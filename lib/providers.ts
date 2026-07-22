@@ -1,5 +1,5 @@
 // ============================================================
-// FORNECEDORES DE IA — cadeia de fallback automático
+// FORNECEDORES DE IA - cadeia de fallback automático
 // Todos são compatíveis com a API OpenAI (chat/completions + SSE),
 // por isso trocar ou reordenar é trivial.
 //
@@ -98,7 +98,7 @@ export function sseToText(upstream: ReadableStream<Uint8Array>): ReadableStream<
               const token = json.choices?.[0]?.delta?.content;
               if (token) controller.enqueue(encoder.encode(token));
             } catch {
-              // linha parcial — ignora
+              // linha parcial - ignora
             }
           }
         }

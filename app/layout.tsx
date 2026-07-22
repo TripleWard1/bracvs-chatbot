@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Bracvs — Assistente do Visit Braga',
+  title: 'Bracvs - Assistente do Visit Braga',
   description:
     'Bracvs, a mascote do Visit Braga, responde às tuas perguntas sobre a cidade em Português, Español, English e Français.',
 };
