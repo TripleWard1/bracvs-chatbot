@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 type Msg = { role: 'user' | 'assistant'; content: string };
 type Lang = 'pt' | 'es' | 'en' | 'fr';
 
-// ---------- Textos da interface nas 4 línguas ----------
+// ---------- Textos da interface nas 4 línguas -----------
 const UI: Record<
   Lang,
   {
