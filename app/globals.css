@@ -60,7 +60,9 @@ body {
   /* O vermelho ocupa também a zona do notch; o conteúdo desce abaixo dele */
   padding: env(safe-area-inset-top) max(20px, env(safe-area-inset-right)) 0
     max(20px, env(safe-area-inset-left));
-  min-height: calc(82px + env(safe-area-inset-top));
+  /* Altura FIXA: é o corte da barra que faz a mascote espreitar.
+     Com min-height, a barra crescia até caber a mascote inteira. */
+  height: calc(82px + env(safe-area-inset-top));
   background:
     /* brilho superior tipo verniz */
     linear-gradient(to bottom, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 34%),
@@ -176,11 +178,11 @@ body {
     gap: 10px;
     padding-left: max(14px, env(safe-area-inset-left));
     padding-right: max(14px, env(safe-area-inset-right));
-    min-height: calc(72px + env(safe-area-inset-top));
+    height: calc(74px + env(safe-area-inset-top));
   }
 
   .header-mascot {
-    height: 142px;
+    height: 132px;
     margin-left: -10px;
   }
 
