@@ -115,7 +115,7 @@ export async function POST(req: Request) {
     if (upstream && upstream.ok && upstream.body) {
       // Registo anónimo (best-effort, sem await bloqueante: completa
       // enquanto a resposta é transmitida ao utilizador)
-      logPergunta({
+      if (!req.headers.get('x-bracvs-test')) logPergunta({
         pergunta: history[history.length - 1].content,
         lingua: body.lang ?? 'desconhecida',
         fornecedor: provider.name,
