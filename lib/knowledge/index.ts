@@ -59,7 +59,7 @@ const MAX_MODULES = 1;
 
 // Teto absoluto de caracteres do conhecimento (~7k tokens), para nenhum
 // módulo grande rebentar o limite por minuto dos fornecedores gratuitos.
-const MAX_KNOWLEDGE_CHARS = 26000;
+const MAX_KNOWLEDGE_CHARS = 18000;
 
 /**
  * Seleciona o conhecimento a enviar ao modelo com base nas últimas
@@ -81,4 +81,13 @@ export function selectKnowledge(userMessages: string[]): string {
       '\n[NOTA: conhecimento truncado por limite de tamanho — se faltar detalhe, remete para visitbraga.travel]';
   }
   return out;
+}
+
+/**
+ * Conhecimento essencial (só o core) — usado pelo fornecedor de último
+ * recurso (groq-8b), cujo limite por minuto é demasiado pequeno para os
+ * módulos de detalhe. Garante que há sempre uma resposta.
+ */
+export function coreOnly(): string {
+  return CORE_KNOWLEDGE;
 }

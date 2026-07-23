@@ -19,6 +19,8 @@ export type Provider = {
   url: string;
   apiKey: string | undefined;
   model: string;
+  // slim: recebe só o conhecimento essencial (para limites por minuto pequenos)
+  slim?: boolean;
 };
 
 export function providerChain(): Provider[] {
@@ -40,6 +42,7 @@ export function providerChain(): Provider[] {
       url: 'https://api.groq.com/openai/v1/chat/completions',
       apiKey: process.env.GROQ_API_KEY,
       model: process.env.GROQ_MODEL_FALLBACK || 'llama-3.1-8b-instant',
+      slim: true,
     },
   ];
   // Só mantém fornecedores com chave definida

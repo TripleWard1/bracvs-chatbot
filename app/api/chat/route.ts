@@ -1,5 +1,5 @@
 import { buildSystemPrompt } from '@/lib/prompt';
-import { selectKnowledge } from '@/lib/knowledge';
+import { selectKnowledge, coreOnly } from '@/lib/knowledge';
 import { providerChain, callProvider, sseToText, type ChatMessage } from '@/lib/providers';
 
 export const runtime = 'edge';
@@ -89,14 +89,20 @@ export async function POST(req: Request) {
 
   const weather = await bragaWeather();
   const userTexts = history.filter((m) => m.role === 'user').map((m) => m.content);
-  const knowledge = selectKnowledge(userTexts);
-  const messages: ChatMessage[] = [
-    { role: 'system', content: buildSystemPrompt(weather, knowledge) },
-    ...history,
-  ];
+  const fullKnowledge = selectKnowledge(userTexts);
+  const slimKnowledge = coreOnly();
 
   // Tenta cada fornecedor por ordem; o primeiro que responder 200 assume.
+  // Fornecedores "slim" recebem só o conhecimento essencial, para caberem
+  // em limites por minuto pequenos — garantem resposta em último recurso.
   for (const provider of providers) {
+    const messages: ChatMessage[] = [
+      {
+        role: 'system',
+        content: buildSystemPrompt(weather, provider.slim ? slimKnowledge : fullKnowledge),
+      },
+      ...history,
+    ];
     const upstream = await callProvider(provider, messages);
     if (upstream && upstream.ok && upstream.body) {
       return new Response(sseToText(upstream.body), {
