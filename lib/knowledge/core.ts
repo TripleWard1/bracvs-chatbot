@@ -1,7 +1,7 @@
 // ============================================================
 // BASE DE CONHECIMENTO DO BRACVS
 // Edita este ficheiro para atualizar o que o Bracvs sabe.
-// Escreve em português - o modelo traduz automaticamente
+// Escreve em português — o modelo traduz automaticamente
 // para a língua do utilizador.
 // IMPORTANTE: horários e preços mudam; mantém isto atualizado
 // ou deixa em termos gerais e remete para visitbraga.travel.
@@ -10,7 +10,7 @@
 export const CORE_KNOWLEDGE = `
 ## POSTO DE TURISMO
 - Posto de Turismo de Braga: Avenida da Liberdade, 1, 4710-305 Braga.
-- Site oficial: https://visitbraga.travel - fonte para horários, preços e eventos atualizados.
+- Site oficial: https://visitbraga.travel — fonte para horários, preços e eventos atualizados.
 
 ## MONUMENTOS E RELIGIOSO
 - Sé de Braga: a catedral mais antiga de Portugal (séc. XI), anterior à própria fundação do país. Inclui Tesouro-Museu e capelas dos pais de D. Afonso Henriques. No centro histórico.
@@ -41,7 +41,9 @@ export const CORE_KNOWLEDGE = `
 - Confirmar datas exatas em https://visitbraga.travel.
 
 ## GASTRONOMIA
-- Pratos típicos: bacalhau à Braga (à Narcisa), arroz de pica no chão, papas de sarrabulho com rojões (época fria), frigideiras (folhado de carne, casa histórica: A Brasileira / Frigideiras do Cantinho).
+- Pratos típicos: bacalhau à Braga (à Narcisa), arroz de pica no chão, papas de sarrabulho com rojões (época fria), frigideiras (folhado de carne — casa histórica: Frigideiras do Cantinho).
+- Cafés/restaurantes históricos: Café Vianna, A Brasileira, Frigideiras do Cantinho, Mesa na Praça (Mercado Municipal), Restaurante do Hotel Bracara Augusta, Casa de Pasto das Carvalheiras.
+- REGRA: para recomendar restaurantes, bares ou espaços noturnos, usar APENAS os que constam do conhecimento (módulos restaurantes e braga-after-dark). NUNCA inventar ou sugerir estabelecimentos de outras cidades.
 - Doces: pudim Abade de Priscos (com toucinho e vinho do Porto), fidalguinhos, tibias de Braga.
 - Vinho: região dos Vinhos Verdes.
 
@@ -54,5 +56,5 @@ export const CORE_KNOWLEDGE = `
 ## DICAS DO BRACVS
 - Melhor foto: escadório do Bom Jesus de manhã cedo, Jardim de Santa Bárbara, Rua do Souto.
 - Meio dia chega para o essencial do centro; um dia inteiro permite Bom Jesus + Sameiro; dois dias acrescentam Tibães e Gerês.
-- Braga é conhecida como a "Roma portuguesa" pelo número de igrejas e como cidade jovem (universidade - Universidade do Minho).
+- Braga é conhecida como a "Roma portuguesa" pelo número de igrejas e como cidade jovem (universidade — Universidade do Minho).
 `;

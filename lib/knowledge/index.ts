@@ -17,10 +17,24 @@ import { MAPA_KNOWLEDGE } from './mapa';
 import { ROTEIRO_3_DIAS_KNOWLEDGE } from './roteiro-3-dias';
 import ROTEIRO_BRACVS_KNOWLEDGE from './roteiro-bracvs';
 import { FUTURE_KNOWLEDGE } from './future';
+import { RESTAURANTES_KNOWLEDGE } from './restaurantes';
+import { bragaAfterDarkKnowledge } from './after-dark';
 
 type Module = { name: string; content: string; keywords: RegExp };
 
 const MODULES: Module[] = [
+  {
+    name: 'restaurantes',
+    content: RESTAURANTES_KNOWLEDGE,
+    keywords:
+      /restaurante|restaurant|comer|jantar|almo[çc]|petisco|tapas|francesinha|pizza|sushi|ramen|vegetariano|vegan|vegetarian|v[ée]g[ée]|steakhouse|carne|churrasq|onde (se )?come|d[óo]nde comer|where to eat|o[ùu] manger|d[îi]ner|cenar|dinner|lunch|almuerzo|d[ée]jeuner|comida t[íi]pica|typical food|michelin/i,
+  },
+  {
+    name: 'braga-after-dark',
+    content: bragaAfterDarkKnowledge,
+    keywords:
+      /noite|nocturn|noturn|nightlife|night(club)?|discoteca|clube?\b|club\b|\bbar(es)?\b|copos|cocktail|cerveja artesanal|craft beer|vinho|wine bar|p[ôo]r[- ]do[- ]sol|sunset|atardecer|puesta de sol|coucher de soleil|soir[ée]e|nuit\b|vie nocturne|after dark|by night|sair [àa] noite|festa|\bdj\b|dan[çc]ar|dancing|bailar|danser/i,
+  },
   {
     name: 'transportes',
     content: TRANSPORTES_KNOWLEDGE,

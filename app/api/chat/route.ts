@@ -52,7 +52,7 @@ export async function POST(req: Request) {
     });
   }
 
-  let body: { messages?: ChatMessage[] };
+  let body: { messages?: ChatMessage[]; lang?: string };
   try {
     body = await req.json();
   } catch {
@@ -91,6 +91,13 @@ export async function POST(req: Request) {
   const userTexts = history.filter((m) => m.role === 'user').map((m) => m.content);
   const fullKnowledge = selectKnowledge(userTexts);
   const slimKnowledge = coreOnly();
+  const LANG_NAMES: Record<string, string> = {
+    pt: 'Português de Portugal',
+    es: 'Espanhol',
+    en: 'Inglês',
+    fr: 'Francês',
+  };
+  const uiLang = LANG_NAMES[body.lang ?? ''] ?? 'Inglês';
 
   // Tenta cada fornecedor por ordem; o primeiro que responder 200 assume.
   // Fornecedores "slim" recebem só o conhecimento essencial, para caberem
@@ -99,7 +106,7 @@ export async function POST(req: Request) {
     const messages: ChatMessage[] = [
       {
         role: 'system',
-        content: buildSystemPrompt(weather, provider.slim ? slimKnowledge : fullKnowledge),
+        content: buildSystemPrompt(weather, provider.slim ? slimKnowledge : fullKnowledge, uiLang),
       },
       ...history,
     ];

@@ -95,21 +95,6 @@ function detectUiLang(): Lang {
   return 'en';
 }
 
-// Avatar do Bracvs: cabeça da mascote oficial
-function BracvsAvatar({ size = 40 }: { size?: number }) {
-  return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      className="avatar"
-      src="/bracvs-avatar.png"
-      width={size}
-      height={size}
-      alt=""
-      style={{ borderRadius: '50%' }}
-    />
-  );
-}
-
 // Indicador "a escrever": escadório em zigzag do Bom Jesus
 function TypingStairs() {
   return (
@@ -155,7 +140,7 @@ export default function Chat() {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: next }),
+        body: JSON.stringify({ messages: next, lang }),
       });
 
       if (res.status === 429) {
@@ -194,11 +179,14 @@ export default function Chat() {
   return (
     <div className="app">
       <header className="header">
-        <BracvsAvatar />
-        <div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img className="header-mascot" src="/mascote-bracvs-web.png" alt="" />
+        <div className="header-titles">
           <h1>Bracvs</h1>
           <p>{t.tagline}</p>
         </div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img className="header-logo" src="/logo-branco.png" alt="Visit Braga" />
       </header>
 
       <main className="messages" aria-live="polite">
