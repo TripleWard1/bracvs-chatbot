@@ -69,7 +69,7 @@ export async function POST(req: Request) {
         typeof m.content === 'string' &&
         m.content.trim().length > 0
     )
-    .slice(-12)
+    .slice(-8)
     .map((m) => ({ role: m.role, content: m.content.slice(0, 2000) }));
 
   if (history.length === 0 || history[history.length - 1].role !== 'user') {
@@ -78,6 +78,9 @@ export async function POST(req: Request) {
 
   const providers = providerChain();
   if (providers.length === 0) {
+    console.error(
+      '[Bracvs] Nenhuma chave de API carregada (CEREBRAS_API_KEY / GROQ_API_KEY vazias). Reinicia o servidor depois de editar o .env.'
+    );
     return new Response(JSON.stringify({ error: 'no_provider' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },

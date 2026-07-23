@@ -1,7 +1,7 @@
 // ============================================================
 // ROUTER DE CONHECIMENTO (mini-RAG por palavras-chave)
 // O núcleo (core.ts) vai SEMPRE no prompt. Os módulos de detalhe
-// só são injetados quando a conversa toca nesses temas - assim
+// só são injetados quando a conversa toca nesses temas — assim
 // cada pedido fica leve e a quota gratuita rende.
 //
 // As palavras-chave cobrem as 4 línguas (PT/ES/EN/FR). O conteúdo
@@ -54,7 +54,12 @@ const MODULES: Module[] = [
 ];
 
 // Máximo de módulos de detalhe por pedido (controla o tamanho do prompt).
-const MAX_MODULES = 2;
+// 1 módulo mantém o pedido dentro do limite de 12k tokens/min da Groq gratuita.
+const MAX_MODULES = 1;
+
+// Teto absoluto de caracteres do conhecimento (~7k tokens), para nenhum
+// módulo grande rebentar o limite por minuto dos fornecedores gratuitos.
+const MAX_KNOWLEDGE_CHARS = 26000;
 
 /**
  * Seleciona o conhecimento a enviar ao modelo com base nas últimas
@@ -69,5 +74,11 @@ export function selectKnowledge(userMessages: string[]): string {
   for (const m of matched) {
     parts.push(`\n### MÓDULO DE DETALHE: ${m.name}\n${m.content}`);
   }
-  return parts.join('\n');
+  let out = parts.join('\n');
+  if (out.length > MAX_KNOWLEDGE_CHARS) {
+    out =
+      out.slice(0, MAX_KNOWLEDGE_CHARS) +
+      '\n[NOTA: conhecimento truncado por limite de tamanho — se faltar detalhe, remete para visitbraga.travel]';
+  }
+  return out;
 }

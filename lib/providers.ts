@@ -58,6 +58,7 @@ export async function callProvider(
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${provider.apiKey}`,
+        'User-Agent': 'bracvs-chatbot/1.0 (visitbraga.travel)',
       },
       body: JSON.stringify({
         model: provider.model,
