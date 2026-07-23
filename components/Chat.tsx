@@ -18,11 +18,14 @@ const UI: Record<
     errorRate: string;
     disclaimer: string;
     typing: string;
+    fbUp: string;
+    fbDown: string;
+    fbThanks: string;
     chips: string[];
   }
 > = {
   pt: {
-    tagline: 'O teu Guia de Braga',
+    tagline: 'A mascote do Visit Braga',
     welcome: 'Olá! Sou o Bracvs 👋',
     sub: 'Pergunta-me o que quiseres sobre Braga.',
     placeholder: 'Escreve a tua pergunta…',
@@ -31,6 +34,9 @@ const UI: Record<
     errorRate: 'Muitas mensagens seguidas. Espera um minuto e volta a tentar.',
     disclaimer: 'O Bracvs pode cometer erros. Confirma horários e preços em visitbraga.travel.',
     typing: 'O Bracvs está a escrever',
+    fbUp: 'Resposta útil',
+    fbDown: 'Resposta não útil',
+    fbThanks: 'Obrigado!',
     chips: [
       'O que visitar num dia?',
       'Como chego ao Bom Jesus?',
@@ -48,6 +54,9 @@ const UI: Record<
     errorRate: 'Demasiados mensajes seguidos. Espera un minuto e inténtalo otra vez.',
     disclaimer: 'Bracvs puede cometer errores. Confirma horarios y precios en visitbraga.travel.',
     typing: 'Bracvs está escribiendo',
+    fbUp: 'Respuesta útil',
+    fbDown: 'Respuesta no útil',
+    fbThanks: '¡Gracias!',
     chips: [
       '¿Qué visitar en un día?',
       '¿Cómo llego al Bom Jesus?',
@@ -65,6 +74,9 @@ const UI: Record<
     errorRate: 'Too many messages. Wait a minute and try again.',
     disclaimer: 'Bracvs can make mistakes. Check opening hours and prices at visitbraga.travel.',
     typing: 'Bracvs is typing',
+    fbUp: 'Helpful answer',
+    fbDown: 'Not helpful',
+    fbThanks: 'Thanks!',
     chips: [
       'What to see in one day?',
       'How do I get to Bom Jesus?',
@@ -82,6 +94,9 @@ const UI: Record<
     errorRate: 'Trop de messages. Attends une minute et réessaie.',
     disclaimer: 'Bracvs peut faire des erreurs. Vérifie horaires et prix sur visitbraga.travel.',
     typing: 'Bracvs écrit',
+    fbUp: 'Réponse utile',
+    fbDown: 'Réponse inutile',
+    fbThanks: 'Merci !',
     chips: [
       'Que voir en une journée ?',
       'Comment aller au Bom Jesus ?',
@@ -124,6 +139,7 @@ export default function Chat() {
   const [input, setInput] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [voted, setVoted] = useState<Record<number, 'up' | 'down'>>({});
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -135,6 +151,20 @@ export default function Chat() {
   }, [messages, busy]);
 
   const t = UI[lang];
+
+  function votar(i: number, voto: 'up' | 'down') {
+    if (voted[i]) return;
+    setVoted((v) => ({ ...v, [i]: voto }));
+    fetch('/api/feedback', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        voto,
+        pergunta: messages[i - 1]?.role === 'user' ? messages[i - 1].content : '',
+        resposta: messages[i].content,
+      }),
+    }).catch(() => {});
+  }
 
   async function send(text: string) {
     const content = text.trim();
@@ -238,7 +268,35 @@ export default function Chat() {
             <div key={i} className="bot-row">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img className="bot-avatar" src="/bracvs-avatar.png" alt="" />
-              <div className="msg bot">{m.content}</div>
+              <div className="bot-col">
+                <div className="msg bot">{m.content}</div>
+                {m.content !== '' && (!busy || i < messages.length - 1) && (
+                  <div className="feedback">
+                    {voted[i] ? (
+                      <span className="fb-thanks">{t.fbThanks}</span>
+                    ) : (
+                      <>
+                        <button
+                          className="fb-btn"
+                          aria-label={t.fbUp}
+                          title={t.fbUp}
+                          onClick={() => votar(i, 'up')}
+                        >
+                          👍
+                        </button>
+                        <button
+                          className="fb-btn"
+                          aria-label={t.fbDown}
+                          title={t.fbDown}
+                          onClick={() => votar(i, 'down')}
+                        >
+                          👎
+                        </button>
+                      </>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
           )
         )}

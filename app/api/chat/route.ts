@@ -1,5 +1,6 @@
 import { buildSystemPrompt } from '@/lib/prompt';
-import { selectKnowledge } from '@/lib/knowledge';
+import { selectKnowledge, matchedModuleNames } from '@/lib/knowledge';
+import { logPergunta } from '@/lib/analytics';
 import { providerChain, callProvider, sseToText, type ChatMessage } from '@/lib/providers';
 
 export const runtime = 'edge';
@@ -101,7 +102,7 @@ export async function POST(req: Request) {
 
   // Tenta cada fornecedor por ordem; o primeiro que responder 200 assume.
   // Fornecedores "slim" recebem só o conhecimento essencial, para caberem
-  // em limites por minuto pequenos - garantem resposta em último recurso.
+  // em limites por minuto pequenos — garantem resposta em último recurso.
   for (const provider of providers) {
     const messages: ChatMessage[] = [
       {
@@ -112,6 +113,14 @@ export async function POST(req: Request) {
     ];
     const upstream = await callProvider(provider, messages);
     if (upstream && upstream.ok && upstream.body) {
+      // Registo anónimo (best-effort, sem await bloqueante: completa
+      // enquanto a resposta é transmitida ao utilizador)
+      logPergunta({
+        pergunta: history[history.length - 1].content,
+        lingua: body.lang ?? 'desconhecida',
+        fornecedor: provider.name,
+        modulo: matchedModuleNames(userTexts).join(',') || 'nenhum',
+      });
       return new Response(sseToText(upstream.body), {
         headers: {
           'Content-Type': 'text/plain; charset=utf-8',
