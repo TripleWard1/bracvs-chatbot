@@ -26,6 +26,12 @@ export type Provider = {
 export function providerChain(): Provider[] {
   const chain: Provider[] = [
     {
+      name: 'gemini',
+      url: 'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions',
+      apiKey: process.env.GEMINI_API_KEY,
+      model: process.env.GEMINI_MODEL || 'gemini-2.5-flash',
+    },
+    {
       name: 'cerebras',
       url: 'https://api.cerebras.ai/v1/chat/completions',
       apiKey: process.env.CEREBRAS_API_KEY,

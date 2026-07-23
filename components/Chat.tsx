@@ -137,11 +137,21 @@ export default function Chat() {
     setBusy(true);
 
     try {
-      const res = await fetch('/api/chat', {
+      let res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ messages: next, lang }),
       });
+
+      // Fornecedores em recuperação (limites por minuto): espera e tenta 1x
+      if (res.status === 502) {
+        await new Promise((r) => setTimeout(r, 9500));
+        res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ messages: next, lang }),
+        });
+      }
 
       if (res.status === 429) {
         setError(t.errorRate);
