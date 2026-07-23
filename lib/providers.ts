@@ -25,6 +25,10 @@ export type Provider = {
   // responder e o raciocínio conta para este teto — precisam de folga larga,
   // senão a resposta visível é cortada a meio da frase.
   maxTokens?: number;
+  // reasoningEffort: nível de raciocínio (modelos pensantes). "low" evita
+  // que o Gemini fique 20-30s a pensar antes do primeiro byte — que mataria
+  // a função no limite de 25s do Vercel.
+  reasoningEffort?: string;
 };
 
 export function providerChain(): Provider[] {
@@ -35,6 +39,7 @@ export function providerChain(): Provider[] {
       apiKey: process.env.GEMINI_API_KEY,
       model: process.env.GEMINI_MODEL || 'gemini-3.5-flash',
       maxTokens: 3000,
+      reasoningEffort: 'low',
     },
     {
       name: 'cerebras',
@@ -80,7 +85,10 @@ export async function callProvider(
         temperature: 0.4,
         max_tokens: provider.maxTokens ?? 600,
         stream: true,
+        ...(provider.reasoningEffort ? { reasoning_effort: provider.reasoningEffort } : {}),
       }),
+      // Fornecedor pendurado → aborta e passa ao seguinte (limite Vercel: 25s)
+      signal: AbortSignal.timeout(15000),
     });
     if (!res.ok) {
       // Diagnóstico: mostra no terminal porque é que este fornecedor falhou
