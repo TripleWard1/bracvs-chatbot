@@ -7,7 +7,7 @@
 // ou deixa em termos gerais e remete para visitbraga.travel.
 // ============================================================
 
-export const KNOWLEDGE_BASE = `
+export const CORE_KNOWLEDGE = `
 ## POSTO DE TURISMO
 - Posto de Turismo de Braga: Avenida da Liberdade, 1, 4710-305 Braga.
 - Site oficial: https://visitbraga.travel - fonte para horários, preços e eventos atualizados.
