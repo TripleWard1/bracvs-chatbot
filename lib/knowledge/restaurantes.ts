@@ -6,31 +6,35 @@
 
 export const RESTAURANTES_KNOWLEDGE = `
 # RESTAURANTES DE BRAGA — LISTA OFICIAL VALIDADA
-Regra: recomendar APENAS restaurantes desta lista. Nunca inventar nomes.
 
-## Clássicos e históricos
-- Café Vianna (histórico, Praça da República)
-- A Brasileira (café histórico)
-- Frigideiras do Cantinho (casa histórica das frigideiras de Braga)
-- Mesa na Praça — Mercado Municipal de Braga
-- Restaurante do Hotel Bracara Augusta
+## COMO RECOMENDAR (regras de comportamento)
+1. Recomendar APENAS restaurantes desta lista. NUNCA inventar nomes nem sugerir espaços de outras cidades.
+2. Se o pedido for genérico ("restaurantes em Braga", "onde comer", "mais restaurantes"): NÃO despejar a lista. Pergunta primeiro o que a pessoa procura — tipo de cozinha (tradicional? italiana? asiática? vegetariana?), ocasião (refeição rápida, jantar especial, petiscos) — e só depois recomenda.
+3. Quando o tipo é claro, sugere 2 a 3 opções dessa categoria, não a categoria inteira. Varia as sugestões entre conversas: não comeces sempre pelos mesmos nomes nem pelos históricos.
+4. Os históricos são para quando encaixam: interesse em história/tradição, café, pequeno-almoço, lanche, experiência icónica — não são a resposta por defeito a "onde jantar".
+5. Para ocasiões especiais / alta cozinha, destaca o Palatial (1 Estrela Michelin, o topo da gastronomia bracarense).
+
+## Fine Dining
+- Palatial — 1 ESTRELA MICHELIN. A referência de alta cozinha de Braga; ideal para jantares especiais.
+- Esperança Verde — Recomendado pelo Guia Michelin (vegetariano/vegan).
+
+## Casas Históricas (cafés e restaurantes com história)
+- Café Vianna — Praça da República; café e restaurante histórico, um dos mais antigos de Portugal.
+- A Brasileira — café e restaurante histórico no coração do centro.
+- Frigideiras do Cantinho — casa histórica das frigideiras de Braga; é restaurante, não apenas café.
+- Pastelaria Lusitana — pastelaria histórica de Braga.
 
 ## Cozinha Portuguesa / Tradicional
 - Restaurante Cozinha da Sé
 - pPlace Restaurant
+- Mesa na Praça — Mercado Municipal de Braga
 - Casa de Pasto das Carvalheiras
 - Taberna do Paço
 - Tasquinha Dom Ferreira
 - Taberna da Fonte
 - Taberna Velhos Tempos
-- Tasquinha da Ribeira
 - Tasquinha do Fujacal
 - Trota's
-- Centurium
-- Domus Vinum
-- Canté
-- Santo
-- Atravessado – Restaurante & Petisqueira
 - Dom Augusto — Rua D. Paio Mendes 55, 4700-424 Braga
 - Bem-Me-Quer — Campo das Hortas 6, 4700-210 Braga
 - Arcoense
@@ -68,12 +72,11 @@ Regra: recomendar APENAS restaurantes desta lista. Nunca inventar nomes.
 - Bajwa's Curry & Cocktails
 
 ## Steakhouse / Carnes
-- Top10 Intimista Steakhouse
+- Intimista Steakhouse
 - Churrasqueira Nacional
-- Salão de Carne
 
 ## Vegetariano / Vegan
 - Gosto Superior
 - Hibiscus
-- Esperança Verde (Guia Michelin – Recomendado)
+- Esperança Verde (Guia Michelin — Recomendado)
 `;
