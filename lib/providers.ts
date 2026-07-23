@@ -103,11 +103,38 @@ export async function callProvider(
       signal: AbortSignal.timeout(15000),
     });
     if (!res.ok) {
-      // Diagnóstico: mostra no terminal porque é que este fornecedor falhou
       const errBody = await res.clone().text().catch(() => '');
       console.error(
         `[Bracvs] ${provider.name} falhou: HTTP ${res.status} — ${errBody.slice(0, 300)}`
       );
+      // 400 = parâmetro rejeitado. Volta a tentar sem os parâmetros extra
+      // (reasoning_effort), que nem todas as versões da API aceitam.
+      if (res.status === 400 && provider.reasoningEffort) {
+        console.error(`[Bracvs] ${provider.name}: nova tentativa sem reasoning_effort`);
+        const retry = await fetch(provider.url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${provider.apiKey}`,
+            'User-Agent': 'bracvs-chatbot/1.0 (visitbraga.travel)',
+          },
+          body: JSON.stringify({
+            model: provider.model,
+            messages,
+            temperature: 0.5,
+            max_tokens: provider.maxTokens ?? 600,
+            stream: true,
+          }),
+          signal: AbortSignal.timeout(15000),
+        });
+        if (!retry.ok) {
+          const b = await retry.clone().text().catch(() => '');
+          console.error(
+            `[Bracvs] ${provider.name} falhou na 2.ª tentativa: HTTP ${retry.status} — ${b.slice(0, 300)}`
+          );
+        }
+        return retry;
+      }
     }
     return res;
   } catch (e) {
