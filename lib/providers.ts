@@ -82,7 +82,9 @@ export async function callProvider(
       body: JSON.stringify({
         model: provider.model,
         messages,
-        temperature: 0.4,
+        // 0.4 tornava as sugestões sempre iguais; 0.7 dá variedade sem
+        // aumentar o risco de invenção (as listas são fechadas)
+        temperature: 0.7,
         max_tokens: provider.maxTokens ?? 600,
         stream: true,
         ...(provider.reasoningEffort ? { reasoning_effort: provider.reasoningEffort } : {}),

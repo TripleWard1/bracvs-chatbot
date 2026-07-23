@@ -98,6 +98,11 @@ const CATEGORIAS: Categoria[] = [
   },
 ];
 
+// Nº máximo de opções mostradas por categoria em cada pedido. Mostrar a
+// categoria inteira faz o modelo agarrar-se sempre aos mesmos nomes; uma
+// amostra diferente a cada conversa força variedade real.
+const OPCOES_POR_CATEGORIA = 6;
+
 function baralhar<T>(arr: T[]): T[] {
   const copia = [...arr];
   for (let i = copia.length - 1; i > 0; i--) {
@@ -109,7 +114,8 @@ function baralhar<T>(arr: T[]): T[] {
 
 const REGRAS = `## COMO RECOMENDAR (regras de comportamento)
 1. Recomendar APENAS restaurantes desta lista. NUNCA inventar nomes nem sugerir espaços de outras cidades.
-2. A ordem dos restaurantes em cada categoria é ALEATÓRIA e muda a cada conversa - não reflete qualidade nem preferência. Escolhe os 2-3 mais adequados ao pedido, não os primeiros da lista.
+2. Em cada conversa vês apenas UMA AMOSTRA de cada categoria, diferente de conversa para conversa. A ordem é aleatória e não reflete qualidade. Escolhe os que melhor correspondem ao PEDIDO da pessoa (tipo de cozinha, ocasião, ambiente) - nunca por ordem de lista.
+2b. Se a pessoa pedir mais opções, sugere nomes DIFERENTES dos que já sugeriste nesta conversa.
 3. Se o pedido for genérico ("restaurantes em Braga", "onde comer", "mais restaurantes"): NÃO despejar a lista. Pergunta primeiro o que a pessoa procura - tipo de cozinha (tradicional? italiana? asiática? vegetariana?), ocasião (refeição rápida, jantar especial, petiscos) - e só depois recomenda.
 4. Quando o tipo é claro, sugere 2 a 3 opções dessa categoria, não a categoria inteira.
 5. Os históricos são para quando encaixam: interesse em história/tradição, café, pequeno-almoço, lanche, experiência icónica - não são a resposta por defeito a "onde jantar".
@@ -119,7 +125,11 @@ const REGRAS = `## COMO RECOMENDAR (regras de comportamento)
 // Google Sheet) com baralhamento anti-viés. Reutilizado por lib/sheets.ts.
 export function construirModuloRestaurantes(categorias: Categoria[]): string {
   const seccoes = categorias.map((c) => {
-    const itens = c.baralhar ? baralhar(c.itens) : c.itens;
+    // Fine Dining e categorias pequenas vão inteiras; as grandes vão em
+    // amostra aleatória, diferente a cada pedido.
+    const itens = c.baralhar
+      ? baralhar(c.itens).slice(0, OPCOES_POR_CATEGORIA)
+      : c.itens;
     return `## ${c.titulo}\n${itens.map((i) => `- ${i}`).join('\n')}`;
   }).join('\n\n');
   return `# RESTAURANTES DE BRAGA - LISTA OFICIAL VALIDADA\n\n${REGRAS}\n\n${seccoes}\n`;

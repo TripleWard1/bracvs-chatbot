@@ -13,12 +13,13 @@ export const CORE_KNOWLEDGE = `
 - Site oficial: https://visitbraga.travel - fonte para horários, preços e eventos atualizados.
 
 ## MONUMENTOS E RELIGIOSO
+PRIORIDADE: os imprescindíveis de Braga, a mencionar primeiro a quem visita pela primeira vez ou tem pouco tempo, são o Santuário do Bom Jesus do Monte, a Sé de Braga, o Arco da Porta Nova e o Jardim de Santa Bárbara. Os restantes são complementares.
 - Sé de Braga: a catedral mais antiga de Portugal (séc. XI), anterior à própria fundação do país. Inclui Tesouro-Museu e capelas dos pais de D. Afonso Henriques. No centro histórico.
 - Santuário do Bom Jesus do Monte: Património Mundial UNESCO (2019). Escadório barroco em zigzag com ~580 degraus, Funicular do Bom Jesus (movido a água, 1882 - o mais antigo funicular do mundo com contrapeso de água; NUNCA chamar-lhe "elevador de água": o termo correto é funicular, também conhecido como Elevador do Bom Jesus), jardins e miradouros. A ~5 km do centro.
 - Santuário do Sameiro: um dos maiores centros marianos de Portugal, vista panorâmica sobre Braga. Perto do Bom Jesus.
 - Mosteiro de São Martinho de Tibães: antiga casa-mãe da ordem beneditina em Portugal, cerca monástica com percursos naturais. A ~6 km do centro.
 - Arco da Porta Nova: porta simbólica de entrada no centro histórico (séc. XVIII).
-- Capela dos Coimbras, Igreja de Santa Cruz, Igreja dos Congregados, Basílica dos Congregados: património barroco no centro.
+- Capela dos Coimbras, Igreja de Santa Cruz, Igreja dos Congregados, Basílica dos Congregados: património barroco no centro (COMPLEMENTARES - mencionar apenas a quem já conhece o essencial, tem vários dias, ou pergunta especificamente por igrejas/barroco).
 - Termas Romanas do Alto da Cividade e Fonte do Ídolo: vestígios de Bracara Augusta, a cidade romana fundada em 16 a.C.
 
 ## MUSEUS E CULTURA
