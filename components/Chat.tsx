@@ -200,7 +200,6 @@ export default function Chat() {
           <p>{t.tagline}</p>
         </div>
       </header>
-      <div className="stairband" aria-hidden="true" />
 
       <main className="messages" aria-live="polite">
         {messages.length === 0 && (

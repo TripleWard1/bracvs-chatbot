@@ -1,14 +1,14 @@
 :root {
   --braga-red: #f80000;
   --braga-red-deep: #c00000;
-  --braga-black: #141416;
-  --paper: #faf8f5;
+  --braga-black: #17171a;
+  --paper: #fbfaf8;
   --surface: #ffffff;
-  --ink: #1b1b1e;
+  --ink: #212125;
   --ink-soft: #6f6a64;
-  --line: #ece7e1;
+  --line: #eae6e1;
   --radius: 16px;
-  --shadow-soft: 0 1px 2px rgba(20, 20, 22, 0.05), 0 4px 14px rgba(20, 20, 22, 0.06);
+  --shadow-soft: 0 1px 2px rgba(23, 23, 26, 0.05), 0 4px 14px rgba(23, 23, 26, 0.06);
   --font-display: 'Fraunces', Georgia, serif;
   --font-body: 'Instrument Sans', system-ui, -apple-system, sans-serif;
 }
@@ -27,7 +27,7 @@ body {
 body {
   font-family: var(--font-body);
   color: var(--ink);
-  background: var(--braga-black);
+  background: #edebe7;
 }
 
 .app {
@@ -37,48 +37,45 @@ body {
   max-width: 720px;
   margin: 0 auto;
   background: var(--paper);
+  box-shadow: 0 0 40px rgba(23, 23, 26, 0.12);
 }
 
-/* ---------- Cabeçalho: preto da marca, avatar em anel vermelho ---------- */
+/* ---------- Cabeçalho: vermelho da marca com profundidade ---------- */
 .header {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 14px 20px 16px;
-  background: var(--braga-black);
+  padding: 15px 20px;
+  background: linear-gradient(135deg, #ff1a0d 0%, var(--braga-red) 45%, var(--braga-red-deep) 100%);
   color: #fff;
+  box-shadow: 0 2px 12px rgba(192, 0, 0, 0.35);
+  position: relative;
+  z-index: 2;
 }
 
 .header .avatar {
   flex-shrink: 0;
-  box-shadow: 0 0 0 2px var(--braga-red);
   border-radius: 50%;
+  box-shadow: 0 0 0 2.5px rgba(255, 255, 255, 0.95), 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
 .header h1 {
   font-family: var(--font-display);
-  font-size: 1.5rem;
+  font-size: 1.45rem;
   font-weight: 600;
   letter-spacing: 0.02em;
   line-height: 1.05;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
 }
 
 .header p {
   font-size: 0.78rem;
-  letter-spacing: 0.04em;
-  opacity: 0.75;
+  letter-spacing: 0.03em;
+  opacity: 0.92;
   margin-top: 3px;
 }
 
-/* Assinatura: fita de escadório — a silhueta do Bom Jesus remata o cabeçalho */
-.stairband {
-  height: 10px;
-  background: var(--braga-black);
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='10' viewBox='0 0 28 10'%3E%3Cpath d='M0 10 L0 6 L7 6 L7 2 L14 2 L14 6 L21 6 L21 10 Z' fill='black'/%3E%3C/svg%3E") repeat-x bottom / 28px 10px;
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='10' viewBox='0 0 28 10'%3E%3Cpath d='M0 10 L0 6 L7 6 L7 2 L14 2 L14 6 L21 6 L21 10 Z' fill='black'/%3E%3C/svg%3E") repeat-x bottom / 28px 10px;
-}
-
-/* ---------- Área de mensagens: papel quente com marca de água de escadório ---------- */
+/* ---------- Área de mensagens: papel quente, textura mínima ---------- */
 .messages {
   flex: 1;
   overflow-y: auto;
@@ -86,9 +83,9 @@ body {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  background-color: var(--paper);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cpath d='M0 120 h30 v-30 h30 v-30 h30 v-30 h30' fill='none' stroke='%23f80000' stroke-opacity='0.045' stroke-width='6'/%3E%3C/svg%3E");
-  background-size: 140px 140px;
+  background:
+    linear-gradient(rgba(251, 250, 248, 0.97), rgba(251, 250, 248, 0.97)),
+    repeating-linear-gradient(45deg, #f1efec 0 16px, #fbfaf8 16px 32px);
 }
 
 /* ---------- Bolhas ---------- */
@@ -116,13 +113,13 @@ body {
 
 .msg.user {
   align-self: flex-end;
-  background: linear-gradient(160deg, var(--braga-red) 0%, #d40000 100%);
+  background: linear-gradient(160deg, var(--braga-red) 0%, #d90000 100%);
   color: #fff;
   border-bottom-right-radius: 5px;
   box-shadow: 0 3px 10px rgba(248, 0, 0, 0.22);
 }
 
-/* Bracvs "presente": avatar junto às mensagens dele */
+/* Bracvs presente: avatar junto às mensagens dele */
 .bot-row {
   display: flex;
   align-items: flex-end;
@@ -138,6 +135,7 @@ body {
   flex-shrink: 0;
   box-shadow: 0 0 0 1.5px var(--braga-red);
   margin-bottom: 2px;
+  background: #fff;
 }
 
 .bot-row .msg.bot {
@@ -168,10 +166,10 @@ body {
 }
 
 .empty .mascot {
-  height: 170px;
+  height: 165px;
   width: auto;
-  margin-bottom: 4px;
-  filter: drop-shadow(0 14px 18px rgba(20, 20, 22, 0.18));
+  margin-bottom: 6px;
+  filter: drop-shadow(0 12px 16px rgba(23, 23, 26, 0.2));
   animation: land 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
@@ -188,9 +186,9 @@ body {
 
 .empty h2 {
   font-family: var(--font-display);
-  font-size: 1.7rem;
+  font-size: 1.65rem;
   font-weight: 600;
-  color: var(--braga-black);
+  color: var(--ink);
   animation: rise 0.35s 0.15s ease-out both;
 }
 
@@ -214,16 +212,17 @@ body {
 }
 
 .chip {
-  border: 1.5px solid var(--braga-red);
+  border: 1px solid var(--line);
   background: var(--surface);
-  color: var(--braga-red-deep);
+  color: var(--ink);
   border-radius: 999px;
   padding: 9px 16px;
   font-size: 0.86rem;
   font-weight: 500;
   font-family: var(--font-body);
   cursor: pointer;
-  transition: background 0.16s, color 0.16s, transform 0.16s, box-shadow 0.16s;
+  box-shadow: var(--shadow-soft);
+  transition: background 0.16s, color 0.16s, border-color 0.16s, transform 0.16s, box-shadow 0.16s;
   animation: rise 0.35s ease-out both;
 }
 
@@ -234,6 +233,7 @@ body {
 
 .chip:hover {
   background: var(--braga-red);
+  border-color: var(--braga-red);
   color: #fff;
   transform: translateY(-2px);
   box-shadow: 0 6px 14px rgba(248, 0, 0, 0.28);
@@ -292,7 +292,7 @@ body {
 .composer input:focus-visible {
   border-color: var(--braga-red);
   background: var(--surface);
-  box-shadow: 0 0 0 3px rgba(248, 0, 0, 0.14);
+  box-shadow: 0 0 0 3px rgba(248, 0, 0, 0.13);
 }
 
 .composer button {
@@ -301,17 +301,17 @@ body {
   height: 46px;
   border: none;
   border-radius: 50%;
-  background: var(--braga-red);
+  background: linear-gradient(160deg, var(--braga-red) 0%, var(--braga-red-deep) 100%);
   color: #fff;
   cursor: pointer;
   display: grid;
   place-items: center;
-  transition: background 0.16s, transform 0.16s, box-shadow 0.16s;
+  transition: filter 0.16s, transform 0.16s, box-shadow 0.16s;
   box-shadow: 0 3px 10px rgba(248, 0, 0, 0.3);
 }
 
 .composer button:hover:not(:disabled) {
-  background: var(--braga-red-deep);
+  filter: brightness(0.92);
   transform: scale(1.06);
 }
 
