@@ -1,4 +1,5 @@
 import { buildSystemPrompt } from '@/lib/prompt';
+import { selectKnowledge } from '@/lib/knowledge';
 import { providerChain, callProvider, sseToText, type ChatMessage } from '@/lib/providers';
 
 export const runtime = 'edge';
@@ -84,8 +85,10 @@ export async function POST(req: Request) {
   }
 
   const weather = await bragaWeather();
+  const userTexts = history.filter((m) => m.role === 'user').map((m) => m.content);
+  const knowledge = selectKnowledge(userTexts);
   const messages: ChatMessage[] = [
-    { role: 'system', content: buildSystemPrompt(weather) },
+    { role: 'system', content: buildSystemPrompt(weather, knowledge) },
     ...history,
   ];
 
