@@ -75,23 +75,36 @@ const MAX_MODULES = 1;
 // módulo grande rebentar o limite por minuto dos fornecedores gratuitos.
 const MAX_KNOWLEDGE_CHARS = 18000;
 
+// Módulos até este tamanho são "leves" e cabem no modo essencial (slim),
+// usado pelo fornecedor de último recurso com limite por minuto pequeno.
+const SMALL_MODULE_CHARS = 6000;
+
 /**
  * Seleciona o conhecimento a enviar ao modelo com base nas últimas
  * mensagens do utilizador (as últimas 3, para apanhar contexto de
  * perguntas de seguimento como "e ao fim de semana?").
+ *
+ * slim=true (último recurso): core + apenas módulos LEVES relevantes.
+ * Garante que listas críticas e pequenas (ex.: restaurantes validados)
+ * chegam ao modelo mesmo no caminho de emergência — sem elas, o modelo
+ * pequeno tende a inventar estabelecimentos.
  */
-export function selectKnowledge(userMessages: string[]): string {
+export function selectKnowledge(userMessages: string[], slim = false): string {
   const haystack = userMessages.slice(-3).join('\n');
-  const matched = MODULES.filter((m) => m.keywords.test(haystack)).slice(0, MAX_MODULES);
+  let matched = MODULES.filter((m) => m.keywords.test(haystack)).slice(0, MAX_MODULES);
+  if (slim) {
+    matched = matched.filter((m) => m.content.length <= SMALL_MODULE_CHARS);
+  }
 
   const parts = [CORE_KNOWLEDGE];
   for (const m of matched) {
     parts.push(`\n### MÓDULO DE DETALHE: ${m.name}\n${m.content}`);
   }
   let out = parts.join('\n');
-  if (out.length > MAX_KNOWLEDGE_CHARS) {
+  const cap = slim ? 12000 : MAX_KNOWLEDGE_CHARS;
+  if (out.length > cap) {
     out =
-      out.slice(0, MAX_KNOWLEDGE_CHARS) +
+      out.slice(0, cap) +
       '\n[NOTA: conhecimento truncado por limite de tamanho — se faltar detalhe, remete para visitbraga.travel]';
   }
   return out;

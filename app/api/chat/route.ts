@@ -1,5 +1,5 @@
 import { buildSystemPrompt } from '@/lib/prompt';
-import { selectKnowledge, coreOnly } from '@/lib/knowledge';
+import { selectKnowledge } from '@/lib/knowledge';
 import { providerChain, callProvider, sseToText, type ChatMessage } from '@/lib/providers';
 
 export const runtime = 'edge';
@@ -90,7 +90,7 @@ export async function POST(req: Request) {
   const weather = await bragaWeather();
   const userTexts = history.filter((m) => m.role === 'user').map((m) => m.content);
   const fullKnowledge = selectKnowledge(userTexts);
-  const slimKnowledge = coreOnly();
+  const slimKnowledge = selectKnowledge(userTexts, true);
   const LANG_NAMES: Record<string, string> = {
     pt: 'Português de Portugal',
     es: 'Espanhol',
