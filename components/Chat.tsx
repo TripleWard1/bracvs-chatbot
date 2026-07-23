@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { ALL_PLACES } from '@/lib/places';
 
 type Msg = { role: 'user' | 'assistant'; content: string };
 type Lang = 'pt' | 'es' | 'en' | 'fr';
@@ -21,6 +22,7 @@ const UI: Record<
     fbUp: string;
     fbDown: string;
     fbThanks: string;
+    onMap: string;
     chips: string[];
   }
 > = {
@@ -37,6 +39,7 @@ const UI: Record<
     fbUp: 'Resposta útil',
     fbDown: 'Resposta não útil',
     fbThanks: 'Obrigado!',
+    onMap: 'Ver no mapa',
     chips: [
       'O que visitar num dia?',
       'Como chego ao Bom Jesus?',
@@ -57,6 +60,7 @@ const UI: Record<
     fbUp: 'Respuesta útil',
     fbDown: 'Respuesta no útil',
     fbThanks: '¡Gracias!',
+    onMap: 'Ver en el mapa',
     chips: [
       '¿Qué visitar en un día?',
       '¿Cómo llego al Bom Jesus?',
@@ -77,6 +81,7 @@ const UI: Record<
     fbUp: 'Helpful answer',
     fbDown: 'Not helpful',
     fbThanks: 'Thanks!',
+    onMap: 'View on map',
     chips: [
       'What to see in one day?',
       'How do I get to Bom Jesus?',
@@ -97,6 +102,7 @@ const UI: Record<
     fbUp: 'Réponse utile',
     fbDown: 'Réponse inutile',
     fbThanks: 'Merci !',
+    onMap: 'Voir sur la carte',
     chips: [
       'Que voir en une journée ?',
       'Comment aller au Bom Jesus ?',
@@ -113,6 +119,42 @@ function detectUiLang(): Lang {
   if (l.startsWith('es')) return 'es';
   if (l.startsWith('fr')) return 'fr';
   return 'en';
+}
+
+// Deteção de locais oficiais mencionados na resposta (sem IA, sem custo)
+function norm(s: string): string {
+  return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
+function detectPlaces(text: string): string[] {
+  const n = norm(text);
+  const found: string[] = [];
+  for (const p of ALL_PLACES) {
+    if (found.length >= 3) break;
+    if (n.includes(norm(p))) found.push(p);
+  }
+  return found;
+}
+
+function PlaceActions({ text, label }: { text: string; label: string }) {
+  const places = detectPlaces(text);
+  if (places.length === 0) return null;
+  return (
+    <div className="actions">
+      {places.map((p) => (
+        <a
+          key={p}
+          className="action-chip"
+          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p + ', Braga, Portugal')}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${label}: ${p}`}
+        >
+          📍 {p}
+        </a>
+      ))}
+    </div>
+  );
 }
 
 // Indicador "a escrever": o Bracvs presente, com pontos animados
@@ -270,6 +312,9 @@ export default function Chat() {
               <img className="bot-avatar" src="/bracvs-avatar.png" alt="" />
               <div className="bot-col">
                 <div className="msg bot">{m.content}</div>
+                {m.content !== '' && (!busy || i < messages.length - 1) && (
+                  <PlaceActions text={m.content} label={t.onMap} />
+                )}
                 {m.content !== '' && (!busy || i < messages.length - 1) && (
                   <div className="feedback">
                     {voted[i] ? (
