@@ -25,6 +25,16 @@ body {
 }
 
 body {
+  /* Faixa vermelha no topo (atrás da zona do notch) e neutro no resto —
+     evita qualquer barra clara acima do cabeçalho em iPhone */
+  background-color: #edebe7;
+  background-image: linear-gradient(
+    to bottom,
+    var(--braga-red) 0,
+    var(--braga-red) calc(env(safe-area-inset-top) + 2px),
+    transparent calc(env(safe-area-inset-top) + 2px)
+  );
+  background-repeat: no-repeat;
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -47,8 +57,10 @@ body {
   display: flex;
   align-items: center;
   gap: 14px;
-  height: 82px;
-  padding: 0 20px;
+  /* O vermelho ocupa também a zona do notch; o conteúdo desce abaixo dele */
+  padding: env(safe-area-inset-top) max(20px, env(safe-area-inset-right)) 0
+    max(20px, env(safe-area-inset-left));
+  min-height: calc(82px + env(safe-area-inset-top));
   background:
     /* brilho superior tipo verniz */
     linear-gradient(to bottom, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 34%),
@@ -73,7 +85,7 @@ body {
   content: '';
   position: absolute;
   right: -18px;
-  top: 50%;
+  top: calc(50% + env(safe-area-inset-top) / 2);
   transform: translateY(-42%) rotate(8deg);
   width: 150px;
   height: 150px;
@@ -159,12 +171,45 @@ body {
   backface-visibility: hidden;
 }
 
-@media (max-width: 420px) {
-  .header-logo {
-    height: 15px;
+@media (max-width: 480px) {
+  .header {
+    gap: 10px;
+    padding-left: max(14px, env(safe-area-inset-left));
+    padding-right: max(14px, env(safe-area-inset-right));
+    min-height: calc(72px + env(safe-area-inset-top));
   }
+
   .header-mascot {
-    height: 150px;
+    height: 142px;
+    margin-left: -10px;
+  }
+
+  .header-titles h1 {
+    font-size: 1.3rem;
+  }
+
+  /* Tagline numa só linha: menos espaçamento e corpo mais pequeno */
+  .header-titles p {
+    font-size: 0.58rem;
+    letter-spacing: 0.09em;
+    white-space: nowrap;
+    gap: 5px;
+  }
+
+  .header-titles p::before {
+    width: 6px;
+    height: 6px;
+  }
+
+  .header-logo {
+    height: 14px;
+  }
+
+  .header::after {
+    width: 108px;
+    height: 108px;
+    right: -26px;
+    opacity: 0.07;
   }
 }
 
@@ -626,7 +671,7 @@ html {
   }
 
   body {
-    background: #0d0d0f;
+    background-color: #0d0d0f;
   }
 
   .app {
