@@ -48,7 +48,7 @@ const UI: Record<
     ],
   },
   es: {
-    tagline: 'La mascota de Visit Braga',
+    tagline: 'Tu Guía de Braga',
     welcome: '¡Hola! Soy Bracvs 👋',
     sub: 'Pregúntame lo que quieras sobre Braga.',
     placeholder: 'Escribe tu pregunta…',
@@ -69,7 +69,7 @@ const UI: Record<
     ],
   },
   en: {
-    tagline: 'The Visit Braga mascot',
+    tagline: 'Your Braga Guide',
     welcome: "Hi! I'm Bracvs 👋",
     sub: 'Ask me anything about Braga.',
     placeholder: 'Type your question…',
@@ -90,7 +90,7 @@ const UI: Record<
     ],
   },
   fr: {
-    tagline: 'La mascotte de Visit Braga',
+    tagline: 'Ton Guide de Braga',
     welcome: 'Salut ! Je suis Bracvs 👋',
     sub: 'Pose-moi tes questions sur Braga.',
     placeholder: 'Écris ta question…',

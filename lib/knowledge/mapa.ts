@@ -323,7 +323,7 @@ export const roteiros = [
   {
     nome: 'Roteiro Infanto-Juvenil "A Cidade do Bracvs"',
     descricao:
-      "Roteiro oficial pensado para famílias com crianças, protagonizado pelo Bracvs, a mascote do Visit Braga. Percurso disponível através do QR Code do mapa turístico / mapa digital do Visit Braga.",
+      "Roteiro oficial pensado para famílias com crianças, protagonizado pelo Bracvs, o Guia do Visit Braga. Percurso disponível através do QR Code do mapa turístico / mapa digital do Visit Braga.",
   },
 ];
 

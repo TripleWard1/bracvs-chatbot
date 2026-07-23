@@ -435,6 +435,8 @@ body {
   font-size: 0.95rem;
   font-family: var(--font-body);
   background: var(--paper);
+  /* explícito: sem isto o browser usa preto fixo e o texto some no dark mode */
+  color: var(--ink);
   outline: none;
   transition: border-color 0.16s, box-shadow 0.16s, background 0.16s;
 }
@@ -684,5 +686,23 @@ html {
 
   ::selection {
     background: rgba(248, 0, 0, 0.35);
+  }
+}
+
+/* Placeholder e autofill legíveis nos dois temas */
+.composer input::placeholder {
+  color: var(--ink-soft);
+  opacity: 1;
+}
+
+.composer input:-webkit-autofill,
+.composer input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--ink);
+  -webkit-box-shadow: 0 0 0 60px var(--paper) inset;
+}
+
+@media (prefers-color-scheme: dark) {
+  .composer input {
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.35);
   }
 }

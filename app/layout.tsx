@@ -21,7 +21,7 @@ const instrument = Instrument_Sans({
 export const metadata: Metadata = {
   title: 'Bracvs - Assistente do Visit Braga',
   description:
-    'Bracvs, a mascote do Visit Braga, responde às tuas perguntas sobre a cidade em Português, Español, English e Français.',
+    'Bracvs, o Guia oficial do Visit Braga, responde às tuas perguntas sobre a cidade em Português, Español, English e Français.',
   manifest: '/manifest.webmanifest',
   icons: {
     icon: [
