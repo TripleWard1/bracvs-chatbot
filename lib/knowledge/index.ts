@@ -1,7 +1,7 @@
 // ============================================================
 // ROUTER DE CONHECIMENTO (mini-RAG por palavras-chave)
 // O núcleo (core.ts) vai SEMPRE no prompt. Os módulos de detalhe
-// só são injetados quando a conversa toca nesses temas — assim
+// só são injetados quando a conversa toca nesses temas - assim
 // cada pedido fica leve e a quota gratuita rende.
 //
 // As palavras-chave cobrem as 4 línguas (PT/ES/EN/FR). O conteúdo
@@ -17,29 +17,36 @@ import { MAPA_KNOWLEDGE } from './mapa';
 import { ROTEIRO_3_DIAS_KNOWLEDGE } from './roteiro-3-dias';
 import ROTEIRO_BRACVS_KNOWLEDGE from './roteiro-bracvs';
 import { FUTURE_KNOWLEDGE } from './future';
-import { RESTAURANTES_KNOWLEDGE } from './restaurantes';
-import { bragaAfterDarkKnowledge } from './after-dark';
+import { getRestaurantesKnowledge } from './restaurantes';
+import { AFTER_DARK_SUNSET_JANTAR, AFTER_DARK_BARES, AFTER_DARK_BARES_LITE } from './after-dark';
 
-type Module = { name: string; content: string; keywords: RegExp };
+type Module = { name: string; content: string | (() => string); contentSlim?: string; keywords: RegExp };
 
 const MODULES: Module[] = [
   {
     name: 'restaurantes',
-    content: RESTAURANTES_KNOWLEDGE,
+    content: getRestaurantesKnowledge,
     keywords:
       /restaurante|restaurant|comer|jantar|almo[çc]|petisco|tapas|francesinha|pizza|sushi|ramen|vegetariano|vegan|vegetarian|v[ée]g[ée]|steakhouse|carne|churrasq|onde (se )?come|d[óo]nde comer|where to eat|o[ùu] manger|d[îi]ner|cenar|dinner|lunch|almuerzo|d[ée]jeuner|comida t[íi]pica|typical food|michelin/i,
   },
   {
-    name: 'braga-after-dark',
-    content: bragaAfterDarkKnowledge,
+    name: 'braga-by-dark-bares',
+    content: AFTER_DARK_BARES,
+    contentSlim: AFTER_DARK_BARES_LITE,
     keywords:
-      /noite|nocturn|noturn|nightlife|night(club)?|discoteca|clube?\b|club\b|\bbar(es)?\b|copos|cocktail|cerveja artesanal|craft beer|vinho|wine bar|p[ôo]r[- ]do[- ]sol|sunset|atardecer|puesta de sol|coucher de soleil|soir[ée]e|nuit\b|vie nocturne|after dark|by night|sair [àa] noite|festa|\bdj\b|dan[çc]ar|dancing|bailar|danser/i,
+      /noite|nocturn|noturn|nightlife|night ?club|discoteca|clube?\b|club\b|\bbar(es)?\b|copos|cocktail|shisha|\bgin\b|cerveja|craft beer|\bbeer\b|bi[èe]re|wine bar|bar de vinhos|after dark|by night|by dark|sair [àa] noite|festa|fiesta|\bdj\b|dan[çc]ar|dancing|bailar|danser|soir[ée]e|nuit\b|vie nocturne/i,
+  },
+  {
+    name: 'braga-by-sunset',
+    content: AFTER_DARK_SUNSET_JANTAR,
+    keywords:
+      /p[ôo]r[- ]do[- ]sol|sunset|atardecer|puesta de sol|coucher de soleil|entardecer|fim de tarde|golden hour|miradouro|mirador|rooftop|esplanada|terrace|terrasse|by sunset/i,
   },
   {
     name: 'transportes',
     content: TRANSPORTES_KNOWLEDGE,
     keywords:
-      /autocarro|autobus|autobús|bus\b|comboio|train|tren|esta[çc][ãa]o|station|estación|gare\b|guimar[ãa]es|\btub\b|hor[áa]ri|schedule|timetable|horaires|aeroporto|airport|a[ée]roport|getbus|shuttle|t[áa]xi|taxi|transporte|transport|como chego|como llegar|how (do i|to) get|comment (aller|arriver)|bilhete|ticket|billet|passe\b|abono/i,
+      /autocarro|autobus|autobús|bus\b|comboio|train|tren|esta[çc][ãa]o|station|estación|gare\b|guimar[ãa]es|\btub\b|hor[áa]ri|schedule|timetable|horaires|aeroporto|airport|a[ée]roport|getbus|shuttle|t[áa]xi|taxi|transporte|transport|como chego|como llegar|how (do i|to) get|comment (aller|arriver)|bilhete|ticket|billet|passe\b|abono|sem carro|de carro|a p[ée]\b|on foot|funicular|elevador|como (ir|vou|chego)|c[óo]mo (ir|llego|voy)|comment y aller/i,
   },
   {
     name: 'mapa-monumentos',
@@ -73,7 +80,7 @@ const MAX_MODULES = 1;
 
 // Teto absoluto de caracteres do conhecimento (~7k tokens), para nenhum
 // módulo grande rebentar o limite por minuto dos fornecedores gratuitos.
-const MAX_KNOWLEDGE_CHARS = 18000;
+const MAX_KNOWLEDGE_CHARS = 21000;
 
 // Módulos até este tamanho são "leves" e cabem no modo essencial (slim),
 // usado pelo fornecedor de último recurso com limite por minuto pequeno.
@@ -86,15 +93,20 @@ const SMALL_MODULE_CHARS = 6000;
  *
  * slim=true (último recurso): core + apenas módulos LEVES relevantes.
  * Garante que listas críticas e pequenas (ex.: restaurantes validados)
- * chegam ao modelo mesmo no caminho de emergência — sem elas, o modelo
+ * chegam ao modelo mesmo no caminho de emergência - sem elas, o modelo
  * pequeno tende a inventar estabelecimentos.
  */
 export function selectKnowledge(userMessages: string[], slim = false): string {
   const haystack = userMessages.slice(-3).join('\n');
-  let matched = MODULES.filter((m) => m.keywords.test(haystack)).slice(0, MAX_MODULES);
-  if (slim) {
-    matched = matched.filter((m) => m.content.length <= SMALL_MODULE_CHARS);
-  }
+  const candidates = MODULES.filter((m) => m.keywords.test(haystack))
+    .slice(0, MAX_MODULES)
+    .map((m) => {
+      const full = typeof m.content === 'function' ? m.content() : m.content;
+      return { name: m.name, content: slim && m.contentSlim ? m.contentSlim : full };
+    });
+  const matched = slim
+    ? candidates.filter((m) => m.content.length <= SMALL_MODULE_CHARS)
+    : candidates;
 
   const parts = [CORE_KNOWLEDGE];
   for (const m of matched) {
@@ -105,13 +117,13 @@ export function selectKnowledge(userMessages: string[], slim = false): string {
   if (out.length > cap) {
     out =
       out.slice(0, cap) +
-      '\n[NOTA: conhecimento truncado por limite de tamanho — se faltar detalhe, remete para visitbraga.travel]';
+      '\n[NOTA: conhecimento truncado por limite de tamanho - se faltar detalhe, remete para visitbraga.travel]';
   }
   return out;
 }
 
 /**
- * Conhecimento essencial (só o core) — usado pelo fornecedor de último
+ * Conhecimento essencial (só o core) - usado pelo fornecedor de último
  * recurso (groq-8b), cujo limite por minuto é demasiado pequeno para os
  * módulos de detalhe. Garante que há sempre uma resposta.
  */

@@ -1,6 +1,6 @@
 // lib/knowledge/braga-after-dark.ts
 // Módulo de conhecimento: Roteiro "Braga After Dark" (Night Tour)
-// Fonte: Braga's Pocket Guide — Braga After Dark / Cities After Dark (URBACT_CAD)
+// Fonte: Braga's Pocket Guide - Braga After Dark / Cities After Dark (URBACT_CAD)
 // Publicado pela Divisão de Economia e Turismo, Município de Braga
 // Extração integral: conceito, 55 locais (moradas, GPS, horários, comodidades), mobilidade e contactos
 
@@ -11,20 +11,20 @@
 // after dark, braga by night, braga by sunset, braga by dark, sair à noite, festa, dj
 
 export const bragaAfterDarkKnowledge = `
-# ROTEIRO "BRAGA AFTER DARK" — GUIA OFICIAL DA NOITE DE BRAGA
+# ROTEIRO "BRAGA AFTER DARK" - GUIA OFICIAL DA NOITE DE BRAGA
 
 Guia oficial noturno de Braga ("Braga's Pocket Guide"), publicado pela Divisão de Economia e
 Turismo do Município de Braga no âmbito do projeto europeu URBACT "Cities After Dark".
 Uma jornada mágica pela noite da cidade histórica, dividida em 3 momentos:
 
-1. **Braga by Sunset** (18:00–20:30) — o pôr-do-sol banha os monumentos em tons dourados
+1. **Braga by Sunset** (18:00–20:30) - o pôr-do-sol banha os monumentos em tons dourados
    enquanto se desfruta de uma refeição ou lanche num dos estabelecimentos da cidade.
-2. **Braga by Night** (20:30–22:30) — jantares memoráveis no coração do centro histórico.
-3. **Braga by Dark** (22:30+) — bares vibrantes, discotecas e locais de diversão.
+2. **Braga by Night** (20:30–22:30) - jantares memoráveis no coração do centro histórico.
+3. **Braga by Dark** (22:30+) - bares vibrantes, discotecas e locais de diversão.
 
 ## Iluminação monumental
-Braga brilha à noite com a iluminação dos principais monumentos — a Sé, o Arco da Porta Nova
-e a Torre de Menagem — criando uma atmosfera mágica que realça a beleza arquitetónica local.
+Braga brilha à noite com a iluminação dos principais monumentos - a Sé, o Arco da Porta Nova
+e a Torre de Menagem - criando uma atmosfera mágica que realça a beleza arquitetónica local.
 
 ## Cultura e entretenimento
 Espetáculos e concertos nos espaços culturais de referência: Theatro Circo, Fórum Braga,
@@ -36,12 +36,12 @@ quartas-feiras e durante a semana académica "Enterro da Gata". Festas universit
 Rua Nova de Santa Cruz, Rua dos Peões e Praceta do Vilar.
 
 ## Eventos e festivais noturnos
-- **Braga Romana** (maio) — performances, feiras e mercados que recriam a época romana.
-- **Noite Branca** (setembro) — instalações artísticas e performances ao ar livre.
-- **Noite de São João** (junho) — festas populares, fogueiras, música e dança.
+- **Braga Romana** (maio) - performances, feiras e mercados que recriam a época romana.
+- **Noite Branca** (setembro) - instalações artísticas e performances ao ar livre.
+- **Noite de São João** (junho) - festas populares, fogueiras, música e dança.
 
 ## Segurança
-Braga é conhecida pela segurança e hospitalidade — destino ideal para explorar à noite
+Braga é conhecida pela segurança e hospitalidade - destino ideal para explorar à noite
 com tranquilidade e confiança.
 
 ## Horários aproximados do pôr-do-sol (para planear o "Braga by Sunset")
@@ -54,7 +54,7 @@ Julho 20:30 · Agosto 20:15 · Setembro 19:20 · Outubro 18:30 · Novembro 17:10
 
 ---
 
-# PARTE 1 — BRAGA BY SUNSET (roteiro do pôr-do-sol)
+# PARTE 1 - BRAGA BY SUNSET (roteiro do pôr-do-sol)
 
 Começar com um passeio pelo centro histórico e principais monumentos durante a "Golden Hour",
 aproveitando para uma bebida ou refeição enquanto se aprecia o pôr-do-sol sobre a cidade.
@@ -69,7 +69,7 @@ aproveitando para uma bebida ou refeição enquanto se aprecia o pôr-do-sol sob
 - Morada: Terreiro do Castelo | GPS: 41°33'05.0"N 8°25'26.2"W
 - Torre principal do antigo castelo de Braga, no coração da cidade. Faz parte da Arcada,
   zona animada com bares com vista para a avenida central. Ao pôr-do-sol oferece uma
-  silhueta dramática — local perfeito para uma bebida descontraída.
+  silhueta dramática - local perfeito para uma bebida descontraída.
 
 ## 02. Jardim de Santa Bárbara
 - Morada: Rua Dr. Justino Cruz | GPS: 41°33'05.3"N 8°25'32.9"W
@@ -80,7 +80,7 @@ aproveitando para uma bebida ou refeição enquanto se aprecia o pôr-do-sol sob
 - Morada: Rua Dom Diogo de Sousa | GPS: 41°33'01.1"N 8°25'45.6"W
 - Majestoso arco do século XVIII que marca a entrada na cidade antiga. Liga-se à Torre de
   Menagem pela Rua do Souto, a principal rua pedonal de comércio de Braga. Origem do ditado
-  "És de Braga? Deixaste a porta aberta" — os bracarenses terão sido pioneiros em deixar
+  "És de Braga? Deixaste a porta aberta" - os bracarenses terão sido pioneiros em deixar
   abertos os portões das muralhas.
 
 ## 04. Casa dos Coimbras ♿🥗🌱🐾💳
@@ -135,13 +135,13 @@ aproveitando para uma bebida ou refeição enquanto se aprecia o pôr-do-sol sob
 - Morada: Praça do Comércio | GPS: 41°33'15.0"N 8°25'38.6"W
 - Horário Mesa na Praça: domingo a quinta 09:00–22:30; sexta e sábado 09:00–23:30
 - Horário Mercado: terça a sexta 07:00–17:00; sábado 09:00–14:00
-- Mercado aberto desde 1956 e renovado em 2019 — simbiose entre a tradição do comércio
+- Mercado aberto desde 1956 e renovado em 2019 - simbiose entre a tradição do comércio
   local e uma oferta inovadora de qualidade. Ala de alimentação com gastronomia portuguesa,
   comida asiática e turca, doçarias e cervejarias.
 
 ---
 
-# PARTE 2 — BRAGA BY NIGHT (jantar no coração do centro histórico)
+# PARTE 2 - BRAGA BY NIGHT (jantar no coração do centro histórico)
 
 Explorar os encantos gastronómicos de Braga à noite: iguarias locais e delícias da região
 no ambiente pitoresco do centro histórico, acompanhadas pelo refrescante vinho verde ou
@@ -274,7 +274,7 @@ pela cerveja artesanal regional.
 
 ---
 
-# PARTE 3 — BRAGA BY DARK (bares, discotecas e espaços de entretenimento)
+# PARTE 3 - BRAGA BY DARK (bares, discotecas e espaços de entretenimento)
 
 Após a refeição, apreciar a beleza noturna dos monumentos iluminados. Percurso sugerido:
 começar no Arco da Porta Nova, passar pelo Jardim de Santa Bárbara, seguir até à Praça da
@@ -331,7 +331,7 @@ som da música mais recente e alternativa.
 - Morada: Rua Dom Paio Mendes, 87 | GPS: 41°32'59.7"N 8°25'39.8"W
 - Horário: domingo a quinta 16:00–01:00; sexta e sábado 16:00–02:00
 - Adição vibrante à rua de bares perto da Sé: ótima música, bebidas personalizadas e
-  atmosfera animada — ambiente perfeito para festas.
+  atmosfera animada - ambiente perfeito para festas.
 
 ## 39. Tosga
 - Morada: Rua do Forno, 1 | GPS: 41°32'59.4"N 8°25'35.3"W
@@ -357,7 +357,7 @@ som da música mais recente e alternativa.
 - Morada: Rua Andrade Corvo, 66 | GPS: 41°33'00.5"N 8°25'54.6"W
 - Horário: segunda a sábado 13:00–00:00; domingo 13:00–20:00
 - Encantador bar de vinhos perto do Arco da Porta Nova. Ampla seleção de vinhos
-  portugueses — favoritos regionais e castas únicas — com tapas e petiscos. Decoração
+  portugueses - favoritos regionais e castas únicas - com tapas e petiscos. Decoração
   elegante, ideal para entusiastas do vinho.
 
 ## 43. Café-Concerto RUM by Mavy ♿🐾
@@ -387,7 +387,7 @@ som da música mais recente e alternativa.
 - Horário inverno (outubro–abril): domingo/segunda e quarta/quinta 20:00–02:00;
   sexta, sábado e vésperas de feriado 20:00–03:00
 - Fundado em 2022; o nome vem da Lei Seca dos EUA, quando "Speak Easy" designava bares
-  clandestinos — o berço do cocktail. Localização mais escondida no centro; decoração
+  clandestinos - o berço do cocktail. Localização mais escondida no centro; decoração
   rock and roll, country e blues.
 
 ## 47. Galeria 101
@@ -425,7 +425,7 @@ som da música mais recente e alternativa.
 - Morada: Largo do Santuário do Bom Jesus | GPS: 41°33'33.1"N 8°22'35.3"W
 - Horário: sexta e sábado 00:00–05:00; domingo 18:00–00:00 | Aberto apenas na temporada de verão
 - Num castelo histórico junto ao Bom Jesus: noites sob as estrelas com arquitetura
-  deslumbrante e música animada — experiência noturna ao ar livre distinta.
+  deslumbrante e música animada - experiência noturna ao ar livre distinta.
 
 ## 53. Araxá by Club del Mar
 - Morada: Via Alto da Vela | GPS: 41°33'50.7"N 8°21'33.1"W
@@ -466,7 +466,7 @@ viagem de aproximadamente 40 minutos em autocarro shuttle.
   Estádio – Braga Norte.
 
 ## Autocarros regionais/nacionais/internacionais
-Centro de Coordenação de Transportes de Braga — horários e ligações: cctb.cm-braga.pt
+Centro de Coordenação de Transportes de Braga - horários e ligações: cctb.cm-braga.pt
 
 ## Micromobilidade
 Aluguer de trotinetes elétricas e bicicletas via apps como Bird/Bolt, em locais de
@@ -529,3 +529,31 @@ estacionamento designados por toda a cidade, exceto no centro histórico.
 //   "cocktail","cocktails","cerveja","vinho","wine","beer","dj","festa","party","fiesta",
 //   "after dark","braga by night","braga by sunset","braga by dark","dinner","dîner","cenar"
 // ] }
+
+
+// ============================================================
+// DERIVADOS: o guia dividido em dois módulos que cabem inteiros
+// no teto de conhecimento (a versão única era truncada e os
+// bares ficavam de fora - o modelo inventava para compensar).
+// Mobilidade/contactos ficam de fora: já existem nos módulos
+// transportes e mapa.
+// ============================================================
+
+const _p3 = bragaAfterDarkKnowledge.indexOf('# PARTE 3');
+const _mob = bragaAfterDarkKnowledge.indexOf('# MOBILIDADE');
+
+export const AFTER_DARK_SUNSET_JANTAR = bragaAfterDarkKnowledge.slice(0, _p3);
+
+export const AFTER_DARK_BARES =
+  '# ROTEIRO "BRAGA AFTER DARK" - BARES, DISCOTECAS E NOITE (guia oficial)\n' +
+  'Regra: recomendar APENAS espaços desta lista. Nunca inventar bares ou discotecas.\n\n' +
+  bragaAfterDarkKnowledge.slice(_p3, _mob === -1 ? undefined : _mob);
+
+// Versão mini (modo essencial/slim): só os nomes oficiais, para o modelo
+// de último recurso nunca ter de inventar.
+export const AFTER_DARK_BARES_LITE = `# BARES E DISCOTECAS DE BRAGA - LISTA OFICIAL (resumo)
+Regra: recomendar APENAS estes espaços. Nunca inventar nomes.
+Bares e café-bares: Colinatrum (vista, gins), Juno (dança, eletrónica/rock), Os Zés (tapas e cocktails), Pátio da Sé, Rossio Bar, Sé La Vie (alternativo), Mal Amado, Tosga (cocktails artesanais), SETRA Urban & Cocktail Bar, Pelle (jazz/blues), Wine 66 (vinhos), Café-Concerto RUM by Mavy (GNRation), Estúdio 22 (música ao vivo), Sé Café, Speak Easy Braga (cocktails), Galeria 101 (mixologia), Berber Shisha Café Marroquino, Bicau Food & Drinks, KeimÒdrumo, Araxá by Club del Mar.
+Discotecas: Lustre; Sardinha Biba, Dona Rosa Disco, Bô Zen (as três só na temporada de inverno); Bô Zen Open Air (verão).
+Zona principal: Rua Dom Paio Mendes e envolvente da Sé. Detalhes (moradas, horários) em visitbraga.travel.
+`;

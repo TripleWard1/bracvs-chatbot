@@ -17,6 +17,7 @@ const UI: Record<
     errorGeneric: string;
     errorRate: string;
     disclaimer: string;
+    typing: string;
     chips: string[];
   }
 > = {
@@ -29,6 +30,7 @@ const UI: Record<
     errorGeneric: 'Algo correu mal. Tenta novamente.',
     errorRate: 'Muitas mensagens seguidas. Espera um minuto e volta a tentar.',
     disclaimer: 'O Bracvs pode cometer erros. Confirma horários e preços em visitbraga.travel.',
+    typing: 'O Bracvs está a escrever',
     chips: [
       'O que visitar num dia?',
       'Como chego ao Bom Jesus?',
@@ -45,6 +47,7 @@ const UI: Record<
     errorGeneric: 'Algo salió mal. Inténtalo de nuevo.',
     errorRate: 'Demasiados mensajes seguidos. Espera un minuto e inténtalo otra vez.',
     disclaimer: 'Bracvs puede cometer errores. Confirma horarios y precios en visitbraga.travel.',
+    typing: 'Bracvs está escribiendo',
     chips: [
       '¿Qué visitar en un día?',
       '¿Cómo llego al Bom Jesus?',
@@ -61,6 +64,7 @@ const UI: Record<
     errorGeneric: 'Something went wrong. Please try again.',
     errorRate: 'Too many messages. Wait a minute and try again.',
     disclaimer: 'Bracvs can make mistakes. Check opening hours and prices at visitbraga.travel.',
+    typing: 'Bracvs is typing',
     chips: [
       'What to see in one day?',
       'How do I get to Bom Jesus?',
@@ -77,6 +81,7 @@ const UI: Record<
     errorGeneric: 'Une erreur est survenue. Réessaie.',
     errorRate: 'Trop de messages. Attends une minute et réessaie.',
     disclaimer: 'Bracvs peut faire des erreurs. Vérifie horaires et prix sur visitbraga.travel.',
+    typing: 'Bracvs écrit',
     chips: [
       'Que voir en une journée ?',
       'Comment aller au Bom Jesus ?',
@@ -95,16 +100,20 @@ function detectUiLang(): Lang {
   return 'en';
 }
 
-// Indicador "a escrever": escadório em zigzag do Bom Jesus
-function TypingStairs() {
+// Indicador "a escrever": o Bracvs presente, com pontos animados
+function TypingBubble({ label }: { label: string }) {
   return (
-    <div className="typing" aria-label="…">
-      <svg width="56" height="26" viewBox="0 0 56 26">
-        <path
-          className="stair"
-          d="M2 24 h9 v-7 h9 v-7 h9 v-7 h9 M38 3 h16"
-        />
-      </svg>
+    <div className="bot-row">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img className="bot-avatar" src="/bracvs-avatar.png" alt="" />
+      <div className="msg bot typing-bubble" role="status" aria-label={label}>
+        <span className="typing-label">{label}</span>
+        <span className="dots" aria-hidden="true">
+          <i />
+          <i />
+          <i />
+        </span>
+      </div>
     </div>
   );
 }
@@ -234,7 +243,11 @@ export default function Chat() {
           )
         )}
 
-        {busy && messages[messages.length - 1]?.content === '' && <TypingStairs />}
+        {busy &&
+          (messages[messages.length - 1]?.role === 'user' ||
+            messages[messages.length - 1]?.content === '') && (
+            <TypingBubble label={t.typing} />
+          )}
         {error && <div className="msg error">{error}</div>}
         <div ref={bottomRef} />
       </main>
