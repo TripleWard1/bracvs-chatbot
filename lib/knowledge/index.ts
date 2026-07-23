@@ -8,7 +8,7 @@
 // dos módulos está em PT/EN: o modelo traduz na resposta.
 //
 // Para adicionar um módulo novo: cria o ficheiro em lib/knowledge/,
-// importa aqui e acrescenta uma entrada em MODULES com as keywords.
+// importa aqui e acrescenta um  a entrada em MODULES com as keywords.
 // ============================================================
 
 import { CORE_KNOWLEDGE } from './core';
