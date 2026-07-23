@@ -200,13 +200,18 @@ export default function Chat() {
           <p>{t.tagline}</p>
         </div>
       </header>
+      <div className="stairband" aria-hidden="true" />
 
       <main className="messages" aria-live="polite">
         {messages.length === 0 && (
           <div className="empty">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img className="mascot" src="/mascote-bracvs-web.png" alt="Bracvs" />
-            <h2>{t.welcome}</h2>
+            <h2>
+              {t.welcome.split('Bracvs')[0]}
+              <em>Bracvs</em>
+              {t.welcome.split('Bracvs')[1]}
+            </h2>
             <p>{t.sub}</p>
             <div className="chips">
               {t.chips.map((c) => (
@@ -218,11 +223,19 @@ export default function Chat() {
           </div>
         )}
 
-        {messages.map((m, i) => (
-          <div key={i} className={`msg ${m.role === 'user' ? 'user' : 'bot'}`}>
-            {m.content}
-          </div>
-        ))}
+        {messages.map((m, i) =>
+          m.role === 'user' ? (
+            <div key={i} className="msg user">
+              {m.content}
+            </div>
+          ) : (
+            <div key={i} className="bot-row">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className="bot-avatar" src="/bracvs-avatar.png" alt="" />
+              <div className="msg bot">{m.content}</div>
+            </div>
+          )
+        )}
 
         {busy && messages[messages.length - 1]?.content === '' && <TypingStairs />}
         {error && <div className="msg error">{error}</div>}
