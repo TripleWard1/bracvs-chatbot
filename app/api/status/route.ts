@@ -1,7 +1,7 @@
 // app/api/status/route.ts
 // DIAGNÓSTICO: testa cada fornecedor de IA com um pedido mínimo e
 // devolve quem está operacional. Abrir no browser: /api/status
-// Não expõe chaves — só o estado e o erro (se houver) de cada um.
+// Não expõe chaves - só o estado e o erro (se houver) de cada um.
 
 import { providerChain } from '@/lib/providers';
 
@@ -21,7 +21,7 @@ export async function GET() {
           Authorization: `Bearer ${p.apiKey}`,
           'User-Agent': 'bracvs-chatbot/1.0 (visitbraga.travel)',
           'HTTP-Referer': 'https://visitbraga.travel',
-          'X-Title': 'Bracvs — Visit Braga',
+          'X-Title': 'Bracvs - Visit Braga',
         },
         // Mesmos parâmetros do /api/chat: um "ping" minúsculo passaria em
         // fornecedores que falham num pedido real (parâmetros extra, quota
@@ -92,7 +92,7 @@ export async function GET() {
       {
         resumo: ativo
           ? `O Bracvs está a responder com: ${ativo}`
-          : 'NENHUM fornecedor operacional — o chat vai dar erro',
+          : 'NENHUM fornecedor operacional - o chat vai dar erro',
         chaves_configuradas: providers.map((p) => p.name),
         detalhe: results,
       },

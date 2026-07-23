@@ -17,6 +17,7 @@ const UI: Record<
     send: string;
     errorGeneric: string;
     errorRate: string;
+    errorBusy: string;
     disclaimer: string;
     typing: string;
     fbUp: string;
@@ -34,6 +35,7 @@ const UI: Record<
     send: 'Enviar',
     errorGeneric: 'Algo correu mal. Tenta novamente.',
     errorRate: 'Muitas mensagens seguidas. Espera um minuto e volta a tentar.',
+    errorBusy: 'Estou sem capacidade neste momento. Tenta daqui a alguns minutos - entretanto, tens tudo em visitbraga.travel.',
     disclaimer: 'O Bracvs pode cometer erros. Confirma horários e preços em visitbraga.travel.',
     typing: 'O Bracvs está a escrever',
     fbUp: 'Resposta útil',
@@ -55,6 +57,7 @@ const UI: Record<
     send: 'Enviar',
     errorGeneric: 'Algo salió mal. Inténtalo de nuevo.',
     errorRate: 'Demasiados mensajes seguidos. Espera un minuto e inténtalo otra vez.',
+    errorBusy: 'No tengo capacidad en este momento. Inténtalo en unos minutos - mientras tanto, tienes todo en visitbraga.travel.',
     disclaimer: 'Bracvs puede cometer errores. Confirma horarios y precios en visitbraga.travel.',
     typing: 'Bracvs está escribiendo',
     fbUp: 'Respuesta útil',
@@ -76,6 +79,7 @@ const UI: Record<
     send: 'Send',
     errorGeneric: 'Something went wrong. Please try again.',
     errorRate: 'Too many messages. Wait a minute and try again.',
+    errorBusy: "I'm at capacity right now. Please try again in a few minutes - meanwhile, everything is on visitbraga.travel.",
     disclaimer: 'Bracvs can make mistakes. Check opening hours and prices at visitbraga.travel.',
     typing: 'Bracvs is typing',
     fbUp: 'Helpful answer',
@@ -97,6 +101,7 @@ const UI: Record<
     send: 'Envoyer',
     errorGeneric: 'Une erreur est survenue. Réessaie.',
     errorRate: 'Trop de messages. Attends une minute et réessaie.',
+    errorBusy: "Je n'ai pas de capacité en ce moment. Réessaie dans quelques minutes - en attendant, tout est sur visitbraga.travel.",
     disclaimer: 'Bracvs peut faire des erreurs. Vérifie horaires et prix sur visitbraga.travel.',
     typing: 'Bracvs écrit',
     fbUp: 'Réponse utile',
@@ -260,6 +265,11 @@ export default function Chat() {
         setError(t.errorRate);
         return;
       }
+      if (res.status === 502) {
+        // Todos os fornecedores indisponíveis (quota/avaria)
+        setError(t.errorBusy);
+        return;
+      }
       if (!res.ok || !res.body) {
         setError(t.errorGeneric);
         return;
@@ -286,6 +296,12 @@ export default function Chat() {
       setError(t.errorGeneric);
     } finally {
       setBusy(false);
+      // Remove uma bolha vazia do Bracvs se a resposta nunca chegou a vir
+      setMessages((m) =>
+        m.length && m[m.length - 1].role === 'assistant' && m[m.length - 1].content === ''
+          ? m.slice(0, -1)
+          : m
+      );
     }
   }
 

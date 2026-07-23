@@ -1,5 +1,5 @@
 // ============================================================
-// FORNECEDORES DE IA — cadeia de fallback automático
+// FORNECEDORES DE IA - cadeia de fallback automático
 // Todos são compatíveis com a API OpenAI (chat/completions + SSE),
 // por isso trocar ou reordenar é trivial.
 //
@@ -22,11 +22,11 @@ export type Provider = {
   // slim: recebe só o conhecimento essencial (para limites por minuto pequenos)
   slim?: boolean;
   // maxTokens: teto de resposta. Os modelos Gemini 3.x "pensam" antes de
-  // responder e o raciocínio conta para este teto — precisam de folga larga,
+  // responder e o raciocínio conta para este teto - precisam de folga larga,
   // senão a resposta visível é cortada a meio da frase.
   maxTokens?: number;
   // reasoningEffort: nível de raciocínio (modelos pensantes). "low" evita
-  // que o Gemini fique 20-30s a pensar antes do primeiro byte — que mataria
+  // que o Gemini fique 20-30s a pensar antes do primeiro byte - que mataria
   // a função no limite de 25s do Vercel.
   reasoningEffort?: string;
 };
@@ -96,14 +96,14 @@ export async function callProvider(
         Authorization: `Bearer ${provider.apiKey}`,
         'User-Agent': 'bracvs-chatbot/1.0 (visitbraga.travel)',
         'HTTP-Referer': 'https://visitbraga.travel',
-        'X-Title': 'Bracvs — Visit Braga',
+        'X-Title': 'Bracvs - Visit Braga',
       },
       body: JSON.stringify({
         model: provider.model,
         messages,
         // 0.4 repetia sempre as mesmas sugestões; 0.7 aumentou as invenções.
         // 0.5 com amostragem do conhecimento dá variedade sem criatividade
-        // a mais — a variedade vem da amostra, não da temperatura.
+        // a mais - a variedade vem da amostra, não da temperatura.
         temperature: 0.5,
         max_tokens: provider.maxTokens ?? 600,
         stream: true,
@@ -115,7 +115,7 @@ export async function callProvider(
     if (!res.ok) {
       const errBody = await res.clone().text().catch(() => '');
       console.error(
-        `[Bracvs] ${provider.name} falhou: HTTP ${res.status} — ${errBody.slice(0, 300)}`
+        `[Bracvs] ${provider.name} falhou: HTTP ${res.status} - ${errBody.slice(0, 300)}`
       );
       // 400 = parâmetro rejeitado. Volta a tentar sem os parâmetros extra
       // (reasoning_effort), que nem todas as versões da API aceitam.
@@ -128,7 +128,7 @@ export async function callProvider(
             Authorization: `Bearer ${provider.apiKey}`,
             'User-Agent': 'bracvs-chatbot/1.0 (visitbraga.travel)',
             'HTTP-Referer': 'https://visitbraga.travel',
-            'X-Title': 'Bracvs — Visit Braga',
+            'X-Title': 'Bracvs - Visit Braga',
           },
           body: JSON.stringify({
             model: provider.model,
@@ -142,7 +142,7 @@ export async function callProvider(
         if (!retry.ok) {
           const b = await retry.clone().text().catch(() => '');
           console.error(
-            `[Bracvs] ${provider.name} falhou na 2.ª tentativa: HTTP ${retry.status} — ${b.slice(0, 300)}`
+            `[Bracvs] ${provider.name} falhou na 2.ª tentativa: HTTP ${retry.status} - ${b.slice(0, 300)}`
           );
         }
         return retry;
@@ -181,7 +181,7 @@ export function sseToText(upstream: ReadableStream<Uint8Array>): ReadableStream<
               const token = json.choices?.[0]?.delta?.content;
               if (token) controller.enqueue(encoder.encode(token));
             } catch {
-              // linha parcial — ignora
+              // linha parcial - ignora
             }
           }
         }
