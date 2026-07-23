@@ -20,6 +20,8 @@ export async function GET() {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${p.apiKey}`,
           'User-Agent': 'bracvs-chatbot/1.0 (visitbraga.travel)',
+          'HTTP-Referer': 'https://visitbraga.travel',
+          'X-Title': 'Bracvs — Visit Braga',
         },
         // Mesmos parâmetros do /api/chat: um "ping" minúsculo passaria em
         // fornecedores que falham num pedido real (parâmetros extra, quota
@@ -37,8 +39,32 @@ export async function GET() {
         }),
       });
       const ms = Date.now() - started;
+      // Quota restante (a Groq e outros expõem-na nos cabeçalhos): um teste
+      // pequeno pode passar e uma pergunta real falhar por falta de tokens.
+      const restam =
+        res.headers.get('x-ratelimit-remaining-tokens') ??
+        res.headers.get('x-ratelimit-remaining-tokens-day') ??
+        null;
+      const reset =
+        res.headers.get('x-ratelimit-reset-tokens') ??
+        res.headers.get('x-ratelimit-reset-tokens-day') ??
+        null;
+
       if (res.ok) {
-        results.push({ fornecedor: p.name, modelo: p.model, estado: 'OK ✅', latencia_ms: ms });
+        const tokensRestantes = restam ? Number(restam) : null;
+        const chegaParaPergunta =
+          tokensRestantes === null ? null : tokensRestantes > 6000;
+        results.push({
+          fornecedor: p.name,
+          modelo: p.model,
+          estado:
+            chegaParaPergunta === false
+              ? 'SEM QUOTA PARA PERGUNTAS REAIS ⚠️'
+              : 'OK ✅',
+          latencia_ms: ms,
+          ...(tokensRestantes !== null ? { tokens_restantes: tokensRestantes } : {}),
+          ...(reset ? { quota_repoe_em: reset } : {}),
+        });
       } else {
         const erro = (await res.text()).slice(0, 220);
         results.push({
