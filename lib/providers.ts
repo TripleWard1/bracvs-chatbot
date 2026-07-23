@@ -1,5 +1,5 @@
 // ============================================================
-// FORNECEDORES DE IA - cadeia de fallback automático
+// FORNECEDORES DE IA — cadeia de fallback automático
 // Todos são compatíveis com a API OpenAI (chat/completions + SSE),
 // por isso trocar ou reordenar é trivial.
 //
@@ -21,6 +21,10 @@ export type Provider = {
   model: string;
   // slim: recebe só o conhecimento essencial (para limites por minuto pequenos)
   slim?: boolean;
+  // maxTokens: teto de resposta. Os modelos Gemini 3.x "pensam" antes de
+  // responder e o raciocínio conta para este teto — precisam de folga larga,
+  // senão a resposta visível é cortada a meio da frase.
+  maxTokens?: number;
 };
 
 export function providerChain(): Provider[] {
@@ -29,7 +33,8 @@ export function providerChain(): Provider[] {
       name: 'gemini',
       url: 'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions',
       apiKey: process.env.GEMINI_API_KEY,
-      model: process.env.GEMINI_MODEL || 'gemini-2.5-flash',
+      model: process.env.GEMINI_MODEL || 'gemini-3.5-flash',
+      maxTokens: 3000,
     },
     {
       name: 'cerebras',
@@ -73,7 +78,7 @@ export async function callProvider(
         model: provider.model,
         messages,
         temperature: 0.4,
-        max_tokens: 600,
+        max_tokens: provider.maxTokens ?? 600,
         stream: true,
       }),
     });
@@ -81,7 +86,7 @@ export async function callProvider(
       // Diagnóstico: mostra no terminal porque é que este fornecedor falhou
       const errBody = await res.clone().text().catch(() => '');
       console.error(
-        `[Bracvs] ${provider.name} falhou: HTTP ${res.status} - ${errBody.slice(0, 300)}`
+        `[Bracvs] ${provider.name} falhou: HTTP ${res.status} — ${errBody.slice(0, 300)}`
       );
     }
     return res;
@@ -117,7 +122,7 @@ export function sseToText(upstream: ReadableStream<Uint8Array>): ReadableStream<
               const token = json.choices?.[0]?.delta?.content;
               if (token) controller.enqueue(encoder.encode(token));
             } catch {
-              // linha parcial - ignora
+              // linha parcial — ignora
             }
           }
         }
