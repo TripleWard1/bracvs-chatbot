@@ -29,7 +29,7 @@ body {
 }
 
 body {
-  /* Faixa vermelha no topo (atrás da zona do notch) e neutro no resto —
+  /* Faixa vermelha no topo (atrás da zona do notch) e neutro no resto -
      evita qualquer barra clara acima do cabeçalho em iPhone */
   background-color: #edebe7;
   background-image: linear-gradient(
