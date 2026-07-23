@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 type Msg = { role: 'user' | 'assistant'; content: string };
 type Lang = 'pt' | 'es' | 'en' | 'fr';
 
-// ---------- Textos da interface nas 4 línguas -----------
+// ---------- Textos da interface nas 4 línguas ----------
 const UI: Record<
   Lang,
   {
@@ -95,26 +95,18 @@ function detectUiLang(): Lang {
   return 'en';
 }
 
-// Avatar do Bracvs: arco (Arco da Porta Nova) estilizado
+// Avatar do Bracvs: cabeça da mascote oficial
 function BracvsAvatar({ size = 40 }: { size?: number }) {
   return (
-    <svg
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
       className="avatar"
+      src="/bracvs-avatar.png"
       width={size}
       height={size}
-      viewBox="0 0 40 40"
-      aria-hidden="true"
-    >
-      <circle cx="20" cy="20" r="20" fill="#fff" />
-      <path
-        d="M11 30 V20 a9 9 0 0 1 18 0 V30"
-        fill="none"
-        stroke="#1d4e89"
-        strokeWidth="3.5"
-        strokeLinecap="round"
-      />
-      <circle cx="20" cy="17" r="2.2" fill="#b98a2f" />
-    </svg>
+      alt=""
+      style={{ borderRadius: '50%' }}
+    />
   );
 }
 
@@ -212,6 +204,8 @@ export default function Chat() {
       <main className="messages" aria-live="polite">
         {messages.length === 0 && (
           <div className="empty">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img className="mascot" src="/mascote-bracvs-web.png" alt="Bracvs" />
             <h2>{t.welcome}</h2>
             <p>{t.sub}</p>
             <div className="chips">

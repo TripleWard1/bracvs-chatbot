@@ -13,15 +13,13 @@
 
   // Botão flutuante
   var btn = document.createElement('button');
-  btn.setAttribute('aria-label', 'Bracvs - Visit Braga chat');
+  btn.setAttribute('aria-label', 'Bracvs — Visit Braga chat');
   btn.style.cssText =
     'position:fixed;bottom:20px;right:20px;z-index:99998;width:60px;height:60px;' +
-    'border-radius:50%;border:none;cursor:pointer;background:#1d4e89;' +
+    'border-radius:50%;border:none;cursor:pointer;background:#f80000;' +
     'box-shadow:0 4px 16px rgba(0,0,0,.25);display:grid;place-items:center;';
   btn.innerHTML =
-    '<svg width="30" height="30" viewBox="0 0 40 40" aria-hidden="true">' +
-    '<path d="M11 30 V20 a9 9 0 0 1 18 0 V30" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>' +
-    '<circle cx="20" cy="17" r="2.2" fill="#b98a2f"/></svg>';
+    '<img src="' + ORIGIN + '/bracvs-avatar.png" alt="" width="46" height="46" style="border-radius:50%;display:block;pointer-events:none;">';
 
   // Painel com iframe
   var panel = document.createElement('div');
@@ -32,14 +30,14 @@
     'display:none;background:#fff;';
   var frame = document.createElement('iframe');
   frame.src = ORIGIN;
-  frame.title = 'Bracvs - Visit Braga';
+  frame.title = 'Bracvs — Visit Braga';
   frame.style.cssText = 'width:100%;height:100%;border:0;';
   panel.appendChild(frame);
 
   btn.addEventListener('click', function () {
     open = !open;
     panel.style.display = open ? 'block' : 'none';
-    btn.style.background = open ? '#143a68' : '#1d4e89';
+    btn.style.background = open ? '#b50000' : '#f80000';
   });
 
   document.body.appendChild(panel);

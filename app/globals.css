@@ -1,12 +1,12 @@
 :root {
-  --azulejo: #1d4e89;
-  --azulejo-deep: #143a68;
-  --gold: #b98a2f;
-  --stone: #efece5;
+  --braga-red: #f80000;
+  --braga-red-deep: #b50000;
+  --braga-black: #141414;
+  --stone: #f4f3f1;
   --surface: #ffffff;
   --ink: #23262b;
   --ink-soft: #5a5f68;
-  --line: #dcd7cc;
+  --line: #e4e0dd;
   --radius: 14px;
   --font-display: 'Fraunces', Georgia, serif;
   --font-body: 'Instrument Sans', system-ui, -apple-system, sans-serif;
@@ -44,7 +44,7 @@ body {
   align-items: center;
   gap: 12px;
   padding: 14px 18px;
-  background: var(--azulejo);
+  background: var(--braga-red);
   color: #fff;
 }
 
@@ -91,7 +91,7 @@ body {
 
 .msg.user {
   align-self: flex-end;
-  background: var(--azulejo);
+  background: var(--braga-red);
   color: #fff;
   border-bottom-right-radius: 4px;
 }
@@ -122,7 +122,7 @@ body {
   font-family: var(--font-display);
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--azulejo-deep);
+  color: var(--braga-red-deep);
   margin-bottom: 6px;
 }
 
@@ -152,8 +152,8 @@ body {
 }
 
 .chip:hover {
-  border-color: var(--gold);
-  background: #fdf9f0;
+  border-color: var(--braga-red);
+  background: #fff5f5;
 }
 
 /* ---------- Indicador "a escrever": escadório zigzag do Bom Jesus ---------- */
@@ -167,7 +167,7 @@ body {
 }
 
 .typing .stair {
-  stroke: var(--gold);
+  stroke: var(--braga-red);
   stroke-width: 2.5;
   fill: none;
   stroke-dasharray: 90;
@@ -208,8 +208,8 @@ body {
 }
 
 .composer input:focus-visible {
-  border-color: var(--azulejo);
-  box-shadow: 0 0 0 3px rgba(29, 78, 137, 0.18);
+  border-color: var(--braga-red);
+  box-shadow: 0 0 0 3px rgba(248, 0, 0, 0.15);
 }
 
 .composer button {
@@ -218,7 +218,7 @@ body {
   height: 44px;
   border: none;
   border-radius: 50%;
-  background: var(--azulejo);
+  background: var(--braga-red);
   color: #fff;
   cursor: pointer;
   display: grid;
@@ -227,7 +227,7 @@ body {
 }
 
 .composer button:hover:not(:disabled) {
-  background: var(--azulejo-deep);
+  background: var(--braga-red-deep);
 }
 
 .composer button:disabled {
@@ -236,7 +236,7 @@ body {
 }
 
 .composer button:focus-visible {
-  outline: 3px solid var(--gold);
+  outline: 3px solid var(--braga-black);
   outline-offset: 2px;
 }
 
@@ -246,4 +246,11 @@ body {
   color: var(--ink-soft);
   padding: 0 12px 8px;
   background: var(--surface);
+}
+
+/* ---------- Mascote no ecrã inicial ---------- */
+.empty .mascot {
+  height: 150px;
+  width: auto;
+  margin-bottom: 12px;
 }
