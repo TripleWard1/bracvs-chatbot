@@ -93,7 +93,7 @@ export async function POST(req: Request) {
   ];
 
   // Tenta cada fornecedor por ordem; o primeiro que responder 200 assume.
-  for (const provider of providers) {
+  for (const provider of providwers) {
     const upstream = await callProvider(provider, messages);
     if (upstream && upstream.ok && upstream.body) {
       return new Response(sseToText(upstream.body), {
