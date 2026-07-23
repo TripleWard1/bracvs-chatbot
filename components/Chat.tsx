@@ -121,6 +121,28 @@ function detectUiLang(): Lang {
   return 'en';
 }
 
+// Limpeza de markdown: alguns modelos ignoram a instrução de escrever em
+// texto simples e devolvem **negritos**, [links](url) ou ### títulos. Como a
+// interface mostra texto puro, os símbolos apareciam em bruto. Isto resolve
+// independentemente do modelo que responder.
+function limparMarkdown(texto: string): string {
+  return texto
+    // [rótulo](url) → rótulo
+    .replace(/\[([^\]]+)\]\((?:https?:\/\/)?[^)]+\)/g, '$1')
+    // **negrito** e __negrito__
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/__([^_]+)__/g, '$1')
+    // *itálico* isolado (evita apanhar listas "* item")
+    .replace(/(^|[^*\s])\*([^*\n]+)\*(?![*\w])/g, '$1$2')
+    // ### títulos
+    .replace(/^#{1,6}\s+/gm, '')
+    // listas com asterisco → travessão
+    .replace(/^\s*\*\s+/gm, '- ')
+    // marcas de código
+    .replace(/`{1,3}/g, '')
+    .trim();
+}
+
 // Deteção de locais oficiais mencionados na resposta (sem IA, sem custo)
 function norm(s: string): string {
   return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
@@ -311,9 +333,9 @@ export default function Chat() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img className="bot-avatar" src="/bracvs-avatar.png" alt="" />
               <div className="bot-col">
-                <div className="msg bot">{m.content}</div>
+                <div className="msg bot">{limparMarkdown(m.content)}</div>
                 {m.content !== '' && (!busy || i < messages.length - 1) && (
-                  <PlaceActions text={m.content} label={t.onMap} />
+                  <PlaceActions text={limparMarkdown(m.content)} label={t.onMap} />
                 )}
                 {m.content !== '' && (!busy || i < messages.length - 1) && (
                   <div className="feedback">
