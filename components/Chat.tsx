@@ -277,7 +277,7 @@ export default function Chat() {
           <p>{t.tagline}</p>
         </div>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img className="header-logo" src="/logo-branco.png" alt="Visit Braga" />
+        <img className="header-logo" src="/logo-visitbraga-branco.png" alt="Visit Braga" />
       </header>
 
       <main className="messages" aria-live="polite">

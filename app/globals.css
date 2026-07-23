@@ -151,10 +151,12 @@ body {
   height: 21px;
   width: auto;
   opacity: 0.98;
-  /* torna o logo inteiro branco: a metade "BRAGA" é vermelha e sumia no fundo */
-  filter: brightness(0) invert(1) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.3));
   position: relative;
   z-index: 1;
+  /* Sem filtros CSS: o ficheiro já é branco. Filtros obrigam o telemóvel a
+     redesenhar a imagem durante o scroll e causavam flicker branco/preto. */
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 @media (max-width: 420px) {
