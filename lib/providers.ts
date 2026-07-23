@@ -1,5 +1,5 @@
 // ============================================================
-// FORNECEDORES DE IA - cadeia de fallback automático
+// FORNECEDORES DE IA — cadeia de fallback automático
 // Todos são compatíveis com a API OpenAI (chat/completions + SSE),
 // por isso trocar ou reordenar é trivial.
 //
@@ -22,11 +22,11 @@ export type Provider = {
   // slim: recebe só o conhecimento essencial (para limites por minuto pequenos)
   slim?: boolean;
   // maxTokens: teto de resposta. Os modelos Gemini 3.x "pensam" antes de
-  // responder e o raciocínio conta para este teto - precisam de folga larga,
+  // responder e o raciocínio conta para este teto — precisam de folga larga,
   // senão a resposta visível é cortada a meio da frase.
   maxTokens?: number;
   // reasoningEffort: nível de raciocínio (modelos pensantes). "low" evita
-  // que o Gemini fique 20-30s a pensar antes do primeiro byte - que mataria
+  // que o Gemini fique 20-30s a pensar antes do primeiro byte — que mataria
   // a função no limite de 25s do Vercel.
   reasoningEffort?: string;
 };
@@ -53,13 +53,22 @@ export function providerChain(): Provider[] {
       apiKey: process.env.GROQ_API_KEY,
       model: process.env.GROQ_MODEL || 'llama-3.3-70b-versatile',
     },
-    {
-      name: 'groq-8b',
-      url: 'https://api.groq.com/openai/v1/chat/completions',
-      apiKey: process.env.GROQ_API_KEY,
-      model: process.env.GROQ_MODEL_FALLBACK || 'llama-3.1-8b-instant',
-      slim: true,
-    },
+    // NOTA: o llama-3.1-8b-instant foi REMOVIDO da cadeia. Inventava
+    // estabelecimentos, escrevia em português do Brasil e produzia texto
+    // degradado ("(pausa)"). Uma resposta errada é pior do que uma espera:
+    // é preferível a retentativa automática do cliente. Para o reativar,
+    // define GROQ_ENABLE_8B=1 nas variáveis de ambiente.
+    ...(process.env.GROQ_ENABLE_8B === '1'
+      ? [
+          {
+            name: 'groq-8b',
+            url: 'https://api.groq.com/openai/v1/chat/completions',
+            apiKey: process.env.GROQ_API_KEY,
+            model: process.env.GROQ_MODEL_FALLBACK || 'llama-3.1-8b-instant',
+            slim: true,
+          },
+        ]
+      : []),
   ];
   // Só mantém fornecedores com chave definida
   return chain.filter((p) => !!p.apiKey);
@@ -82,9 +91,10 @@ export async function callProvider(
       body: JSON.stringify({
         model: provider.model,
         messages,
-        // 0.4 tornava as sugestões sempre iguais; 0.7 dá variedade sem
-        // aumentar o risco de invenção (as listas são fechadas)
-        temperature: 0.7,
+        // 0.4 repetia sempre as mesmas sugestões; 0.7 aumentou as invenções.
+        // 0.5 com amostragem do conhecimento dá variedade sem criatividade
+        // a mais — a variedade vem da amostra, não da temperatura.
+        temperature: 0.5,
         max_tokens: provider.maxTokens ?? 600,
         stream: true,
         ...(provider.reasoningEffort ? { reasoning_effort: provider.reasoningEffort } : {}),
@@ -96,7 +106,7 @@ export async function callProvider(
       // Diagnóstico: mostra no terminal porque é que este fornecedor falhou
       const errBody = await res.clone().text().catch(() => '');
       console.error(
-        `[Bracvs] ${provider.name} falhou: HTTP ${res.status} - ${errBody.slice(0, 300)}`
+        `[Bracvs] ${provider.name} falhou: HTTP ${res.status} — ${errBody.slice(0, 300)}`
       );
     }
     return res;
@@ -132,7 +142,7 @@ export function sseToText(upstream: ReadableStream<Uint8Array>): ReadableStream<
               const token = json.choices?.[0]?.delta?.content;
               if (token) controller.enqueue(encoder.encode(token));
             } catch {
-              // linha parcial - ignora
+              // linha parcial — ignora
             }
           }
         }
