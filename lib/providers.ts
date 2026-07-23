@@ -53,6 +53,14 @@ export function providerChain(): Provider[] {
       apiKey: process.env.GROQ_API_KEY,
       model: process.env.GROQ_MODEL || 'llama-3.3-70b-versatile',
     },
+    {
+      // Terceiro reservatório de quota, independente do Google e da Groq.
+      // Free tier sem cartão (~20 pedidos/min, ~200/dia). Compatível OpenAI.
+      name: 'openrouter',
+      url: 'https://openrouter.ai/api/v1/chat/completions',
+      apiKey: process.env.OPENROUTER_API_KEY,
+      model: process.env.OPENROUTER_MODEL || 'meta-llama/llama-3.3-70b-instruct:free',
+    },
     // NOTA: o llama-3.1-8b-instant foi REMOVIDO da cadeia. Inventava
     // estabelecimentos, escrevia em português do Brasil e produzia texto
     // degradado ("(pausa)"). Uma resposta errada é pior do que uma espera:
@@ -87,6 +95,8 @@ export async function callProvider(
         'Content-Type': 'application/json',
         Authorization: `Bearer ${provider.apiKey}`,
         'User-Agent': 'bracvs-chatbot/1.0 (visitbraga.travel)',
+        'HTTP-Referer': 'https://visitbraga.travel',
+        'X-Title': 'Bracvs — Visit Braga',
       },
       body: JSON.stringify({
         model: provider.model,
@@ -117,6 +127,8 @@ export async function callProvider(
             'Content-Type': 'application/json',
             Authorization: `Bearer ${provider.apiKey}`,
             'User-Agent': 'bracvs-chatbot/1.0 (visitbraga.travel)',
+            'HTTP-Referer': 'https://visitbraga.travel',
+            'X-Title': 'Bracvs — Visit Braga',
           },
           body: JSON.stringify({
             model: provider.model,
