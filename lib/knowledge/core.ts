@@ -42,9 +42,8 @@ PRIORIDADE: os imprescindíveis de Braga, a mencionar primeiro a quem visita pel
 - Confirmar datas exatas em https://visitbraga.travel.
 
 ## GASTRONOMIA
-- Pratos típicos: bacalhau à Braga (à Narcisa), arroz de pica no chão, papas de sarrabulho com rojões (época fria), frigideiras (folhado de carne - casa histórica: Frigideiras do Cantinho).
-- Cafés/restaurantes históricos: Café Vianna, A Brasileira, Frigideiras do Cantinho, Mesa na Praça (Mercado Municipal), Restaurante do Hotel Bracara Augusta, Casa de Pasto das Carvalheiras.
-- REGRA: para recomendar restaurantes, bares ou espaços noturnos, usar APENAS os que constam do conhecimento (módulos restaurantes e braga-after-dark). NUNCA inventar ou sugerir estabelecimentos de outras cidades.
+- Pratos típicos: bacalhau à Braga (à Narcisa), arroz de pica no chão, papas de sarrabulho com rojões (época fria), frigideiras (folhado de carne, doçaria salgada típica da cidade).
+- REGRA CRÍTICA sobre nomes de estabelecimentos: este núcleo NÃO contém restaurantes, cafés nem bares. Só podes nomear estabelecimentos que apareçam nos módulos de detalhe (restaurantes / braga-after-dark) desta mesma mensagem. Se nenhum módulo desses estiver presente, NÃO inventes nem cites nomes de memória - diz que podes sugerir se a pessoa indicar o tipo de comida ou ambiente que procura, ou remete para visitbraga.travel.
 - Doces: pudim Abade de Priscos (com toucinho e vinho do Porto), fidalguinhos, tibias de Braga.
 - Vinho: região dos Vinhos Verdes.
 
