@@ -1,5 +1,5 @@
 // ============================================================
-// FORNECEDORES DE IA — cadeia de fallback automático
+// FORNECEDORES DE IA - cadeia de fallback automático
 // Todos são compatíveis com a API OpenAI (chat/completions + SSE),
 // por isso trocar ou reordenar é trivial.
 //
@@ -22,11 +22,11 @@ export type Provider = {
   // slim: recebe só o conhecimento essencial (para limites por minuto pequenos)
   slim?: boolean;
   // maxTokens: teto de resposta. Os modelos Gemini 3.x "pensam" antes de
-  // responder e o raciocínio conta para este teto — precisam de folga larga,
+  // responder e o raciocínio conta para este teto - precisam de folga larga,
   // senão a resposta visível é cortada a meio da frase.
   maxTokens?: number;
   // reasoningEffort: nível de raciocínio (modelos pensantes). "low" evita
-  // que o Gemini fique 20-30s a pensar antes do primeiro byte — que mataria
+  // que o Gemini fique 20-30s a pensar antes do primeiro byte - que mataria
   // a função no limite de 25s do Vercel.
   reasoningEffort?: string;
 };
@@ -94,7 +94,7 @@ export async function callProvider(
       // Diagnóstico: mostra no terminal porque é que este fornecedor falhou
       const errBody = await res.clone().text().catch(() => '');
       console.error(
-        `[Bracvs] ${provider.name} falhou: HTTP ${res.status} — ${errBody.slice(0, 300)}`
+        `[Bracvs] ${provider.name} falhou: HTTP ${res.status} - ${errBody.slice(0, 300)}`
       );
     }
     return res;
@@ -130,7 +130,7 @@ export function sseToText(upstream: ReadableStream<Uint8Array>): ReadableStream<
               const token = json.choices?.[0]?.delta?.content;
               if (token) controller.enqueue(encoder.encode(token));
             } catch {
-              // linha parcial — ignora
+              // linha parcial - ignora
             }
           }
         }

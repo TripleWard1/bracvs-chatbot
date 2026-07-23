@@ -1,5 +1,22 @@
 import type { Metadata, Viewport } from 'next';
+import { Fraunces, Instrument_Sans } from 'next/font/google';
 import './globals.css';
+
+// Fontes self-hosted pelo Next (sem pedido ao Google no browser do turista:
+// carregamento instantâneo, sem "flash" de tipo errado, e melhor em RGPD)
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  weight: ['500', '600'],
+  variable: '--font-fraunces',
+  display: 'swap',
+});
+
+const instrument = Instrument_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-instrument',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'Bracvs - Assistente do Visit Braga',
@@ -23,15 +40,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Instrument+Sans:wght@400;500;600&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html lang="pt" className={`${fraunces.variable} ${instrument.variable}`}>
       <body>{children}</body>
     </html>
   );

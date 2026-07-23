@@ -27,7 +27,7 @@ const UI: Record<
   }
 > = {
   pt: {
-    tagline: 'A mascote do Visit Braga',
+    tagline: 'O teu Guia de Braga',
     welcome: 'Olá! Sou o Bracvs 👋',
     sub: 'Pergunta-me o que quiseres sobre Braga.',
     placeholder: 'Escreve a tua pergunta…',

@@ -1,5 +1,5 @@
 // lib/sheets.ts
-// CONHECIMENTO EDITÁVEL SEM CÓDIGO — lê uma Google Sheet publicada como CSV.
+// CONHECIMENTO EDITÁVEL SEM CÓDIGO - lê uma Google Sheet publicada como CSV.
 //
 // Separadores esperados na folha "Bracvs Conhecimento":
 //   RESTAURANTES → colunas: Categoria | Nome | Notas
@@ -65,7 +65,7 @@ async function lerCsv(envVar: string): Promise<string[][] | null> {
 
 /**
  * Restaurantes vindos da Sheet, no mesmo formato do módulo embutido.
- * Devolve null se a folha não estiver configurada/acessível/preenchida —
+ * Devolve null se a folha não estiver configurada/acessível/preenchida -
  * o chamador recua para a lista embutida.
  */
 export async function restaurantesDaSheet(): Promise<string | null> {
@@ -78,7 +78,7 @@ export async function restaurantesDaSheet(): Promise<string | null> {
     const nome = (l[1] ?? '').trim();
     const notas = (l[2] ?? '').trim();
     if (!categoria || !nome) continue;
-    const item = notas ? `${nome} — ${notas}` : nome;
+    const item = notas ? `${nome} - ${notas}` : nome;
     porCategoria.set(categoria, [...(porCategoria.get(categoria) ?? []), item]);
   }
   if (porCategoria.size === 0) return null;
@@ -93,7 +93,7 @@ export async function restaurantesDaSheet(): Promise<string | null> {
 }
 
 /**
- * Avisos atuais editados pela equipa — entram em TODOS os pedidos.
+ * Avisos atuais editados pela equipa - entram em TODOS os pedidos.
  * Devolve string vazia se não houver avisos.
  */
 export async function avisosDaSheet(): Promise<string> {
@@ -105,6 +105,6 @@ export async function avisosDaSheet(): Promise<string> {
     .filter((a) => a !== '')
     .slice(0, 15);
   if (avisos.length === 0) return '';
-  const texto = `\n## AVISOS ATUAIS (informação recente editada pela equipa Visit Braga — prioritária)\n${avisos.map((a) => `- ${a}`).join('\n')}`;
+  const texto = `\n## AVISOS ATUAIS (informação recente editada pela equipa Visit Braga - prioritária)\n${avisos.map((a) => `- ${a}`).join('\n')}`;
   return texto.slice(0, 2000);
 }

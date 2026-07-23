@@ -9,8 +9,8 @@
   --line: #eae6e1;
   --radius: 16px;
   --shadow-soft: 0 1px 2px rgba(23, 23, 26, 0.05), 0 4px 14px rgba(23, 23, 26, 0.06);
-  --font-display: 'Fraunces', Georgia, serif;
-  --font-body: 'Instrument Sans', system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-body: var(--font-instrument), system-ui, -apple-system, sans-serif;
 }
 
 * {
@@ -62,6 +62,7 @@ body {
 
 /* Mascote inteira, recortada pela barra: vê-se cabeça, pescoço e peito */
 .header-mascot {
+  animation: peek 0.7s 0.2s cubic-bezier(0.22, 1, 0.36, 1) both;
   height: 172px;
   width: auto;
   align-self: flex-start;
@@ -218,7 +219,19 @@ body {
   width: auto;
   margin-bottom: 6px;
   filter: drop-shadow(0 12px 16px rgba(23, 23, 26, 0.2));
-  animation: land 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation:
+    land 0.6s cubic-bezier(0.22, 1, 0.36, 1) both,
+    breathe 4.5s 0.7s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
 }
 
 @keyframes land {
@@ -421,6 +434,7 @@ body {
   .empty .mascot,
   .empty h2,
   .empty p,
+  .header-mascot,
   .chip {
     animation: none;
   }
@@ -519,4 +533,91 @@ html {
 .action-chip:focus-visible {
   outline: 2px solid var(--braga-black);
   outline-offset: 2px;
+}
+
+@keyframes peek {
+  from {
+    transform: translateY(26px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ---------- Dark mode (segue o sistema do turista) ---------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #17171a;
+    --surface: #212125;
+    --ink: #ececea;
+    --ink-soft: #a3a09b;
+    --line: #323238;
+    --braga-black: #0d0d0f;
+    --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 14px rgba(0, 0, 0, 0.35);
+  }
+
+  body {
+    background: #0d0d0f;
+  }
+
+  .app {
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+  }
+
+  .messages {
+    background:
+      url('/sino-watermark-dark.png') center center / auto 46% no-repeat,
+      linear-gradient(rgba(23, 23, 26, 0.97), rgba(23, 23, 26, 0.97)),
+      repeating-linear-gradient(45deg, #1c1c20 0 16px, #17171a 16px 32px);
+  }
+
+  .messages::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.14);
+  }
+
+  .msg.error {
+    background: #3a1f1f;
+    border-color: #6b3535;
+    color: #f0b9b9;
+  }
+
+  .empty {
+    background: radial-gradient(circle at 50% 30%, rgba(248, 0, 0, 0.09), transparent 58%);
+  }
+
+  .empty h2 {
+    color: var(--ink);
+  }
+
+  .chip:hover {
+    box-shadow: 0 6px 14px rgba(248, 0, 0, 0.45);
+  }
+
+  .composer {
+    box-shadow: 0 -4px 18px rgba(0, 0, 0, 0.45);
+  }
+
+  .composer input:focus-visible {
+    box-shadow: 0 0 0 3px rgba(248, 0, 0, 0.25);
+  }
+
+  .composer button:focus-visible,
+  .chip:focus-visible,
+  .action-chip:focus-visible {
+    outline-color: #fff;
+  }
+
+  .action-chip {
+    color: #ff6b6b;
+  }
+
+  .fb-btn {
+    filter: grayscale(1) invert(0.15);
+  }
+
+  ::selection {
+    background: rgba(248, 0, 0, 0.35);
+  }
 }

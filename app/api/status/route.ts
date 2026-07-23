@@ -1,7 +1,7 @@
 // app/api/status/route.ts
 // DIAGNÓSTICO: testa cada fornecedor de IA com um pedido mínimo e
 // devolve quem está operacional. Abrir no browser: /api/status
-// Não expõe chaves — só o estado e o erro (se houver) de cada um.
+// Não expõe chaves - só o estado e o erro (se houver) de cada um.
 
 import { providerChain } from '@/lib/providers';
 
@@ -57,7 +57,7 @@ export async function GET() {
       {
         resumo: ativo
           ? `O Bracvs está a responder com: ${ativo}`
-          : 'NENHUM fornecedor operacional — o chat vai dar erro',
+          : 'NENHUM fornecedor operacional - o chat vai dar erro',
         chaves_configuradas: providers.map((p) => p.name),
         detalhe: results,
       },

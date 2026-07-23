@@ -1,15 +1,15 @@
 // lib/analytics.ts
-// REGISTO ANÓNIMO DE USO — escreve no Firestore via REST (sem SDK,
+// REGISTO ANÓNIMO DE USO - escreve no Firestore via REST (sem SDK,
 // funciona no edge runtime, zero dependências novas).
 //
 // Coleções:
-//   bracvs_perguntas — cada pergunta feita ao Bracvs
-//   bracvs_feedback  — votos 👍/👎 nas respostas
+//   bracvs_perguntas - cada pergunta feita ao Bracvs
+//   bracvs_feedback  - votos 👍/👎 nas respostas
 //
 // Privacidade: NÃO se regista IP nem qualquer identificador do
 // utilizador. Só a pergunta, a língua, o motor e o módulo usados.
 //
-// Best-effort: qualquer falha é engolida — o chat nunca depende disto.
+// Best-effort: qualquer falha é engolida - o chat nunca depende disto.
 // Se FIREBASE_PROJECT_ID / FIREBASE_API_KEY não existirem, desliga-se.
 
 type Campos = Record<string, string>;
