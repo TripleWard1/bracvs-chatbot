@@ -8,7 +8,7 @@
 // dos módulos está em PT/EN: o modelo traduz na resposta.
 //
 // Para adicionar um módulo novo: cria o ficheiro em lib/knowledge/,
-// importa aqui e acrescenta um  a entrada em MODULES com as keywords.
+// importa aqui e acrescenta uma entrada em MODULES com as keywords.
 // ============================================================
 
 import { CORE_KNOWLEDGE } from './core';
@@ -18,14 +18,21 @@ import { ROTEIRO_3_DIAS_KNOWLEDGE } from './roteiro-3-dias';
 import ROTEIRO_BRACVS_KNOWLEDGE from './roteiro-bracvs';
 import { FUTURE_KNOWLEDGE } from './future';
 import { getRestaurantesKnowledge } from './restaurantes';
+import { restaurantesDaSheet, avisosDaSheet } from '../sheets';
 import { AFTER_DARK_SUNSET_JANTAR, AFTER_DARK_BARES, AFTER_DARK_BARES_LITE } from './after-dark';
 
-type Module = { name: string; content: string | (() => string); contentSlim?: string; keywords: RegExp };
+type Module = {
+  name: string;
+  content: string | (() => string | Promise<string>);
+  contentSlim?: string;
+  keywords: RegExp;
+};
 
 const MODULES: Module[] = [
   {
     name: 'restaurantes',
-    content: getRestaurantesKnowledge,
+    // Google Sheet primeiro (editável pela equipa); fallback: lista embutida
+    content: async () => (await restaurantesDaSheet()) ?? getRestaurantesKnowledge(),
     keywords:
       /restaurante|restaurant|comer|jantar|almo[çc]|petisco|tapas|francesinha|pizza|sushi|ramen|vegetariano|vegan|vegetarian|v[ée]g[ée]|steakhouse|carne|churrasq|onde (se )?come|d[óo]nde comer|where to eat|o[ùu] manger|d[îi]ner|cenar|dinner|lunch|almuerzo|d[ée]jeuner|comida t[íi]pica|typical food|michelin/i,
   },
@@ -96,19 +103,22 @@ const SMALL_MODULE_CHARS = 6000;
  * chegam ao modelo mesmo no caminho de emergência — sem elas, o modelo
  * pequeno tende a inventar estabelecimentos.
  */
-export function selectKnowledge(userMessages: string[], slim = false): string {
+export async function selectKnowledge(userMessages: string[], slim = false): Promise<string> {
   const haystack = userMessages.slice(-3).join('\n');
-  const candidates = MODULES.filter((m) => m.keywords.test(haystack))
-    .slice(0, MAX_MODULES)
-    .map((m) => {
-      const full = typeof m.content === 'function' ? m.content() : m.content;
-      return { name: m.name, content: slim && m.contentSlim ? m.contentSlim : full };
-    });
+  const candidates = await Promise.all(
+    MODULES.filter((m) => m.keywords.test(haystack))
+      .slice(0, MAX_MODULES)
+      .map(async (m) => {
+        const full = typeof m.content === 'function' ? await m.content() : m.content;
+        return { name: m.name, content: slim && m.contentSlim ? m.contentSlim : full };
+      })
+  );
   const matched = slim
     ? candidates.filter((m) => m.content.length <= SMALL_MODULE_CHARS)
     : candidates;
 
-  const parts = [CORE_KNOWLEDGE];
+  const avisos = await avisosDaSheet();
+  const parts = [CORE_KNOWLEDGE + avisos];
   for (const m of matched) {
     parts.push(`\n### MÓDULO DE DETALHE: ${m.name}\n${m.content}`);
   }

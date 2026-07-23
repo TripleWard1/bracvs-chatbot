@@ -90,8 +90,8 @@ export async function POST(req: Request) {
 
   const weather = await bragaWeather();
   const userTexts = history.filter((m) => m.role === 'user').map((m) => m.content);
-  const fullKnowledge = selectKnowledge(userTexts);
-  const slimKnowledge = selectKnowledge(userTexts, true);
+  const fullKnowledge = await selectKnowledge(userTexts);
+  const slimKnowledge = await selectKnowledge(userTexts, true);
   const LANG_NAMES: Record<string, string> = {
     pt: 'Português de Portugal',
     es: 'Espanhol',

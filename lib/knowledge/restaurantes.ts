@@ -115,13 +115,19 @@ const REGRAS = `## COMO RECOMENDAR (regras de comportamento)
 5. Os históricos são para quando encaixam: interesse em história/tradição, café, pequeno-almoço, lanche, experiência icónica — não são a resposta por defeito a "onde jantar".
 6. Para ocasiões especiais / alta cozinha, destaca o Palatial (1 Estrela Michelin, o topo da gastronomia bracarense).`;
 
-// Gera o texto do módulo com as categorias baralhadas — chamado a cada pedido.
-export function getRestaurantesKnowledge(): string {
-  const seccoes = CATEGORIAS.map((c) => {
+// Constrói o texto do módulo a partir de categorias (as embutidas ou as da
+// Google Sheet) com baralhamento anti-viés. Reutilizado por lib/sheets.ts.
+export function construirModuloRestaurantes(categorias: Categoria[]): string {
+  const seccoes = categorias.map((c) => {
     const itens = c.baralhar ? baralhar(c.itens) : c.itens;
     return `## ${c.titulo}\n${itens.map((i) => `- ${i}`).join('\n')}`;
   }).join('\n\n');
   return `# RESTAURANTES DE BRAGA — LISTA OFICIAL VALIDADA\n\n${REGRAS}\n\n${seccoes}\n`;
+}
+
+// Versão embutida (fallback quando a Google Sheet não está configurada)
+export function getRestaurantesKnowledge(): string {
+  return construirModuloRestaurantes(CATEGORIAS);
 }
 
 // Nomes limpos (sem descrições) — usados pela deteção de locais no cliente
