@@ -1,8 +1,11 @@
 // lib/sheets.ts
-// CONHECIMENTO EDITÁVEL SEM CÓDIGO - lê uma Google Sheet publicada como CSV.
+// CONHECIMENTO EDITÁVEL SEM CÓDIGO — lê uma Google Sheet publicada como CSV.
 //
 // Separadores esperados na folha "Bracvs Conhecimento":
-//   RESTAURANTES → colunas: Categoria | Nome | Notas
+//   RESTAURANTES → colunas: Categoria | Nome | Zona | Notas
+//                   (Zona: "Centro histórico" para os do centro — é o que
+//                    permite ao Bracvs dar-lhes prioridade e dizer onde ficam.
+//                    Deixar vazio se não souberes: o Bracvs nunca inventa.)
 //   AVISOS       → colunas: Aviso
 //
 // Cada separador é publicado individualmente (Ficheiro → Partilhar →
@@ -65,7 +68,7 @@ async function lerCsv(envVar: string): Promise<string[][] | null> {
 
 /**
  * Restaurantes vindos da Sheet, no mesmo formato do módulo embutido.
- * Devolve null se a folha não estiver configurada/acessível/preenchida -
+ * Devolve null se a folha não estiver configurada/acessível/preenchida —
  * o chamador recua para a lista embutida.
  */
 export async function restaurantesDaSheet(): Promise<string | null> {
@@ -76,9 +79,13 @@ export async function restaurantesDaSheet(): Promise<string | null> {
   for (const l of linhas.slice(1)) {
     const categoria = (l[0] ?? '').trim();
     const nome = (l[1] ?? '').trim();
-    const notas = (l[2] ?? '').trim();
+    const zona = (l[2] ?? '').trim();
+    const notas = (l[3] ?? '').trim();
     if (!categoria || !nome) continue;
-    const item = notas ? `${nome} - ${notas}` : nome;
+    const partes = [nome];
+    if (zona) partes.push(`zona: ${zona}`);
+    if (notas) partes.push(notas);
+    const item = partes.join(' — ');
     porCategoria.set(categoria, [...(porCategoria.get(categoria) ?? []), item]);
   }
   if (porCategoria.size === 0) return null;
@@ -93,7 +100,7 @@ export async function restaurantesDaSheet(): Promise<string | null> {
 }
 
 /**
- * Avisos atuais editados pela equipa - entram em TODOS os pedidos.
+ * Avisos atuais editados pela equipa — entram em TODOS os pedidos.
  * Devolve string vazia se não houver avisos.
  */
 export async function avisosDaSheet(): Promise<string> {
@@ -105,6 +112,6 @@ export async function avisosDaSheet(): Promise<string> {
     .filter((a) => a !== '')
     .slice(0, 15);
   if (avisos.length === 0) return '';
-  const texto = `\n## AVISOS ATUAIS (informação recente editada pela equipa Visit Braga - prioritária)\n${avisos.map((a) => `- ${a}`).join('\n')}`;
+  const texto = `\n## AVISOS ATUAIS (informação recente editada pela equipa Visit Braga — prioritária)\n${avisos.map((a) => `- ${a}`).join('\n')}`;
   return texto.slice(0, 2000);
 }
