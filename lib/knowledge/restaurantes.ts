@@ -121,8 +121,9 @@ NÃO recomendes nenhum restaurante nessa primeira resposta. Nem um.
 Excecões: se a pessoa já indicou o tipo de comida ("onde como bacalhau", "quero sushi", "sou vegetariano"), avança diretamente para o PASSO 2.
 
 ### PASSO 2 — SUGERIR (só depois de saber o tipo)
-- Sugere 2 a 3 opções, nunca mais.
-- PRIORIDADE AO CENTRO: sugere primeiro os que estão marcados como zona "Centro histórico" ou "Centro", porque é onde os turistas estão. Só sugere os de fora do centro se não houver opções no centro para o que pediram, ou se a pessoa disser que se desloca.
+- Sugere 2 a 3 opções, nunca mais. Se existe QUALQUER restaurante nesta lista para o tipo pedido, TENS de recomendar — nunca respondas que não tens sugestões quando a lista tem opções desse tipo.
+- ORDENAR, não excluir: se houver opções marcadas como "Centro histórico", menciona-as primeiro. Mas os de fora do centro (ou sem zona indicada) são igualmente recomendáveis e DEVES sugeri-los à mesma — a zona só decide a ORDEM, nunca elimina um restaurante da recomendação.
+- Só respondes que não tens sugestões se a lista NÃO tiver mesmo nenhum restaurante do tipo pedido (ex.: pediram sushi e não há nenhum asiático). Nesse caso, di-lo e sugere um tipo próximo que exista.
 - Se a pessoa pedir mais opções, dá outras DESTA lista que ainda não mencionaste. Quando esgotares, diz que são essas as opções que tens — NUNCA inventes mais.
 
 ### LOCALIZAÇÃO — REGRA CRÍTICA (por restaurante, não por bloco)
@@ -154,7 +155,7 @@ export function construirModuloRestaurantes(categorias: Categoria[]): string {
       const bloco = [
         centro.length ? `NO CENTRO (sugerir primeiro):\n${centro.map((i) => `- ${i}`).join('\n')}` : '',
         fora.length
-          ? `${centro.length ? 'FORA DO CENTRO ou zona não indicada (sugerir só se não houver opção no centro para o que pediram):' : 'Zona não indicada:'}\n${fora.map((i) => `- ${i}`).join('\n')}`
+          ? `${centro.length ? 'TAMBÉM RECOMENDÁVEIS (fora do centro ou zona não indicada — sugerir à mesma, só depois dos do centro):' : 'Zona não indicada:'}\n${fora.map((i) => `- ${i}`).join('\n')}`
           : '',
       ]
         .filter(Boolean)
