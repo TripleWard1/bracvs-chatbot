@@ -1,15 +1,15 @@
 // lib/analytics.ts
-// REGISTO ANÓNIMO DE USO - escreve no Firestore via REST (sem SDK,
+// REGISTO ANÓNIMO DE USO — escreve no Firestore via REST (sem SDK,
 // funciona no edge runtime, zero dependências novas).
 //
 // Coleções:
-//   bracvs_perguntas - cada pergunta feita ao Bracvs
-//   bracvs_feedback  - votos 👍/👎 nas respostas
+//   bracvs_perguntas — cada pergunta feita ao Bracvs
+//   bracvs_feedback  — votos 👍/👎 nas respostas
 //
 // Privacidade: NÃO se regista IP nem qualquer identificador do
 // utilizador. Só a pergunta, a língua, o motor e o módulo usados.
 //
-// Best-effort: qualquer falha é engolida - o chat nunca depende disto.
+// Best-effort: qualquer falha é engolida — o chat nunca depende disto.
 // Se FIREBASE_PROJECT_ID / FIREBASE_API_KEY não existirem, desliga-se.
 
 type Campos = Record<string, string>;
@@ -68,5 +68,21 @@ export function logFeedback(dados: {
     voto: dados.voto,
     pergunta: dados.pergunta.slice(0, 300),
     resposta: dados.resposta.slice(0, 400),
+  });
+}
+
+export function logAlucinacao(dados: {
+  pergunta: string;
+  fornecedor: string;
+  suspeitos: string[];
+  totalNomes: number;
+  resposta: string;
+}): Promise<void> {
+  return escrever('bracvs_alucinacoes', {
+    pergunta: dados.pergunta.slice(0, 300),
+    fornecedor: dados.fornecedor,
+    suspeitos: dados.suspeitos.join(', ').slice(0, 300),
+    total_nomes: String(dados.totalNomes),
+    resposta: dados.resposta.slice(0, 500),
   });
 }

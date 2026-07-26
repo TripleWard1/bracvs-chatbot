@@ -1,5 +1,6 @@
 import { buildSystemPrompt } from '@/lib/prompt';
-import { selectKnowledge, matchedModuleNames } from '@/lib/knowledge';
+import { selectKnowledge, matchedModuleNames, nomesConhecidos } from '@/lib/knowledge';
+import { validarStream } from '@/lib/validador';
 import { logPergunta } from '@/lib/analytics';
 import { providerChain, callProvider, sseToText, type ChatMessage } from '@/lib/providers';
 
@@ -92,6 +93,8 @@ export async function POST(req: Request) {
   const userTexts = history.filter((m) => m.role === 'user').map((m) => m.content);
   const fullKnowledge = await selectKnowledge(userTexts);
   const slimKnowledge = await selectKnowledge(userTexts, true);
+  const nomesReais = await nomesConhecidos(userTexts);
+  const ehTeste = !!req.headers.get('x-bracvs-test');
   const LANG_NAMES: Record<string, string> = {
     pt: 'Português de Portugal',
     es: 'Espanhol',
@@ -102,7 +105,7 @@ export async function POST(req: Request) {
 
   // Tenta cada fornecedor por ordem; o primeiro que responder 200 assume.
   // Fornecedores "slim" recebem só o conhecimento essencial, para caberem
-  // em limites por minuto pequenos - garantem resposta em último recurso.
+  // em limites por minuto pequenos — garantem resposta em último recurso.
   for (const provider of providers) {
     const messages: ChatMessage[] = [
       {
@@ -121,7 +124,13 @@ export async function POST(req: Request) {
         fornecedor: provider.name,
         modulo: matchedModuleNames(userTexts).join(',') || 'nenhum',
       });
-      return new Response(sseToText(upstream.body), {
+      const streamValidado = validarStream(sseToText(upstream.body), {
+        pergunta: history[history.length - 1].content,
+        fornecedor: provider.name,
+        nomesConhecidos: nomesReais,
+        teste: ehTeste,
+      });
+      return new Response(streamValidado, {
         headers: {
           'Content-Type': 'text/plain; charset=utf-8',
           'X-Bracvs-Provider': provider.name, // útil para debug/monitorização

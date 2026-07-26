@@ -155,3 +155,26 @@ export function matchedModuleNames(userMessages: string[]): string[] {
     .slice(0, MAX_MODULES)
     .map((m) => m.name);
 }
+
+/**
+ * Nomes de estabelecimentos presentes no conhecimento selecionado — usado
+ * pelo validador para saber o que é real. Extrai de linhas de lista dos
+ * módulos de restaurantes/bares (que começam por "- Nome ...").
+ */
+export async function nomesConhecidos(userMessages: string[]): Promise<string[]> {
+  const texto = await selectKnowledge(userMessages, false);
+  const nomes = new Set<string>();
+  for (const m of texto.matchAll(/^-\s*([^\n—(]+?)(?:\s+—|\s+\(|:|$)/gm)) {
+    const nome = m[1].trim();
+    // ignora linhas que são regras/instruções, não nomes
+    if (
+      nome.length >= 3 &&
+      nome.length <= 60 &&
+      /[A-ZÀ-Ú]/.test(nome[0]) &&
+      !/^(sugerir|zona|no centro|fora|regra|nunca|prioridade|se |para |quando |escolhe)/i.test(nome)
+    ) {
+      nomes.add(nome);
+    }
+  }
+  return Array.from(nomes);
+}
