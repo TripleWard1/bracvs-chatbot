@@ -1,7 +1,7 @@
 // ============================================================
 // ROUTER DE CONHECIMENTO (mini-RAG por palavras-chave)
 // O núcleo (core.ts) vai SEMPRE no prompt. Os módulos de detalhe
-// só são injetados quando a conversa toca nesses temas - assim
+// só são injetados quando a conversa toca nesses temas — assim
 // cada pedido fica leve e a quota gratuita rende.
 //
 // As palavras-chave cobrem as 4 línguas (PT/ES/EN/FR). O conteúdo
@@ -19,6 +19,7 @@ import ROTEIRO_BRACVS_KNOWLEDGE from './roteiro-bracvs';
 import { FUTURE_KNOWLEDGE } from './future';
 import { getRestaurantesKnowledge } from './restaurantes';
 import { restaurantesDaSheet, avisosDaSheet } from '../sheets';
+import { DOCES_KNOWLEDGE } from './doces';
 import { AFTER_DARK_SUNSET_JANTAR, AFTER_DARK_BARES, AFTER_DARK_BARES_LITE } from './after-dark';
 
 type Module = {
@@ -29,6 +30,12 @@ type Module = {
 };
 
 const MODULES: Module[] = [
+  {
+    name: 'doces-gastronomia',
+    content: DOCES_KNOWLEDGE,
+    keywords:
+      /doce|doçaria|sobremesa|dessert|postre|p[âa]tisserie|fidalguinho|abade de priscos|t[íi]bias|pudim|frigideira|bacalhau|sarrabulho|rojões|pica no chão|gastronomia|prato t[íi]pico|typical dish|especialidade|comer de doce|sweets?|bolo|pastel|pastela|confeitaria|pastelaria/i,
+  },
   {
     name: 'restaurantes',
     // Google Sheet primeiro (editável pela equipa); fallback: lista embutida
@@ -100,7 +107,7 @@ const SMALL_MODULE_CHARS = 6000;
  *
  * slim=true (último recurso): core + apenas módulos LEVES relevantes.
  * Garante que listas críticas e pequenas (ex.: restaurantes validados)
- * chegam ao modelo mesmo no caminho de emergência - sem elas, o modelo
+ * chegam ao modelo mesmo no caminho de emergência — sem elas, o modelo
  * pequeno tende a inventar estabelecimentos.
  */
 export async function selectKnowledge(userMessages: string[], slim = false): Promise<string> {
@@ -127,13 +134,13 @@ export async function selectKnowledge(userMessages: string[], slim = false): Pro
   if (out.length > cap) {
     out =
       out.slice(0, cap) +
-      '\n[NOTA: conhecimento truncado por limite de tamanho - se faltar detalhe, remete para visitbraga.travel]';
+      '\n[NOTA: conhecimento truncado por limite de tamanho — se faltar detalhe, remete para visitbraga.travel]';
   }
   return out;
 }
 
 /**
- * Conhecimento essencial (só o core) - usado pelo fornecedor de último
+ * Conhecimento essencial (só o core) — usado pelo fornecedor de último
  * recurso (groq-8b), cujo limite por minuto é demasiado pequeno para os
  * módulos de detalhe. Garante que há sempre uma resposta.
  */
@@ -141,7 +148,7 @@ export function coreOnly(): string {
   return CORE_KNOWLEDGE;
 }
 
-/** Nomes dos módulos que a pergunta ativa - usado só para analytics. */
+/** Nomes dos módulos que a pergunta ativa — usado só para analytics. */
 export function matchedModuleNames(userMessages: string[]): string[] {
   const haystack = userMessages.slice(-3).join('\n');
   return MODULES.filter((m) => m.keywords.test(haystack))
