@@ -17,6 +17,9 @@
 
 import { construirModuloRestaurantes } from './knowledge/restaurantes';
 
+// Mínimo de restaurantes para a folha ser considerada válida
+const MIN_RESTAURANTES = 12;
+
 // Parser de CSV mínimo com suporte a campos entre aspas
 function parseCsv(texto: string): string[][] {
   const linhas: string[][] = [];
@@ -58,7 +61,7 @@ async function lerCsv(envVar: string): Promise<string[][] | null> {
   const url = process.env[envVar];
   if (!url) return null;
   try {
-    const r = await fetch(url, { next: { revalidate: 600 } });
+    const r = await fetch(url, { next: { revalidate: 600 } } as RequestInit);
     if (!r.ok) return null;
     return parseCsv(await r.text());
   } catch {
@@ -88,7 +91,17 @@ export async function restaurantesDaSheet(): Promise<string | null> {
     const item = partes.join(' — ');
     porCategoria.set(categoria, [...(porCategoria.get(categoria) ?? []), item]);
   }
-  if (porCategoria.size === 0) return null;
+  // Proteção: uma folha quase vazia (mal preenchida, cabeçalho em falta,
+  // publicação errada) substituiria a lista completa por 2 ou 3 nomes — foi
+  // isso que fez o Bracvs recomendar sempre o mesmo restaurante. Abaixo do
+  // mínimo, ignora a folha e usa a lista embutida.
+  const total = Array.from(porCategoria.values()).reduce((n, v) => n + v.length, 0);
+  if (porCategoria.size === 0 || total < MIN_RESTAURANTES) {
+    console.error(
+      `[Bracvs] Google Sheet ignorada: só ${total} restaurantes (mínimo ${MIN_RESTAURANTES}). Confirma o cabeçalho "Categoria | Nome | Zona | Notas" na primeira linha. A usar a lista embutida.`
+    );
+    return null;
+  }
 
   const categorias = Array.from(porCategoria.entries()).map(([titulo, itens]) => ({
     titulo,
@@ -114,4 +127,33 @@ export async function avisosDaSheet(): Promise<string> {
   if (avisos.length === 0) return '';
   const texto = `\n## AVISOS ATUAIS (informação recente editada pela equipa Visit Braga — prioritária)\n${avisos.map((a) => `- ${a}`).join('\n')}`;
   return texto.slice(0, 2000);
+}
+
+
+/** Diagnóstico: que fonte de restaurantes está ativa e com quantos registos. */
+export async function estadoDoConhecimento(): Promise<object> {
+  const linhas = await lerCsv('SHEET_RESTAURANTES_URL');
+  if (!linhas) {
+    return {
+      fonte: 'lista embutida no código',
+      motivo: process.env.SHEET_RESTAURANTES_URL
+        ? 'a folha não respondeu ou está vazia'
+        : 'SHEET_RESTAURANTES_URL não definida',
+    };
+  }
+  const validas = linhas.slice(1).filter((l) => (l[0] ?? '').trim() && (l[1] ?? '').trim());
+  const comZonaCentro = validas.filter((l) => /centro/i.test(l[2] ?? '')).length;
+  const cabecalhoOk = /categoria/i.test(linhas[0]?.[0] ?? '');
+  return {
+    fonte: validas.length >= MIN_RESTAURANTES ? 'Google Sheet' : 'lista embutida no código',
+    linhas_lidas: linhas.length,
+    restaurantes_validos: validas.length,
+    no_centro: comZonaCentro,
+    cabecalho_detetado: cabecalhoOk
+      ? 'sim'
+      : 'NÃO — a 1.ª linha deve ser: Categoria | Nome | Zona | Notas (a atual está a ser descartada)',
+    ...(validas.length < MIN_RESTAURANTES
+      ? { aviso: `A folha tem menos de ${MIN_RESTAURANTES} restaurantes, por isso está a ser IGNORADA.` }
+      : {}),
+  };
 }

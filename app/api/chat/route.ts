@@ -34,7 +34,7 @@ async function bragaWeather(): Promise<string> {
       '&current=temperature_2m,weather_code' +
       '&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max' +
       '&timezone=Europe%2FLisbon&forecast_days=1';
-    const r = await fetch(url, { next: { revalidate: 1800 } });
+    const r = await fetch(url, { next: { revalidate: 1800 } } as RequestInit);
     if (!r.ok) return '';
     const d = await r.json();
     const desc = WMO[d.current.weather_code] ?? '';

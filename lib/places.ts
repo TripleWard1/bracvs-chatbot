@@ -1,5 +1,5 @@
 // lib/places.ts
-// LOCAIS OFICIAIS DE BRAGA - usados pelo cliente para detetar menções
+// LOCAIS OFICIAIS DE BRAGA — usados pelo cliente para detetar menções
 // nas respostas do Bracvs e gerar botões "Ver no mapa" (Google Maps).
 // Deteção determinística, sem IA: só locais desta lista geram botões.
 
