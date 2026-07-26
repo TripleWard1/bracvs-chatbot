@@ -177,7 +177,7 @@ export async function baresDaSheet(): Promise<string | null> {
     .join('\n\n');
   return (
     '# BARES, DISCOTECAS E VIDA NOTURNA DE BRAGA — lista oficial\n' +
-    'Recomenda APENAS estes espaços. Dá prioridade aos marcados como centro. Nunca inventes nomes nem afirmes a localização se não estiver escrita.\n\n' +
+    'Recomenda APENAS estes espaços. Respeita a categoria pedida: se pedirem BARES, sugere bares (podes mencionar uma discoteca só como extra "se também quiseres dançar"); se pedirem DISCOTECAS, sugere discotecas. Dá prioridade aos marcados como centro. Nunca inventes nomes, moradas nem afirmes a localização se não estiver escrita nas notas.\n\n' +
     seccoes +
     '\n'
   );
