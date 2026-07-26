@@ -1,11 +1,11 @@
 // lib/knowledge/restaurantes.ts
-// LISTA OFICIAL DE RESTAURANTES DE BRAGA — fornecida e validada pela
+// LISTA OFICIAL DE RESTAURANTES DE BRAGA - fornecida e validada pela
 // Divisão de Economia e Turismo. Esta é a ÚNICA fonte para recomendações.
 //
 // A ordem dentro de cada categoria é BARALHADA a cada pedido: os modelos
 // tendem a recomendar os primeiros itens de uma lista, e o baralhar
 // garante variedade real nas sugestões. Exceção: Fine Dining (Palatial
-// primeiro, por mérito — Estrela Michelin).
+// primeiro, por mérito - Estrela Michelin).
 
 type Categoria = { titulo: string; itens: string[]; baralhar: boolean };
 
@@ -14,18 +14,18 @@ const CATEGORIAS: Categoria[] = [
     titulo: 'Fine Dining',
     baralhar: false,
     itens: [
-      'Palatial — 1 ESTRELA MICHELIN. A referência de alta cozinha de Braga; ideal para jantares especiais.',
-      'Esperança Verde — Recomendado pelo Guia Michelin (vegetariano/vegan).',
+      'Palatial - 1 ESTRELA MICHELIN. A referência de alta cozinha de Braga; ideal para jantares especiais.',
+      'Esperança Verde - Recomendado pelo Guia Michelin (vegetariano/vegan).',
     ],
   },
   {
     titulo: 'Casas Históricas (cafés e restaurantes com história)',
     baralhar: true,
     itens: [
-      'Café Vianna — Praça da República; café e restaurante histórico, um dos mais antigos de Portugal.',
-      'A Brasileira — café e restaurante histórico no coração do centro.',
-      'Frigideiras do Cantinho — casa histórica das frigideiras de Braga; é restaurante, não apenas café.',
-      'Pastelaria Lusitana — pastelaria histórica de Braga.',
+      'Café Vianna - Praça da República; café e restaurante histórico, um dos mais antigos de Portugal.',
+      'A Brasileira - café e restaurante histórico no coração do centro.',
+      'Frigideiras do Cantinho - casa histórica das frigideiras de Braga; é restaurante, não apenas café.',
+      'Pastelaria Lusitana - pastelaria histórica de Braga.',
     ],
   },
   {
@@ -34,7 +34,7 @@ const CATEGORIAS: Categoria[] = [
     itens: [
       'Restaurante Cozinha da Sé',
       'pPlace Restaurant',
-      'Mesa na Praça — Mercado Municipal de Braga',
+      'Mesa na Praça - Mercado Municipal de Braga',
       'Casa de Pasto das Carvalheiras',
       'Taberna do Paço',
       'Tasquinha Dom Ferreira',
@@ -42,8 +42,8 @@ const CATEGORIAS: Categoria[] = [
       'Taberna Velhos Tempos',
       'Tasquinha do Fujacal',
       "Trota's",
-      'Dom Augusto — Rua D. Paio Mendes 55, 4700-424 Braga',
-      'Bem-Me-Quer — Campo das Hortas 6, 4700-210 Braga',
+      'Dom Augusto - Rua D. Paio Mendes 55, 4700-424 Braga',
+      'Bem-Me-Quer - Campo das Hortas 6, 4700-210 Braga',
       'Arcoense',
       'Retrokitchen',
       'O Filho da Mãe',
@@ -94,7 +94,7 @@ const CATEGORIAS: Categoria[] = [
   {
     titulo: 'Vegetariano / Vegan',
     baralhar: true,
-    itens: ['Gosto Superior', 'Hibiscus', 'Esperança Verde (Guia Michelin — Recomendado)'],
+    itens: ['Gosto Superior', 'Hibiscus', 'Esperança Verde (Guia Michelin - Recomendado)'],
   },
 ];
 
@@ -114,19 +114,19 @@ function baralhar<T>(arr: T[]): T[] {
 
 const REGRAS = `## COMO RECOMENDAR (regras obrigatórias)
 
-### PASSO 1 — PERGUNTAR PRIMEIRO (nunca saltar)
+### PASSO 1 - PERGUNTAR PRIMEIRO (nunca saltar)
 Se a pessoa não disse QUE TIPO DE COMIDA quer, a tua resposta é UMA PERGUNTA, não uma sugestão.
 Pergunta que tipo de cozinha procura (tradicional portuguesa, petiscos, francesinha, italiana, asiática, vegetariana, carnes) e, se fizer sentido, a ocasião (refeição rápida, jantar especial).
 NÃO recomendes nenhum restaurante nessa primeira resposta. Nem um.
 Excecões: se a pessoa já indicou o tipo de comida ("onde como bacalhau", "quero sushi", "sou vegetariano"), avança diretamente para o PASSO 2.
 
-### PASSO 2 — SUGERIR (só depois de saber o tipo)
-- Sugere 2 a 3 opções, nunca mais. Se existe QUALQUER restaurante nesta lista para o tipo pedido, TENS de recomendar — nunca respondas que não tens sugestões quando a lista tem opções desse tipo.
-- ORDENAR, não excluir: se houver opções marcadas como "Centro histórico", menciona-as primeiro. Mas os de fora do centro (ou sem zona indicada) são igualmente recomendáveis e DEVES sugeri-los à mesma — a zona só decide a ORDEM, nunca elimina um restaurante da recomendação.
+### PASSO 2 - SUGERIR (só depois de saber o tipo)
+- Sugere 2 a 3 opções, nunca mais. Se existe QUALQUER restaurante nesta lista para o tipo pedido, TENS de recomendar - nunca respondas que não tens sugestões quando a lista tem opções desse tipo.
+- ORDENAR, não excluir: se houver opções marcadas como "Centro histórico", menciona-as primeiro. Mas os de fora do centro (ou sem zona indicada) são igualmente recomendáveis e DEVES sugeri-los à mesma - a zona só decide a ORDEM, nunca elimina um restaurante da recomendação.
 - Só respondes que não tens sugestões se a lista NÃO tiver mesmo nenhum restaurante do tipo pedido (ex.: pediram sushi e não há nenhum asiático). Nesse caso, di-lo e sugere um tipo próximo que exista.
-- Se a pessoa pedir mais opções, dá outras DESTA lista que ainda não mencionaste. Quando esgotares, diz que são essas as opções que tens — NUNCA inventes mais.
+- Se a pessoa pedir mais opções, dá outras DESTA lista que ainda não mencionaste. Quando esgotares, diz que são essas as opções que tens - NUNCA inventes mais.
 
-### LOCALIZAÇÃO — REGRA CRÍTICA (por restaurante, não por bloco)
+### LOCALIZAÇÃO - REGRA CRÍTICA (por restaurante, não por bloco)
 Olha para a LINHA do restaurante que vais recomendar:
 - Se a linha tiver morada ou zona escritas, podes indicá-las tal como estão escritas.
 - Se a linha NÃO tiver morada nem zona, não digas onde fica, não digas que é no centro nem perto de nada, não inventes rua. Diz que podes confirmar no visitbraga.travel ou pelo botão do mapa.
@@ -155,7 +155,7 @@ export function construirModuloRestaurantes(categorias: Categoria[]): string {
       const bloco = [
         centro.length ? `NO CENTRO (sugerir primeiro):\n${centro.map((i) => `- ${i}`).join('\n')}` : '',
         fora.length
-          ? `${centro.length ? 'TAMBÉM RECOMENDÁVEIS (fora do centro ou zona não indicada — sugerir à mesma, só depois dos do centro):' : 'Zona não indicada:'}\n${fora.map((i) => `- ${i}`).join('\n')}`
+          ? `${centro.length ? 'TAMBÉM RECOMENDÁVEIS (fora do centro ou zona não indicada - sugerir à mesma, só depois dos do centro):' : 'Zona não indicada:'}\n${fora.map((i) => `- ${i}`).join('\n')}`
           : '',
       ]
         .filter(Boolean)
@@ -164,7 +164,7 @@ export function construirModuloRestaurantes(categorias: Categoria[]): string {
       return `## ${c.titulo}\n${bloco}`;
     })
     .join('\n\n');
-  return `# RESTAURANTES DE BRAGA — LISTA OFICIAL VALIDADA\n\n${REGRAS}\n\n${seccoes}\n`;
+  return `# RESTAURANTES DE BRAGA - LISTA OFICIAL VALIDADA\n\n${REGRAS}\n\n${seccoes}\n`;
 }
 
 // Versão embutida (fallback quando a Google Sheet não está configurada)
@@ -172,12 +172,12 @@ export function getRestaurantesKnowledge(): string {
   return construirModuloRestaurantes(CATEGORIAS);
 }
 
-// Nomes limpos (sem descrições) — usados pela deteção de locais no cliente
+// Nomes limpos (sem descrições) - usados pela deteção de locais no cliente
 // para gerar botões "Ver no mapa". Não contém segredos.
 export const NOMES_RESTAURANTES: string[] = Array.from(
   new Set(
     CATEGORIAS.flatMap((c) =>
-      c.itens.map((i) => i.split(' — ')[0].split(' (')[0].trim())
+      c.itens.map((i) => i.split(' - ')[0].split(' (')[0].trim())
     )
   )
 );

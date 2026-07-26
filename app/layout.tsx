@@ -19,7 +19,7 @@ const instrument = Instrument_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'Bracvs — Assistente do Visit Braga',
+  title: 'Bracvs - Assistente do Visit Braga',
   description:
     'Bracvs, o Guia oficial do Visit Braga, responde às tuas perguntas sobre a cidade em Português, Español, English e Français.',
   manifest: '/manifest.webmanifest',
@@ -38,7 +38,7 @@ export const viewport: Viewport = {
   themeColor: '#F80000',
   // Usa o ecrã completo (incluindo a zona do notch/Dynamic Island).
   // O CSS afasta o conteúdo do cabeçalho com env(safe-area-inset-*),
-  // e o vermelho sobe até ao topo — sem barra branca.
+  // e o vermelho sobe até ao topo - sem barra branca.
   viewportFit: 'cover',
 };
 

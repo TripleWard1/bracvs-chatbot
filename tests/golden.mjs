@@ -9,9 +9,9 @@
 // (cabeçalho x-bracvs-test).
 //
 // Campos de cada teste:
-//   todas    — TODOS estes termos têm de aparecer na resposta
-//   umDe     — PELO MENOS UM destes termos tem de aparecer
-//   proibido — NENHUM destes termos pode aparecer
+//   todas    - TODOS estes termos têm de aparecer na resposta
+//   umDe     - PELO MENOS UM destes termos tem de aparecer
+//   proibido - NENHUM destes termos pode aparecer
 
 const BASE = process.argv[2];
 if (!BASE) {
@@ -150,4 +150,4 @@ if (falhas.length > 0) {
   }
   process.exit(1);
 }
-console.log('  Tudo verde — podes fazer deploy descansado. 🟢');
+console.log('  Tudo verde - podes fazer deploy descansado. 🟢');

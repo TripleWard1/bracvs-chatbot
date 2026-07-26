@@ -13,7 +13,7 @@
 
   // Botão flutuante
   var btn = document.createElement('button');
-  btn.setAttribute('aria-label', 'Bracvs — Visit Braga chat');
+  btn.setAttribute('aria-label', 'Bracvs - Visit Braga chat');
   btn.style.cssText =
     'position:fixed;bottom:20px;right:20px;z-index:99998;width:60px;height:60px;' +
     'border-radius:50%;border:none;cursor:pointer;background:#f80000;' +
@@ -30,7 +30,7 @@
     'display:none;background:#fff;';
   var frame = document.createElement('iframe');
   frame.src = ORIGIN;
-  frame.title = 'Bracvs — Visit Braga';
+  frame.title = 'Bracvs - Visit Braga';
   frame.style.cssText = 'width:100%;height:100%;border:0;';
   panel.appendChild(frame);
 

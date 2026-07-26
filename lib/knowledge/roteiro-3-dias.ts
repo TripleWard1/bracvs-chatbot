@@ -1,14 +1,14 @@
 /**
- * KNOWLEDGE BASE — Roteiro "Descobrir Braga em 3 Dias"
- * Fonte: Município de Braga — Departamento de Cultura e Turismo / Divisão de Economia e Turismo
+ * KNOWLEDGE BASE - Roteiro "Descobrir Braga em 3 Dias"
+ * Fonte: Município de Braga - Departamento de Cultura e Turismo / Divisão de Economia e Turismo
  * Elaboração: Ana Esteves, Luís Ferreira | Coordenação: Luís Ferreira, Hugo Barros
- * Extraído para o chatbot Bracvs — visitbraga.travel
+ * Extraído para o chatbot Bracvs - visitbraga.travel
  */
 
 export const ROTEIRO_3_DIAS = {
   introducao: {
     descricao:
-      "Roteiro concebido para visitar Braga de um até três dias. Com um dia obtém-se uma visão geral do que mais caracteriza a cidade (sugestões do primeiro dia). Em dois dias alarga-se a experiência numa viagem histórica — Braga é uma cidade bimilenar, fundada em 16 a.C. pelos Romanos, onde ruínas e edifícios contemporâneos convivem em harmonia. Com três dias expande-se a viagem por espaços monumentais e culturais ecléticos, desde igrejas barrocas a espaços arquitetónicos do século XX. Braga conserva tradição conciliando-a com inovação, com um caráter empreendedor, dinâmico e jovem. Braga soa a futuro.",
+      "Roteiro concebido para visitar Braga de um até três dias. Com um dia obtém-se uma visão geral do que mais caracteriza a cidade (sugestões do primeiro dia). Em dois dias alarga-se a experiência numa viagem histórica - Braga é uma cidade bimilenar, fundada em 16 a.C. pelos Romanos, onde ruínas e edifícios contemporâneos convivem em harmonia. Com três dias expande-se a viagem por espaços monumentais e culturais ecléticos, desde igrejas barrocas a espaços arquitetónicos do século XX. Braga conserva tradição conciliando-a com inovação, com um caráter empreendedor, dinâmico e jovem. Braga soa a futuro.",
     fundacao: "16 a.C. pelos Romanos (Bracara Augusta)",
   },
 
@@ -48,7 +48,7 @@ export const ROTEIRO_3_DIAS = {
       nome: "Biblioteca Pública de Braga / Paço Arquiepiscopal",
       website: "bpb.uminho.pt",
       descricao:
-        "O Paço Arquiepiscopal é um dos edifícios mais emblemáticos da cidade — era a residência dos Arcebispos, donos e Senhores de Braga. Projetado no séc. XVIII em estilo barroco, foi vítima de um grande incêndio e reconstruído nos anos 30 do séc. XX, respeitando o estilo original.",
+        "O Paço Arquiepiscopal é um dos edifícios mais emblemáticos da cidade - era a residência dos Arcebispos, donos e Senhores de Braga. Projetado no séc. XVIII em estilo barroco, foi vítima de um grande incêndio e reconstruído nos anos 30 do séc. XX, respeitando o estilo original.",
     },
     {
       nome: "Rua do Souto",
@@ -63,7 +63,7 @@ export const ROTEIRO_3_DIAS = {
     {
       nome: "Praça da República e Arcada",
       descricao:
-        "É o centro de Braga e ponto de encontro preferido dos bracarenses. Tem origem na Idade Média — aqui comercializavam-se os bens que abasteciam a cidade, servindo a arcada de alpendre para animais e mercadorias. A Arcada atual data de 1715. Ao centro está a Igreja da Lapa e, nas laterais, cafés emblemáticos, nomeadamente o Café Vianna, o mais antigo da cidade (1858).",
+        "É o centro de Braga e ponto de encontro preferido dos bracarenses. Tem origem na Idade Média - aqui comercializavam-se os bens que abasteciam a cidade, servindo a arcada de alpendre para animais e mercadorias. A Arcada atual data de 1715. Ao centro está a Igreja da Lapa e, nas laterais, cafés emblemáticos, nomeadamente o Café Vianna, o mais antigo da cidade (1858).",
     },
     {
       nome: "Torre de Menagem",
@@ -73,14 +73,14 @@ export const ROTEIRO_3_DIAS = {
     {
       nome: "Casa dos Crivos",
       descricao:
-        "Um dos únicos exemplares da arquitetura urbana civil em Braga, típica dos séculos XVII e XVIII. As janelas estão cobertas de gelosias, refletindo o clima de forte religiosidade e recolhimento da época. Estes imóveis cobertos de crivos eram vulgares na zona central e correspondiam quase sempre a habitações de mercadores — o piso térreo tinha amplas portas para deixar entrar luz e mostrar as mercadorias.",
+        "Um dos únicos exemplares da arquitetura urbana civil em Braga, típica dos séculos XVII e XVIII. As janelas estão cobertas de gelosias, refletindo o clima de forte religiosidade e recolhimento da época. Estes imóveis cobertos de crivos eram vulgares na zona central e correspondiam quase sempre a habitações de mercadores - o piso térreo tinha amplas portas para deixar entrar luz e mostrar as mercadorias.",
     },
     {
       nome: "Igreja de Santa Cruz",
       descricao:
         "As obras tiveram início em 1625 e a primeira fase foi concluída em 1653. Na fachada destacam-se os treze instrumentos da paixão de Cristo (coroa de espinhos, cravos, esponja de fel, etc.).",
       curiosidade:
-        "Segundo a lenda, quem encontrar os dois galos simétricos na fachada casará em breve ou casará em Braga — por isso há muita gente de olhar fixo na fachada. Há a versão de que são três galos, alusão à negação de Pedro (que negou três vezes conhecer Jesus), mas é muito difícil encontrar o terceiro; há quem diga que não existe e quem confunda o ganso com um galo num dos cataventos da torre.",
+        "Segundo a lenda, quem encontrar os dois galos simétricos na fachada casará em breve ou casará em Braga - por isso há muita gente de olhar fixo na fachada. Há a versão de que são três galos, alusão à negação de Pedro (que negou três vezes conhecer Jesus), mas é muito difícil encontrar o terceiro; há quem diga que não existe e quem confunda o ganso com um galo num dos cataventos da torre.",
     },
     {
       nome: "Igreja do Hospital de S. Marcos",
@@ -97,7 +97,7 @@ export const ROTEIRO_3_DIAS = {
       website: "bomjesus.pt",
       patrimonio: "Património Mundial da Humanidade (UNESCO) desde 2019",
       descricao:
-        "O verdadeiro ex-libris da cidade dos Arcebispos, onde natureza e arte 'dão mutuamente as mãos'. As origens remontam ao princípio do século XIV, quando foi colocada uma cruz no alto da encosta do monte Espinho, depois abrigada por uma ermida que se tornou meta de peregrinação. A ideia de transformar a ermida da Santa Cruz do Monte num grandioso monumento em honra da paixão de Cristo ganhou corpo. Em suave ziguezague desenvolve-se um Escadório com uma capela em cada patamar, alusiva aos passos da Via Sacra; segue-se o escadório dos Cinco Sentidos com fontes alegóricas, rematando com o Escadório das Três Virtudes e o Terreiro de Moisés — dando ao conjunto o aspeto de um cálice da consagração. Uma das maiores intervenções tardo-barrocas do país e referência obrigatória do Barroco europeu.",
+        "O verdadeiro ex-libris da cidade dos Arcebispos, onde natureza e arte 'dão mutuamente as mãos'. As origens remontam ao princípio do século XIV, quando foi colocada uma cruz no alto da encosta do monte Espinho, depois abrigada por uma ermida que se tornou meta de peregrinação. A ideia de transformar a ermida da Santa Cruz do Monte num grandioso monumento em honra da paixão de Cristo ganhou corpo. Em suave ziguezague desenvolve-se um Escadório com uma capela em cada patamar, alusiva aos passos da Via Sacra; segue-se o escadório dos Cinco Sentidos com fontes alegóricas, rematando com o Escadório das Três Virtudes e o Terreiro de Moisés - dando ao conjunto o aspeto de um cálice da consagração. Uma das maiores intervenções tardo-barrocas do país e referência obrigatória do Barroco europeu.",
       curiosidade:
         "Elevador do Bom Jesus: inaugurado a 25 de março de 1882 e sem registo de qualquer acidente, é atualmente o mais antigo funicular do mundo a utilizar o sistema de contrapeso de água. Sobe e desce de meia em meia hora e demora 2 a 3 minutos a fazer o percurso. Números: 2 vias, movimento simultâneo de subida e descida, 274 metros de percurso, 116 m de desnível, 42% de inclinação, 1,8 m/seg. de velocidade.",
     },
@@ -115,7 +115,7 @@ export const ROTEIRO_3_DIAS = {
       nome: "Termas Romanas do Alto da Cividade",
       tempoVisita: "20/30 min",
       descricao:
-        "Complexo termal construído entre os séculos I-III d.C. e abandonado no século V d.C., quando o Império Romano no Ocidente entrava em colapso. Era um espaço de convívio e descontração — através das salas frias e quentes e da palestra (espaço dedicado ao exercício físico), os romanos cuidavam do corpo. A norte do edifício termal foram encontrados vestígios arqueológicos de um teatro romano da mesma época.",
+        "Complexo termal construído entre os séculos I-III d.C. e abandonado no século V d.C., quando o Império Romano no Ocidente entrava em colapso. Era um espaço de convívio e descontração - através das salas frias e quentes e da palestra (espaço dedicado ao exercício físico), os romanos cuidavam do corpo. A norte do edifício termal foram encontrados vestígios arqueológicos de um teatro romano da mesma época.",
     },
     {
       nome: "Museu de Arqueologia D. Diogo de Sousa",
@@ -138,7 +138,7 @@ export const ROTEIRO_3_DIAS = {
       tempoVisita: "40 min",
       website: "scmbraga.pt/cimmb-palácio-do-raio",
       descricao:
-        "Também conhecido como Casa do Mexicano, deve o nome a um dos proprietários — Miguel José Raio, visconde de São Lázaro. Construção de 1754-1755, projeto do arquiteto bracarense André Soares, entre o final do barroco e o início do rococó. Desde 2015 está aberto como Centro Interpretativo das Memórias da Misericórdia de Braga.",
+        "Também conhecido como Casa do Mexicano, deve o nome a um dos proprietários - Miguel José Raio, visconde de São Lázaro. Construção de 1754-1755, projeto do arquiteto bracarense André Soares, entre o final do barroco e o início do rococó. Desde 2015 está aberto como Centro Interpretativo das Memórias da Misericórdia de Braga.",
     },
     {
       nome: "Fonte do Ídolo",
@@ -150,7 +150,7 @@ export const ROTEIRO_3_DIAS = {
       nome: "Santuário do Sameiro",
       website: "santuariodosameiro.pt",
       descricao:
-        "O segundo Santuário Mariano português mais visitado, na sagrada montanha do Sameiro. O Padre Martinho, movido pela devoção a Nossa Senhora Imaculada Conceição, foi o obreiro deste Santuário — começou por erigir um pedestal para uma estátua da Virgem. A 10 de agosto de 1877 é sagrada a primeira capela e em 1890 iniciaram-se as obras do templo atual. Em frente à Basílica ergue-se um imponente escadório, com dois altos pilares encimados pela Virgem Maria e o Sagrado Coração de Jesus, de onde se tem uma panorâmica de toda a cidade com um dos mais espetaculares pores-do-sol.",
+        "O segundo Santuário Mariano português mais visitado, na sagrada montanha do Sameiro. O Padre Martinho, movido pela devoção a Nossa Senhora Imaculada Conceição, foi o obreiro deste Santuário - começou por erigir um pedestal para uma estátua da Virgem. A 10 de agosto de 1877 é sagrada a primeira capela e em 1890 iniciaram-se as obras do templo atual. Em frente à Basílica ergue-se um imponente escadório, com dois altos pilares encimados pela Virgem Maria e o Sagrado Coração de Jesus, de onde se tem uma panorâmica de toda a cidade com um dos mais espetaculares pores-do-sol.",
       curiosidade:
         "Com 572 metros, o monte do Sameiro é o ponto mais alto da cidade, de onde se vislumbram as Serras do Gerês, da Cabreira, da Penha e da Franqueira e, em dias de maior visibilidade, o mar, desde Leixões à foz do Lima. A 15 de maio de 1982 o Papa João Paulo II visitou o Sameiro, acolhido por uma imensa multidão.",
     },
@@ -177,7 +177,7 @@ export const ROTEIRO_3_DIAS = {
     {
       nome: "Basílica dos Congregados",
       descricao:
-        "A construção teve início no séc. XVI mas só foi terminada no séc. XX — a torre poente foi concluída em 1964. No complexo conventual conserva-se a capelinha-oratório de Nossa Senhora da Aparecida, única no país pela particularidade das proporções e profusão da ornamentação barroca.",
+        "A construção teve início no séc. XVI mas só foi terminada no séc. XX - a torre poente foi concluída em 1964. No complexo conventual conserva-se a capelinha-oratório de Nossa Senhora da Aparecida, única no país pela particularidade das proporções e profusão da ornamentação barroca.",
     },
     {
       nome: "Mercado Municipal – A Praça",
@@ -203,7 +203,7 @@ export const ROTEIRO_3_DIAS = {
     {
       nome: "Rua de S. João",
       descricao:
-        "Rua emblemática com lojas com história, parte da abside da Sé Catedral e a imagem de Nossa Senhora do Leite em pedra ançã, atribuída a Nicolau de Chanterene — símbolo de fertilidade e maternidade. Curiosamente, quase no mesmo local, os Romanos adoravam outra divindade da fertilidade e maternidade, a deusa egípcia Ísis: na parede externa da Catedral, a poucos metros, vê-se uma pedra com inscrição dedicando o templo romano do séc. II a esta deusa.",
+        "Rua emblemática com lojas com história, parte da abside da Sé Catedral e a imagem de Nossa Senhora do Leite em pedra ançã, atribuída a Nicolau de Chanterene - símbolo de fertilidade e maternidade. Curiosamente, quase no mesmo local, os Romanos adoravam outra divindade da fertilidade e maternidade, a deusa egípcia Ísis: na parede externa da Catedral, a poucos metros, vê-se uma pedra com inscrição dedicando o templo romano do séc. II a esta deusa.",
     },
     {
       nome: "Rossio da Sé",
@@ -306,7 +306,7 @@ export const ROTEIRO_3_DIAS = {
 
   gastronomia: {
     descricao:
-      "Braga oferece uma gastronomia riquíssima, suculenta e variada, segundo a tradição de várias gerações, com o bacalhau como prato principal. A diversidade da paisagem natural e as influências de outras gentes explicam a multiplicidade de especialidades. Por influência da religiosidade da cidade, cumpriam-se os períodos de abstinência, levando à criação de multifacetadas formas de cozinhar o bacalhau — destaca-se o Bacalhau à Braga. O famoso vinho verde da região, branco ou tinto, acompanha bem qualquer prato. Na doçaria, grande originalidade e refinamento, com o Pudim Abade de Priscos, os doces de romaria e os biscoitos secos para o chá, além de especialidades de longa tradição conventual e popular.",
+      "Braga oferece uma gastronomia riquíssima, suculenta e variada, segundo a tradição de várias gerações, com o bacalhau como prato principal. A diversidade da paisagem natural e as influências de outras gentes explicam a multiplicidade de especialidades. Por influência da religiosidade da cidade, cumpriam-se os períodos de abstinência, levando à criação de multifacetadas formas de cozinhar o bacalhau - destaca-se o Bacalhau à Braga. O famoso vinho verde da região, branco ou tinto, acompanha bem qualquer prato. Na doçaria, grande originalidade e refinamento, com o Pudim Abade de Priscos, os doces de romaria e os biscoitos secos para o chá, além de especialidades de longa tradição conventual e popular.",
     zonasDeRestauracao: [
       "Campo das Hortas",
       "Rua D. Afonso Henriques",
@@ -395,8 +395,8 @@ export const ROTEIRO_3_DIAS = {
   ],
 
   distincoesInternacionais: [
-    "World's Leading Emerging Tourism Destination — World Travel Awards 2024",
-    "Europe's Leading Emerging Tourism Destination — World Travel Awards 2024",
+    "World's Leading Emerging Tourism Destination - World Travel Awards 2024",
+    "Europe's Leading Emerging Tourism Destination - World Travel Awards 2024",
     "Green Destinations Platinum Award 2023",
     "European Best Destination 2021",
   ],
@@ -404,7 +404,7 @@ export const ROTEIRO_3_DIAS = {
   fichaTecnica: {
     titulo: "Descobrir Braga em 3 dias",
     elaboracao: "Divisão de Economia e Turismo",
-    publicadoPor: "Município de Braga — Departamento de Cultura e Turismo",
+    publicadoPor: "Município de Braga - Departamento de Cultura e Turismo",
     email: "turismo@cm-braga.pt",
     website: "visitbraga.travel",
   },

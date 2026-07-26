@@ -1,16 +1,16 @@
 // FONTE: Brochura oficial "Braga, Sounds Like Future" (Visit Braga, EN)
 export const FUTURE_KNOWLEDGE = `
 # FONTE: Brochura oficial "Braga, Sounds Like Future" (Visit Braga / Município de Braga, EN)
-# Extração integral para knowledge.ts — Bracvs
+# Extração integral para knowledge.ts - Bracvs
 
 ## IDENTIDADE E POSICIONAMENTO DA MARCA
 - Slogan internacional: "Braga, Sounds Like Future" / "Braga Soa a Futuro".
 - Mensagem de capa: "Sente o pulsar de uma cidade vibrante, num palco de história imensa."
 - Manifesto: Braga soa a casa, história e amanhã; ao coração do Norte de Portugal; a natureza que respira e inspira; a raízes romanas que constroem sempre um passado com futuro; ao verde dos parques, jardins e colinas; à universidade vibrante que forma e educa; a uma economia movida pela investigação, construção e crescimento; ao desporto que mobiliza comunidades.
 - Perfil da cidade (adjetivos oficiais): Histórica. Transformadora. Criativa. Ativista. Cativante. Expansionista. Experiencialista. Ressonante. BRAGA É VIBRANTE.
-- Em Braga, um legado com mais de 2000 anos de história funde-se com o ritmo típico de uma cidade cosmopolita — é neste contraste que a cidade está no seu melhor, com uma energia contagiante para quem vive e para quem visita.
+- Em Braga, um legado com mais de 2000 anos de história funde-se com o ritmo típico de uma cidade cosmopolita - é neste contraste que a cidade está no seu melhor, com uma energia contagiante para quem vive e para quem visita.
 - O vasto património cultural, a religiosidade sempre presente, os espaços verdes para atividades ao ar livre e o ambiente criativo, empreendedor e cosmopolita fazem de Braga um destino fresco e imperdível.
-- Prémios: World Travel Awards 2024 — "Europe's Leading Emerging Tourism Destination" e "World's Leading Emerging Tourism Destination".
+- Prémios: World Travel Awards 2024 - "Europe's Leading Emerging Tourism Destination" e "World's Leading Emerging Tourism Destination".
 
 ## CÓDIGO DE ÉTICA DO VISITANTE
 1. Escolher produtos e serviços locais;
@@ -26,18 +26,18 @@ export const FUTURE_KNOWLEDGE = `
 
 ## BRAGA EM SÍNTESE
 - Terceira maior cidade de Portugal; acolhe com o mesmo entusiasmo a tradição e a novidade.
-- Quem chega de comboio encontra, no subsolo da moderna estação ferroviária, um balneário pré-romano descoberto durante as escavações da nova plataforma e preservado até hoje — o monumento arqueológico protegido pelo edifício contemporâneo é a metáfora perfeita da identidade da cidade.
+- Quem chega de comboio encontra, no subsolo da moderna estação ferroviária, um balneário pré-romano descoberto durante as escavações da nova plataforma e preservado até hoje - o monumento arqueológico protegido pelo edifício contemporâneo é a metáfora perfeita da identidade da cidade.
 - Camadas sedimentares de mais de dois mil anos de história coexistem, em harmonia e contraste, com equipamento urbano moderno.
 - Concentração de vasto património arquitetónico de diferentes correntes, muitos monumentos, museus e equipamentos culturais, e estruturas internacionais de inovação que fazem de Braga um dos mais importantes centros tecnológicos do país.
 
 ## HISTÓRIA
 - Antes da fundação de Bracara Augusta, as comunidades castrejas foram os primeiros povoados da região (ainda há vestígios); os castrejos do território de Braga ficariam conhecidos como Brácaros.
-- Território sempre exposto à passagem de movimentos migratórios de diferentes povos — "contaminado" pela diversidade.
+- Território sempre exposto à passagem de movimentos migratórios de diferentes povos - "contaminado" pela diversidade.
 - Com a chegada dos Romanos, pela importância geoestratégica, foi nomeada centro administrativo em 27 a.C.; em 16 a.C., o Imperador Augusto elevou o território a cidade, dando-lhe o nome de Bracara Augusta em sua honra.
 - Desde então, foi centro religioso, cultural, comercial e, nos últimos anos, centro de inovação e conhecimento.
-- Período medieval: construção da Sé Catedral, que fez a cidade crescer à sua volta — característica que se mantém no centro histórico; Braga foi doada aos Arcebispos, tornando-se um importante centro religioso da Península Ibérica.
+- Período medieval: construção da Sé Catedral, que fez a cidade crescer à sua volta - característica que se mantém no centro histórico; Braga foi doada aos Arcebispos, tornando-se um importante centro religioso da Península Ibérica.
 - Presença religiosa muito forte: número significativo de igrejas e importante coleção de arte sacra, frequentemente invejada; o edificado religioso foi sendo atualizado segundo as novas correntes arquitetónicas.
-- Séculos XVII–XVIII: o Barroco tornou-se muito presente — Braga é um dos maiores representantes portugueses deste estilo.
+- Séculos XVII–XVIII: o Barroco tornou-se muito presente - Braga é um dos maiores representantes portugueses deste estilo.
 - A industrialização expôs a cidade a um estilo de vida contemporâneo (caminho de ferro, infraestruturas básicas) e fez florescer um forte setor industrial têxtil.
 - Ao longo do século XX, Braga cresceu em dimensão e população, tornando-se a terceira maior cidade de Portugal. Chega até hoje como sempre foi: curiosa quanto ao futuro e permeável à mudança.
 
@@ -47,8 +47,8 @@ export const FUTURE_KNOWLEDGE = `
 - Aeroporto Francisco Sá Carneiro (Porto) a ~30 minutos de carro; bons acessos rodoviários e ferroviários; próxima dos principais portos da região: Leixões, Viana do Castelo e Vigo.
 - Porta de entrada para o Parque Nacional da Peneda-Gerês, uma das áreas protegidas mais emblemáticas do país, Reserva Mundial da Biosfera da UNESCO.
 - Centro a minutos de paisagens rurais bucólicas do Minho, conhecidas pelos espigueiros.
-- Centro histórico compacto, perfeito para percorrer a pé: ruas estreitas que desembocam em praças amplas e arejadas — um palco natural onde é fácil descobrir património e assistir a espetáculos de rua.
-- A cidade estende-se para a periferia com parques urbanos, edifícios comerciais e industriais e edifícios científicos e educativos, como o INL — International Iberian Nanotechnology Laboratory e a Universidade do Minho.
+- Centro histórico compacto, perfeito para percorrer a pé: ruas estreitas que desembocam em praças amplas e arejadas - um palco natural onde é fácil descobrir património e assistir a espetáculos de rua.
+- A cidade estende-se para a periferia com parques urbanos, edifícios comerciais e industriais e edifícios científicos e educativos, como o INL - International Iberian Nanotechnology Laboratory e a Universidade do Minho.
 - Pentágono Urbano: rede urbana de competitividade e inovação formada por Braga, Barcelos, Guimarães, Viana do Castelo e Vila Nova de Famalicão, criada pelos cinco municípios para reforçar um território fortemente industrializado e exportador.
 
 ### Distâncias a partir de Braga
@@ -67,17 +67,17 @@ export const FUTURE_KNOWLEDGE = `
 - Lisboa: 363 km
 
 ## UMA VIAGEM NO TEMPO (estilos arquitetónicos e exemplos)
-- Romano — séc. I a.C. a séc. IV: Coleção Bühler-Borckhaus.
-- Medieval — séc. V a XV: Capela de São Frutuoso.
-- Renascimento — séc. XVI: Igreja da Misericórdia.
-- Barroco — séc. XVII–XVIII: Paços do Concelho (Braga Town Hall).
-- Contemporâneo — séc. XIX–XXI: Capela Árvore da Vida.
+- Romano - séc. I a.C. a séc. IV: Coleção Bühler-Borckhaus.
+- Medieval - séc. V a XV: Capela de São Frutuoso.
+- Renascimento - séc. XVI: Igreja da Misericórdia.
+- Barroco - séc. XVII–XVIII: Paços do Concelho (Braga Town Hall).
+- Contemporâneo - séc. XIX–XXI: Capela Árvore da Vida.
 - Visitar a cidade é ser transportado para diferentes eras a cada rua; uma cidade onde se pode sentir e ver o passado, viver o presente e planear o futuro.
 
 ## MONUMENTOS HISTÓRICOS
 
 ### Sé de Braga (Catedral)
-- A catedral mais antiga de Portugal, datada do ano 1089 — dá sentido à famosa expressão "mais velho que a Sé de Braga".
+- A catedral mais antiga de Portugal, datada do ano 1089 - dá sentido à famosa expressão "mais velho que a Sé de Braga".
 - Tesouro-Museu da Sé: instalado na antiga Casa do Cabido, guarda mais de 1500 anos de história; Museu de Arte Sacra com coleção íntegra e magnífica.
 - No Tesouro-Museu pode ver-se a cruz levada por Pedro Álvares Cabral para o Brasil, usada na primeira missa lá celebrada.
 
@@ -103,8 +103,8 @@ export const FUTURE_KNOWLEDGE = `
 
 ### Arco da Porta Nova
 - Aberto na muralha de Braga no início do séc. XVI por iniciativa do Arcebispo D. Diogo de Sousa; entrada de muitos Reis e Arcebispos na cidade.
-- Uma das maiores alegorias da cidade — boas-vindas a quem visita Braga.
-- Origem da expressão popular "És de Braga?" — pergunta retórica dirigida a quem tem o hábito de deixar a porta aberta.
+- Uma das maiores alegorias da cidade - boas-vindas a quem visita Braga.
+- Origem da expressão popular "És de Braga?" - pergunta retórica dirigida a quem tem o hábito de deixar a porta aberta.
 
 ### Igreja de São Vicente
 - Eixo importante da malha urbana; construída entre finais do séc. XVII e primeiras décadas do séc. XVIII.
@@ -116,7 +116,7 @@ export const FUTURE_KNOWLEDGE = `
 
 ### Igreja de Santa Cruz
 - Primeiro grande marco do chamado Barroco de Braga e uma das suas mais altas expressões.
-- Lenda famosa: há três galos em relevo escondidos nos desenhos intrincados esculpidos na pedra — "se a rapariga solteira os encontrar, o casamento está para breve".
+- Lenda famosa: há três galos em relevo escondidos nos desenhos intrincados esculpidos na pedra - "se a rapariga solteira os encontrar, o casamento está para breve".
 
 ### Hospital e Igreja de São Marcos
 - Construção do Hospital de São Marcos (a principal casa de peregrinos e doentes) remonta a 1508; muito ampliado no séc. XVIII, estendendo-se à Igreja de São Marcos.
@@ -143,7 +143,7 @@ export const FUTURE_KNOWLEDGE = `
 ### Arcada / Praça da República
 - Origem na Idade Média, projeto do Arcebispo D. Diogo de Sousa; em meados do séc. XVI ali se comercializavam os bens que abasteciam a cidade.
 - O edifício atual data de 1715, construído por iniciativa do Arcebispo D. Rodrigo de Moura Teles.
-- Designação atual: Praça da República, mas para os habitantes será sempre "a Arcada" — espaço representativo da essência autêntica da cidade.
+- Designação atual: Praça da República, mas para os habitantes será sempre "a Arcada" - espaço representativo da essência autêntica da cidade.
 
 ### Igreja e Convento do Pópulo
 - Construção iniciada em 1596; foi outrora palco conventual de segredos e enredos.
@@ -156,7 +156,7 @@ export const FUTURE_KNOWLEDGE = `
 
 ### Igreja de São Victor
 - Construída por D. Luís de Sousa no séc. XVII; uma das primeiras igrejas em Portugal com elementos barrocos.
-- As paredes interiores estão cobertas por 11.700 azulejos com pinturas azuis — técnica que viria a caracterizar o Barroco português.
+- As paredes interiores estão cobertas por 11.700 azulejos com pinturas azuis - técnica que viria a caracterizar o Barroco português.
 
 ### Santuário do Sameiro (Nossa Senhora do Sameiro)
 - No ponto mais alto da cidade (572 m), com vista para as serras do Gerês, Cabreira, Penha e Franqueira.
@@ -173,7 +173,7 @@ export const FUTURE_KNOWLEDGE = `
 
 ### Capela de São Frutuoso
 - Deve a existência a São Frutuoso, bispo de Dume e de Braga no período visigótico, que escolheu ser ali sepultado nos anos 60 do séc. VII.
-- Em redor existia um complexo monástico muito maior — centro religioso da região na época — que terá desaparecido no início do séc. XVI quando os Franciscanos reconstruíram o mosteiro.
+- Em redor existia um complexo monástico muito maior - centro religioso da região na época - que terá desaparecido no início do séc. XVI quando os Franciscanos reconstruíram o mosteiro.
 
 ### Mamoa de Lamas (Burial Mound of Lamas)
 - Na freguesia de Lamas; monumento funerário pré-histórico construído há cerca de cinco mil anos.
@@ -231,7 +231,7 @@ export const FUTURE_KNOWLEDGE = `
 - Exibe as tradições etnográficas do Baixo Minho, em particular os trajes de finais do séc. XIX e inícios do séc. XX.
 - Ênfase nos instrumentos musicais típicos das festas populares e no traje "Capotilha" (cobertura para os ombros usada pelas mulheres).
 
-### MUZEU — Pensamento e Arte Contemporânea dst
+### MUZEU - Pensamento e Arte Contemporânea dst
 - Museu de arte contemporânea cuja missão é promover o pensamento crítico e o ativismo social.
 - Programa estruturado em ciclos temáticos, apoiado nas coleções da dstgroup e de José Teixeira, com artistas como Pablo Picasso, Anselm Kiefer, Nan Goldin, Richard Long, Candida Höfer, André Butzer, Sue Webster & Tim Noble, Caio Reisewitz, Jason Martin, Paula Rego, Helena Almeida, Pedro Cabrita Reis e Julião Sarmento, entre outros.
 - Procura afirmar-se como a Ágora da Polis contemporânea, voz pública da dstgroup, da sua escola e dos seus valores.
@@ -267,7 +267,7 @@ export const FUTURE_KNOWLEDGE = `
 - No coração da cidade; muito mais que um espaço de compras, é ponto de encontro com o espírito autêntico do Minho.
 - Construído no séc. XX, tornou-se símbolo da vida comercial e social de Braga, juntando produtores locais e consumidores num ambiente de proximidade e tradição.
 - Requalificação extensa em 2020: imagem renovada, adaptada às novas dinâmicas urbanas e turísticas sem perder a essência.
-- Produtos frescos e genuínos, artesanato e sabores únicos; experiência sensorial — provar, descobrir e sentir Braga pelos aromas e sabores.
+- Produtos frescos e genuínos, artesanato e sabores únicos; experiência sensorial - provar, descobrir e sentir Braga pelos aromas e sabores.
 
 ### Bibliotecas e livrarias
 - Biblioteca Pública de Braga: no representativo Paço Arquiepiscopal; fundada em 1841; integrada na Universidade do Minho desde 1975; valioso património bibliográfico.
@@ -277,7 +277,7 @@ export const FUTURE_KNOWLEDGE = `
 ### Galerias e ciência
 - Galeria Duarte Sequeira: inaugurada em 1994 no piso térreo de uma casa de lavoura de finais do séc. XIX; três espaços expositivos (casa principal, edifício contemporâneo e parque de escultura no jardim); exposições nacionais e internacionais de renome.
 - Zet Gallery: criada em 2014; combina plataforma online de arte contemporânea com espaço físico; exibe arte contemporânea e de vanguarda em pintura, escultura, fotografia, arte digital, instalação e multimédia.
-- INL — International Iberian Nanotechnology Laboratory: nasce de uma parceria entre os governos português e espanhol para criar um centro de I&D capaz de se afirmar na esfera científica internacional.
+- INL - International Iberian Nanotechnology Laboratory: nasce de uma parceria entre os governos português e espanhol para criar um centro de I&D capaz de se afirmar na esfera científica internacional.
 
 ## NATUREZA E AR LIVRE
 
@@ -313,7 +313,7 @@ export const FUTURE_KNOWLEDGE = `
 
 ### Ecovia do Rio Este
 - Eixo estruturante vital e incontornável de Braga; pista pedonal e ciclável de cerca de 3 km ao longo da margem.
-- Inclui o famoso "Sítio dos Galos" — lugar característico usado como cenário para a recriação do batismo de Cristo durante as Festas de São João.
+- Inclui o famoso "Sítio dos Galos" - lugar característico usado como cenário para a recriação do batismo de Cristo durante as Festas de São João.
 
 ### Quinta Pedagógica (Educational Farm)
 - Resultado do restauro e adaptação de uma antiga quinta tradicional minhota para fins educativos e pedagógicos.
@@ -331,7 +331,7 @@ export const FUTURE_KNOWLEDGE = `
 - Frase de convite oficial: "Soa-te bem? Então vem conhecer Braga de perto."
 
 ## CONTACTOS OFICIAIS
-- Município de Braga — Direção Municipal de Desenvolvimento Económico, Turismo e Sustentabilidade — Divisão de Atividades Económicas e Turismo.
+- Município de Braga - Direção Municipal de Desenvolvimento Económico, Turismo e Sustentabilidade - Divisão de Atividades Económicas e Turismo.
 - Email: turismo@cm-braga.pt
 - Telefone: +351 253 613 387
 `;

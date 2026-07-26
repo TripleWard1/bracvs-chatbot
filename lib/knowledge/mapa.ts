@@ -1,8 +1,8 @@
 // ============================================================
-// KNOWLEDGE — MAPA TURÍSTICO OFICIAL DE BRAGA (Desdobrável PT)
-// Fonte: Visit Braga — Mapa Turístico Oficial de Braga
+// KNOWLEDGE - MAPA TURÍSTICO OFICIAL DE BRAGA (Desdobrável PT)
+// Fonte: Visit Braga - Mapa Turístico Oficial de Braga
 // Textos originais do mapa: Luís Fontes e Miguel Bandeira
-// Extraído para o chatbot Bracvs — visitbraga.travel
+// Extraído para o chatbot Bracvs - visitbraga.travel
 // ============================================================
 // Para integrar no lib/knowledge.ts existente: importar e
 // concatenar/mergir estas estruturas na base de conhecimento.
@@ -36,7 +36,7 @@ export interface Contacto {
 }
 
 // ------------------------------------------------------------
-// SOBRE BRAGA — texto institucional do mapa
+// SOBRE BRAGA - texto institucional do mapa
 // ------------------------------------------------------------
 
 export const sobreBraga = `Braga soa a casa, a história, a amanhã. Braga soa ao pulsar do Norte de Portugal, soa a natureza que respira e inspira. Soa às raízes romanas que constroem um passado sempre futuro. Soa ao verde dos parques, jardins e montes que abraçam. Soa a universidade que vibra, alimenta e qualifica. Soa a economia que investiga, edifica e prospera. Soa ao desporto que mobiliza. Aqui é Braga!`;
@@ -144,7 +144,7 @@ export const monumentos: Monumento[] = [
     nome: "Torre de Santiago",
     tipologias: ["Medieval"],
     descricao:
-      "A imponente Torre de Santiago, sobre a porta do mesmo nome — por onde entrava quem vinha do Porto, incluindo os peregrinos que se dirigiam a Santiago de Compostela — foi edificada no decurso do século XV. Apoiado na fachada interior da torre medieval, existe um oratório que sugestiona uma imensa igreja ao ar livre cuja nave é o Largo de S. Paulo, o pátio académico dos estudantes da Contrarreforma. O oratório terá sido erguido como recompensa à Virgem por ter poupado a cidade ao efeito do terramoto de 1755.",
+      "A imponente Torre de Santiago, sobre a porta do mesmo nome - por onde entrava quem vinha do Porto, incluindo os peregrinos que se dirigiam a Santiago de Compostela - foi edificada no decurso do século XV. Apoiado na fachada interior da torre medieval, existe um oratório que sugestiona uma imensa igreja ao ar livre cuja nave é o Largo de S. Paulo, o pátio académico dos estudantes da Contrarreforma. O oratório terá sido erguido como recompensa à Virgem por ter poupado a cidade ao efeito do terramoto de 1755.",
   },
   {
     id: 15,
@@ -293,7 +293,7 @@ export const bomJesus = {
     "Estacionamento",
     "Lago",
     "Monóculo / miradouro",
-    "Paragem de Autocarro TUB — linhas 2 e 88",
+    "Paragem de Autocarro TUB - linhas 2 e 88",
     "Parque de Merendas",
     "Parque Infantil",
     "Sanitários",
@@ -368,7 +368,7 @@ export const pontosDeInteresse = [
   "Parque de Campismo",
   "Parque Desportivo",
   "Parque Infantil",
-  "Paragens de Autocarro TUB (Basílica do Bom Jesus do Monte, Santuário do Sameiro, Mosteiro de Tibães, Parque de Campismo, Estádio Municipal/Dume, Circuito Urbano — algumas linhas apenas aos fins de semana)",
+  "Paragens de Autocarro TUB (Basílica do Bom Jesus do Monte, Santuário do Sameiro, Mosteiro de Tibães, Parque de Campismo, Estádio Municipal/Dume, Circuito Urbano - algumas linhas apenas aos fins de semana)",
   // TODO: confirmar números exatos das linhas TUB por destino (legenda pouco legível na digitalização; confirmado apenas 2/88 para o Bom Jesus)
   "Polícia",
   "Posto de Turismo",
@@ -378,9 +378,9 @@ export const pontosDeInteresse = [
   "Sanitários",
   "Táxis",
   "Theatro Circo",
-  "Turismo Porto e Norte de Portugal — Loja Interativa",
+  "Turismo Porto e Norte de Portugal - Loja Interativa",
   "Universidade",
-  "Planetário — Centro Ciência Viva",
+  "Planetário - Centro Ciência Viva",
 ];
 
 // ------------------------------------------------------------
@@ -406,10 +406,10 @@ export const contactosUteis: Contacto[] = [
   { entidade: "Polícia de Segurança Pública (PSP)", telefone: "+351 253 200 420" },
   { entidade: "Polícia Municipal de Braga", telefone: "+351 253 609 740" },
   { entidade: "Guarda Nacional Republicana (GNR)", telefone: "+351 253 609 740" },
-  // TODO: PSP Municipal e GNR aparecem com números próximos na digitalização — confirmar no desdobrável impresso
+  // TODO: PSP Municipal e GNR aparecem com números próximos na digitalização - confirmar no desdobrável impresso
   {
     entidade: "Câmara Municipal de Braga",
-    telefone: "+351 253 616 060", // TODO: confirmar — dígitos pouco legíveis na digitalização
+    telefone: "+351 253 616 060", // TODO: confirmar - dígitos pouco legíveis na digitalização
   },
   {
     entidade: "Táxis",
@@ -423,20 +423,20 @@ export const contactosUteis: Contacto[] = [
 // ------------------------------------------------------------
 
 export const notasGerais = [
-  "O Centro Histórico de Braga está delimitado no mapa e é gerido em articulação com a marca CBA — Centro Braga.",
+  "O Centro Histórico de Braga está delimitado no mapa e é gerido em articulação com a marca CBA - Centro Braga.",
   "O mapa assinala as antigas muralhas da cidade: Muralha Romana e Muralha Medieval.",
   "O mapa turístico oficial é gratuito e está disponível no Posto de Turismo.",
   "Existe um mapa digital com recomendações, dicas e outras informações úteis, acessível por QR Code no desdobrável.",
-  "Braga integra as redes: European Best Destinations (prémios de destino europeu), Green Destinations, UNESCO (Bom Jesus do Monte — Património Mundial) e Braga City of Media Arts (Cidade Criativa da UNESCO — Artes dos Media).",
+  "Braga integra as redes: European Best Destinations (prémios de destino europeu), Green Destinations, UNESCO (Bom Jesus do Monte - Património Mundial) e Braga City of Media Arts (Cidade Criativa da UNESCO - Artes dos Media).",
   "É proibida a reprodução total ou parcial do mapa, bem como a sua comercialização, sem autorização prévia dos detentores dos direitos.",
 ];
 
 // ------------------------------------------------------------
-// EXPORT AGREGADO — conveniência para merge no knowledge.ts
+// EXPORT AGREGADO - conveniência para merge no knowledge.ts
 // ------------------------------------------------------------
 
 export const mapaTuristicoBraga = {
-  fonte: "Mapa Turístico Oficial de Braga — Visit Braga (desdobrável PT)",
+  fonte: "Mapa Turístico Oficial de Braga - Visit Braga (desdobrável PT)",
   autoresTextos: "Luís Fontes e Miguel Bandeira",
   sobreBraga,
   monumentos,
