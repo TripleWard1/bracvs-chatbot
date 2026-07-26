@@ -19,6 +19,7 @@ import ROTEIRO_BRACVS_KNOWLEDGE from './roteiro-bracvs';
 import { FUTURE_KNOWLEDGE } from './future';
 import { getRestaurantesKnowledge } from './restaurantes';
 import { restaurantesDaSheet, avisosDaSheet, pastelariasDaSheet } from '../sheets';
+import { construirDoces } from './doces';
 import { AFTER_DARK_SUNSET_JANTAR, AFTER_DARK_BARES, AFTER_DARK_BARES_LITE } from './after-dark';
 
 type Module = {

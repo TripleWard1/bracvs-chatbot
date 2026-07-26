@@ -206,16 +206,31 @@ export default function Chat() {
   const [error, setError] = useState<string | null>(null);
   const [voted, setVoted] = useState<Record<number, 'up' | 'down'>>({});
   const bottomRef = useRef<HTMLDivElement>(null);
+  const lastBotRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     setLang(detectUiLang());
   }, []);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    const ultima = messages[messages.length - 1];
+    // Quando chega uma resposta do Bracvs, mostra-a a partir do INÍCIO
+    // (alinha o topo da mensagem ao topo da área visível). Para mensagens
+    // do utilizador ou enquanto escreve, acompanha o fim como habitual.
+    if (ultima?.role === 'assistant' && lastBotRef.current) {
+      lastBotRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
   }, [messages, busy]);
 
   const t = UI[lang];
+  // Em ecrãs táteis, o Enter faz nova linha (envio só pelo botão); no
+  // computador, o Enter envia (Shift+Enter faz nova linha).
+  const isTouch =
+    typeof window !== 'undefined' &&
+    window.matchMedia?.('(pointer: coarse)').matches;
 
   function votar(i: number, voto: 'up' | 'down') {
     if (voted[i]) return;
@@ -341,7 +356,11 @@ export default function Chat() {
               {m.content}
             </div>
           ) : (
-            <div key={i} className="bot-row">
+            <div
+              key={i}
+              className="bot-row"
+              ref={i === messages.length - 1 ? lastBotRef : undefined}
+            >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img className="bot-avatar" src="/bracvs-avatar.png" alt="" />
               <div className="bot-col">
@@ -390,18 +409,34 @@ export default function Chat() {
       </main>
 
       <div className="composer">
-        <input
+        <textarea
+          ref={inputRef}
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          rows={1}
+          onChange={(e) => {
+            setInput(e.target.value);
+            // cresce até 5 linhas conforme o texto
+            e.target.style.height = 'auto';
+            e.target.style.height = Math.min(e.target.scrollHeight, 120) + 'px';
+          }}
           onKeyDown={(e) => {
-            if (e.key === 'Enter') send(input);
+            // Telemóvel: Enter = nova linha (envio só no botão).
+            // Computador: Enter envia, Shift+Enter faz nova linha.
+            if (e.key === 'Enter' && !e.shiftKey && !isTouch) {
+              e.preventDefault();
+              send(input);
+              if (inputRef.current) inputRef.current.style.height = 'auto';
+            }
           }}
           placeholder={t.placeholder}
           aria-label={t.placeholder}
           maxLength={2000}
         />
         <button
-          onClick={() => send(input)}
+          onClick={() => {
+            send(input);
+            if (inputRef.current) inputRef.current.style.height = 'auto';
+          }}
           disabled={busy || !input.trim()}
           aria-label={t.send}
         >
