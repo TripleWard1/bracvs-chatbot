@@ -31,7 +31,7 @@ body {
 }
 
 body {
-  /* Faixa vermelha no topo (atrás da zona do notch) e neutro no resto -
+  /* Faixa vermelha no topo (atrás da zona do notch) e neutro no resto —
      evita qualquer barra clara acima do cabeçalho em iPhone */
   background-color: #edebe7;
   background-image: linear-gradient(
@@ -45,7 +45,6 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   color: var(--ink);
-  background: #edebe7;
 }
 
 .app {
@@ -94,6 +93,8 @@ body {
     0 3px 18px rgba(160, 0, 0, 0.4);
   position: relative;
   overflow: hidden;
+  width: 100%;
+  max-width: 100%;
   z-index: 2;
 }
 
@@ -101,11 +102,11 @@ body {
 .header::after {
   content: '';
   position: absolute;
-  right: -18px;
+  right: 0;
   top: calc(50% + env(safe-area-inset-top) / 2);
   transform: translateY(-42%) rotate(8deg);
-  width: 150px;
-  height: 150px;
+  width: 130px;
+  height: 130px;
   background: url('/sino-braga-branco.png') center / contain no-repeat;
   opacity: 0.09;
   pointer-events: none;
@@ -116,6 +117,7 @@ body {
   animation: peek 0.7s 0.2s cubic-bezier(0.22, 1, 0.36, 1) both;
   height: 178px;
   width: auto;
+  flex-shrink: 0;
   align-self: flex-start;
   margin-top: 4px;
   margin-left: -6px;
@@ -237,9 +239,9 @@ body {
   }
 
   .header::after {
-    width: 108px;
-    height: 108px;
-    right: -26px;
+    width: 96px;
+    height: 96px;
+    right: 0;
     opacity: 0.07;
   }
 }
@@ -823,4 +825,31 @@ html {
   .header-logo {
     height: 12px;
   }
+}
+
+/* ---------- Trava anti-scroll-lateral (rede de segurança final) ---------- */
+/* Nenhum destes contentores pode exceder a largura do ecrã nem encolher
+   os filhos ao ponto de os empurrar para fora. */
+.app,
+.header,
+.messages,
+.composer,
+.empty,
+.bot-row,
+.msg,
+.chips {
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* Imagens nunca excedem o contentor */
+img {
+  max-width: 100%;
+}
+
+/* Palavras muito longas (URLs, nomes) quebram em vez de alargar */
+.msg,
+.empty p,
+.empty h2 {
+  overflow-wrap: anywhere;
 }
