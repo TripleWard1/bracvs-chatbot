@@ -1,9 +1,9 @@
 // lib/sheets.ts
-// CONHECIMENTO EDITÁVEL SEM CÓDIGO - lê uma Google Sheet publicada como CSV.
+// CONHECIMENTO EDITÁVEL SEM CÓDIGO — lê uma Google Sheet publicada como CSV.
 //
 // Separadores esperados na folha "Bracvs Conhecimento":
 //   RESTAURANTES → colunas: Categoria | Nome | Zona | Notas
-//                   (Zona: "Centro histórico" para os do centro - é o que
+//                   (Zona: "Centro histórico" para os do centro — é o que
 //                    permite ao Bracvs dar-lhes prioridade e dizer onde ficam.
 //                    Deixar vazio se não souberes: o Bracvs nunca inventa.)
 //   AVISOS       → colunas: Aviso
@@ -71,7 +71,7 @@ async function lerCsv(envVar: string): Promise<string[][] | null> {
 
 /**
  * Restaurantes vindos da Sheet, no mesmo formato do módulo embutido.
- * Devolve null se a folha não estiver configurada/acessível/preenchida -
+ * Devolve null se a folha não estiver configurada/acessível/preenchida —
  * o chamador recua para a lista embutida.
  */
 export async function restaurantesDaSheet(): Promise<string | null> {
@@ -88,11 +88,11 @@ export async function restaurantesDaSheet(): Promise<string | null> {
     const partes = [nome];
     if (zona) partes.push(`zona: ${zona}`);
     if (notas) partes.push(notas);
-    const item = partes.join(' - ');
+    const item = partes.join(' — ');
     porCategoria.set(categoria, [...(porCategoria.get(categoria) ?? []), item]);
   }
   // Proteção: uma folha quase vazia (mal preenchida, cabeçalho em falta,
-  // publicação errada) substituiria a lista completa por 2 ou 3 nomes - foi
+  // publicação errada) substituiria a lista completa por 2 ou 3 nomes — foi
   // isso que fez o Bracvs recomendar sempre o mesmo restaurante. Abaixo do
   // mínimo, ignora a folha e usa a lista embutida.
   const total = Array.from(porCategoria.values()).reduce((n, v) => n + v.length, 0);
@@ -115,7 +115,7 @@ export async function restaurantesDaSheet(): Promise<string | null> {
 /**
  * Pastelarias, confeitarias e casas de doces vindas da folha (categorias que
  * contenham "pastelaria", "confeitaria", "doçaria" ou "padaria"). Devolve as
- * linhas já formatadas com nome, zona e notas - para o módulo de doces poder
+ * linhas já formatadas com nome, zona e notas — para o módulo de doces poder
  * dizer ONDE comprar sem inventar.
  */
 export async function pastelariasDaSheet(): Promise<string | null> {
@@ -133,14 +133,58 @@ export async function pastelariasDaSheet(): Promise<string | null> {
     const partes = [nome];
     if (zona) partes.push(`zona: ${zona}`);
     if (notas) partes.push(notas);
-    doceiras.push('- ' + partes.join(' - '));
+    doceiras.push('- ' + partes.join(' — '));
   }
   if (doceiras.length === 0) return null;
   return doceiras.join('\n');
 }
 
 /**
- * Avisos atuais editados pela equipa - entram em TODOS os pedidos.
+ * Bares e discotecas vindos da folha "BARES E NOITE" (separador próprio,
+ * publicado como CSV em SHEET_BARES_URL). Colunas: Categoria | Nome | Zona | Notas.
+ * Devolve o texto formatado (centro primeiro) ou null para o código usar o
+ * guia embutido.
+ */
+export async function baresDaSheet(): Promise<string | null> {
+  const url = process.env.SHEET_BARES_URL;
+  if (!url) return null;
+  let linhas: string[][] | null = null;
+  try {
+    const r = await fetch(url, { next: { revalidate: 600 } } as RequestInit);
+    if (!r.ok) return null;
+    linhas = parseCsv(await r.text());
+  } catch {
+    return null;
+  }
+  if (!linhas || linhas.length < 2) return null;
+
+  const porCategoria = new Map<string, string[]>();
+  for (const l of linhas.slice(1)) {
+    const categoria = (l[0] ?? '').trim() || 'Bares';
+    const nome = (l[1] ?? '').trim();
+    const zona = (l[2] ?? '').trim();
+    const notas = (l[3] ?? '').trim();
+    if (!nome) continue;
+    const partes = [nome];
+    if (zona) partes.push(`zona: ${zona}`);
+    if (notas) partes.push(notas);
+    porCategoria.set(categoria, [...(porCategoria.get(categoria) ?? []), '- ' + partes.join(' — ')]);
+  }
+  if (porCategoria.size === 0) return null;
+
+  const seccoes = Array.from(porCategoria.entries())
+    .map(([cat, itens]) => `## ${cat}\n${itens.join('\n')}`)
+    .join('\n\n');
+  return (
+    '# BARES, DISCOTECAS E VIDA NOTURNA DE BRAGA — lista oficial\n' +
+    'Recomenda APENAS estes espaços. Dá prioridade aos marcados como centro. Nunca inventes nomes nem afirmes a localização se não estiver escrita.\n\n' +
+    seccoes +
+    '\n'
+  );
+}
+
+/**
+ * Avisos atuais editados pela equipa — entram em TODOS os pedidos.
  * Devolve string vazia se não houver avisos.
  */
 export async function avisosDaSheet(): Promise<string> {
@@ -152,7 +196,7 @@ export async function avisosDaSheet(): Promise<string> {
     .filter((a) => a !== '')
     .slice(0, 15);
   if (avisos.length === 0) return '';
-  const texto = `\n## AVISOS ATUAIS (informação recente editada pela equipa Visit Braga - prioritária)\n${avisos.map((a) => `- ${a}`).join('\n')}`;
+  const texto = `\n## AVISOS ATUAIS (informação recente editada pela equipa Visit Braga — prioritária)\n${avisos.map((a) => `- ${a}`).join('\n')}`;
   return texto.slice(0, 2000);
 }
 
@@ -178,7 +222,7 @@ export async function estadoDoConhecimento(): Promise<object> {
     no_centro: comZonaCentro,
     cabecalho_detetado: cabecalhoOk
       ? 'sim'
-      : 'NÃO - a 1.ª linha deve ser: Categoria | Nome | Zona | Notas (a atual está a ser descartada)',
+      : 'NÃO — a 1.ª linha deve ser: Categoria | Nome | Zona | Notas (a atual está a ser descartada)',
     ...(validas.length < MIN_RESTAURANTES
       ? { aviso: `A folha tem menos de ${MIN_RESTAURANTES} restaurantes, por isso está a ser IGNORADA.` }
       : {}),

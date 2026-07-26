@@ -1,7 +1,7 @@
 // ============================================================
 // ROUTER DE CONHECIMENTO (mini-RAG por palavras-chave)
 // O núcleo (core.ts) vai SEMPRE no prompt. Os módulos de detalhe
-// só são injetados quando a conversa toca nesses temas - assim
+// só são injetados quando a conversa toca nesses temas — assim
 // cada pedido fica leve e a quota gratuita rende.
 //
 // As palavras-chave cobrem as 4 línguas (PT/ES/EN/FR). O conteúdo
@@ -18,7 +18,7 @@ import { ROTEIRO_3_DIAS_KNOWLEDGE } from './roteiro-3-dias';
 import ROTEIRO_BRACVS_KNOWLEDGE from './roteiro-bracvs';
 import { FUTURE_KNOWLEDGE } from './future';
 import { getRestaurantesKnowledge } from './restaurantes';
-import { restaurantesDaSheet, avisosDaSheet, pastelariasDaSheet } from '../sheets';
+import { restaurantesDaSheet, avisosDaSheet, pastelariasDaSheet, baresDaSheet } from '../sheets';
 import { construirDoces } from './doces';
 import { AFTER_DARK_SUNSET_JANTAR, AFTER_DARK_BARES, AFTER_DARK_BARES_LITE } from './after-dark';
 
@@ -45,7 +45,8 @@ const MODULES: Module[] = [
   },
   {
     name: 'braga-by-dark-bares',
-    content: AFTER_DARK_BARES,
+    // Folha "BARES E NOITE" primeiro; guia embutido como fallback
+    content: async () => (await baresDaSheet()) ?? AFTER_DARK_BARES,
     contentSlim: AFTER_DARK_BARES_LITE,
     keywords:
       /noite|nocturn|noturn|nightlife|night ?club|discoteca|clube?\b|club\b|\bbar(es)?\b|copos|cocktail|shisha|\bgin\b|cerveja|craft beer|\bbeer\b|bi[èe]re|wine bar|bar de vinhos|after dark|by night|by dark|sair [àa] noite|festa|fiesta|\bdj\b|dan[çc]ar|dancing|bailar|danser|soir[ée]e|nuit\b|vie nocturne/i,
@@ -107,7 +108,7 @@ const SMALL_MODULE_CHARS = 6000;
  *
  * slim=true (último recurso): core + apenas módulos LEVES relevantes.
  * Garante que listas críticas e pequenas (ex.: restaurantes validados)
- * chegam ao modelo mesmo no caminho de emergência - sem elas, o modelo
+ * chegam ao modelo mesmo no caminho de emergência — sem elas, o modelo
  * pequeno tende a inventar estabelecimentos.
  */
 export async function selectKnowledge(userMessages: string[], slim = false): Promise<string> {
@@ -134,13 +135,13 @@ export async function selectKnowledge(userMessages: string[], slim = false): Pro
   if (out.length > cap) {
     out =
       out.slice(0, cap) +
-      '\n[NOTA: conhecimento truncado por limite de tamanho - se faltar detalhe, remete para visitbraga.travel]';
+      '\n[NOTA: conhecimento truncado por limite de tamanho — se faltar detalhe, remete para visitbraga.travel]';
   }
   return out;
 }
 
 /**
- * Conhecimento essencial (só o core) - usado pelo fornecedor de último
+ * Conhecimento essencial (só o core) — usado pelo fornecedor de último
  * recurso (groq-8b), cujo limite por minuto é demasiado pequeno para os
  * módulos de detalhe. Garante que há sempre uma resposta.
  */
@@ -148,7 +149,7 @@ export function coreOnly(): string {
   return CORE_KNOWLEDGE;
 }
 
-/** Nomes dos módulos que a pergunta ativa - usado só para analytics. */
+/** Nomes dos módulos que a pergunta ativa — usado só para analytics. */
 export function matchedModuleNames(userMessages: string[]): string[] {
   const haystack = userMessages.slice(-3).join('\n');
   return MODULES.filter((m) => m.keywords.test(haystack))
@@ -157,14 +158,14 @@ export function matchedModuleNames(userMessages: string[]): string[] {
 }
 
 /**
- * Nomes de estabelecimentos presentes no conhecimento selecionado - usado
+ * Nomes de estabelecimentos presentes no conhecimento selecionado — usado
  * pelo validador para saber o que é real. Extrai de linhas de lista dos
  * módulos de restaurantes/bares (que começam por "- Nome ...").
  */
 export async function nomesConhecidos(userMessages: string[]): Promise<string[]> {
   const texto = await selectKnowledge(userMessages, false);
   const nomes = new Set<string>();
-  for (const m of texto.matchAll(/^-\s*([^\n-(]+?)(?:\s+-|\s+\(|:|$)/gm)) {
+  for (const m of texto.matchAll(/^-\s*([^\n—(]+?)(?:\s+—|\s+\(|:|$)/gm)) {
     const nome = m[1].trim();
     // ignora linhas que são regras/instruções, não nomes
     if (
