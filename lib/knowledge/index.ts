@@ -41,7 +41,7 @@ const MODULES: Module[] = [
     // Google Sheet primeiro (editável pela equipa); fallback: lista embutida
     content: async () => (await restaurantesDaSheet()) ?? getRestaurantesKnowledge(),
     keywords:
-      /restaurante|restaurant|comer|jantar|almo[çc]|petisco|tapas|francesinha|pizza|sushi|ramen|vegetariano|vegan|vegetarian|v[ée]g[ée]|steakhouse|carne|churrasq|onde (se )?come|d[óo]nde comer|where to eat|o[ùu] manger|d[îi]ner|cenar|dinner|lunch|almuerzo|d[ée]jeuner|comida t[íi]pica|typical food|michelin/i,
+      /restaurante|restaurant|comer|jantar|almo[çc]|petisco|tapas|francesinha|pizza|sushi|ramen|vegetariano|vegan|vegetarian|v[ée]g[ée]|steakhouse|carne|churrasq|onde (se )?come|d[óo]nde comer|where to eat|o[ùu] manger|d[îi]ner|cenar|dinner|lunch|almuerzo|d[ée]jeuner|comida t[íi]pica|typical food|michelin|tradicional|traditional|marisqueira|marisco|italiana|italiano|asi[áa]tic|japon[êe]s|japonesa|indiano|hamburguer|burger|refei[çc][ãa]o|prato|gastronomia|onde jantar|para jantar|para almo[çc]ar/i,
   },
   {
     name: 'braga-by-dark-bares',
@@ -91,7 +91,9 @@ const MODULES: Module[] = [
 
 // Máximo de módulos de detalhe por pedido (controla o tamanho do prompt).
 // 1 módulo mantém o pedido dentro do limite de 12k tokens/min da Groq gratuita.
-const MAX_MODULES = 1;
+// 2 módulos: permite conversas que saltam de tema (ex.: bares -> jantar)
+// terem os dois conhecimentos. O tamanho é controlado pelo teto de chars.
+const MAX_MODULES = 2;
 
 // Teto absoluto de caracteres do conhecimento (~7k tokens), para nenhum
 // módulo grande rebentar o limite por minuto dos fornecedores gratuitos.
@@ -112,14 +114,22 @@ const SMALL_MODULE_CHARS = 6000;
  * pequeno tende a inventar estabelecimentos.
  */
 export async function selectKnowledge(userMessages: string[], slim = false): Promise<string> {
-  const haystack = userMessages.slice(-3).join('\n');
+  const ultima = userMessages[userMessages.length - 1] ?? '';
+  const contexto = userMessages.slice(-3).join('\n');
+  // Ordena: primeiro os módulos que a ÚLTIMA pergunta ativa (tema atual),
+  // depois os que só o contexto recente ativa. Assim o tema da pergunta
+  // presente nunca fica de fora quando a conversa mudou de assunto.
+  const relevantes = MODULES.filter((m) => m.keywords.test(contexto));
+  relevantes.sort((a, b) => {
+    const aU = a.keywords.test(ultima) ? 0 : 1;
+    const bU = b.keywords.test(ultima) ? 0 : 1;
+    return aU - bU;
+  });
   const candidates = await Promise.all(
-    MODULES.filter((m) => m.keywords.test(haystack))
-      .slice(0, MAX_MODULES)
-      .map(async (m) => {
-        const full = typeof m.content === 'function' ? await m.content() : m.content;
-        return { name: m.name, content: slim && m.contentSlim ? m.contentSlim : full };
-      })
+    relevantes.slice(0, MAX_MODULES).map(async (m) => {
+      const full = typeof m.content === 'function' ? await m.content() : m.content;
+      return { name: m.name, content: slim && m.contentSlim ? m.contentSlim : full };
+    })
   );
   const matched = slim
     ? candidates.filter((m) => m.content.length <= SMALL_MODULE_CHARS)
@@ -151,8 +161,10 @@ export function coreOnly(): string {
 
 /** Nomes dos módulos que a pergunta ativa — usado só para analytics. */
 export function matchedModuleNames(userMessages: string[]): string[] {
-  const haystack = userMessages.slice(-3).join('\n');
-  return MODULES.filter((m) => m.keywords.test(haystack))
+  const ultima = userMessages[userMessages.length - 1] ?? '';
+  const contexto = userMessages.slice(-3).join('\n');
+  return MODULES.filter((m) => m.keywords.test(contexto))
+    .sort((a, b) => (a.keywords.test(ultima) ? 0 : 1) - (b.keywords.test(ultima) ? 0 : 1))
     .slice(0, MAX_MODULES)
     .map((m) => m.name);
 }
