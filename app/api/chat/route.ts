@@ -6,6 +6,18 @@ import { providerChain, callProvider, sseToText, type ChatMessage } from '@/lib/
 
 export const runtime = 'edge';
 
+// CORS — permite que a landing do Visit Braga (noutro domínio) use o Bracvs
+// diretamente, sem iframe. Evita os bloqueios de embedding.
+const CORS = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type, x-bracvs-test',
+};
+
+export async function OPTIONS() {
+  return new Response(null, { status: 204, headers: CORS });
+}
+
 // ---------- Rate limiting simples (por IP, em memória) ----------
 const WINDOW_MS = 60_000;
 const MAX_REQUESTS = 15;
@@ -132,6 +144,7 @@ export async function POST(req: Request) {
       });
       return new Response(streamValidado, {
         headers: {
+          ...CORS,
           'Content-Type': 'text/plain; charset=utf-8',
           'X-Bracvs-Provider': provider.name, // útil para debug/monitorização
         },
