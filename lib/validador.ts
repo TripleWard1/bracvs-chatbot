@@ -3,7 +3,7 @@
 // Depois de a resposta estar completa, extrai nomes próprios de
 // estabelecimentos e verifica se existem no conhecimento oficial que foi
 // enviado ao modelo neste pedido. Nomes que não existem são registados
-// (Firestore) para o Hugo ver - é o alarme que apanha invenções de
+// (Firestore) para o Hugo ver — é o alarme que apanha invenções de
 // qualquer modelo, incluindo os de recurso.
 //
 // Não bloqueia a resposta (o texto já foi transmitido em streaming); serve
@@ -146,7 +146,7 @@ export function validarStream(
       const { suspeitos, totalNomes } = validarNomes(texto, ctx.nomesConhecidos);
       if (suspeitos.length > 0) {
         console.error(
-          `[Bracvs] POSSÍVEL ALUCINAÇÃO (${ctx.fornecedor}): ${suspeitos.join(', ')} - pergunta: "${ctx.pergunta.slice(0, 80)}"`
+          `[Bracvs] POSSÍVEL ALUCINAÇÃO (${ctx.fornecedor}): ${suspeitos.join(', ')} — pergunta: "${ctx.pergunta.slice(0, 80)}"`
         );
         await logAlucinacao({
           pergunta: ctx.pergunta,

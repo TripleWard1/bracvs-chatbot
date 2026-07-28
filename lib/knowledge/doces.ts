@@ -1,16 +1,16 @@
 // lib/knowledge/doces.ts
-// DOCES E GASTRONOMIA TÍPICA DE BRAGA - informação validada (fonte: roteiro
+// DOCES E GASTRONOMIA TÍPICA DE BRAGA — informação validada (fonte: roteiro
 // oficial e materiais do Município). Fecha as alucinações sobre doçaria:
 // o modelo estava a inventar descrições e pastelarias inexistentes.
 
-const DOCES_BASE = `# DOCES E GASTRONOMIA TÍPICA DE BRAGA - informação validada
+const DOCES_BASE = `# DOCES E GASTRONOMIA TÍPICA DE BRAGA — informação validada
 
 ## REGRAS
 - Descreve estes doces e pratos APENAS como estão descritos aqui. Não inventes ingredientes, formas nem histórias.
-- NUNCA inventes nomes de pastelarias, confeitarias ou casas onde comprar. Só podes nomear estabelecimentos que estejam no teu conhecimento de restaurantes/cafés. Se não sabes onde comprar um doce, diz que se encontra em pastelarias tradicionais da cidade e remete para visitbraga.travel - não inventes nomes.
+- NUNCA inventes nomes de pastelarias, confeitarias ou casas onde comprar. Só podes nomear estabelecimentos que estejam no teu conhecimento de restaurantes/cafés. Se não sabes onde comprar um doce, diz que se encontra em pastelarias tradicionais da cidade e remete para visitbraga.travel — não inventes nomes.
 
 ## DOCES
-- Fidalguinhos: BISCOITOS tradicionais de Braga (não são pastéis nem recheados). Têm uma forma característica de "pernas cruzadas" - uma brincadeira antiga com os fidalgos, que ficavam de pernas cruzadas sem precisar de trabalhar. Feitos com farinha, ovos, açúcar, azeite, canela e raspa de limão.
+- Fidalguinhos: BISCOITOS tradicionais de Braga (não são pastéis nem recheados). Têm uma forma característica de "pernas cruzadas" — uma brincadeira antiga com os fidalgos, que ficavam de pernas cruzadas sem precisar de trabalhar. Feitos com farinha, ovos, açúcar, azeite, canela e raspa de limão.
 - Pudim Abade de Priscos: um dos doces conventuais mais famosos de Portugal, nascido em Priscos (perto de Braga). Inventado pelo abade Manuel Joaquim Machado Rebelo, feito com ovos, açúcar, toucinho e vinho do Porto.
 - Tíbias de Braga: doce típico da cidade.
 

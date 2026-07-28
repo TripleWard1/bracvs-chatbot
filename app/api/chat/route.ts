@@ -105,7 +105,7 @@ export async function POST(req: Request) {
 
   // Tenta cada fornecedor por ordem; o primeiro que responder 200 assume.
   // Fornecedores "slim" recebem só o conhecimento essencial, para caberem
-  // em limites por minuto pequenos - garantem resposta em último recurso.
+  // em limites por minuto pequenos — garantem resposta em último recurso.
   for (const provider of providers) {
     const messages: ChatMessage[] = [
       {
